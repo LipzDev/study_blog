@@ -1,12 +1,13 @@
 import React from "react";
-import { Container } from "../Container/styles";
-import * as Styles from "../Footer/styles";
+import * as S from "../Footer/styles";
 
 const Footer = () => {
   return (
-    <Styles.Footer>
-      <Container>© Lipz.</Container>
-    </Styles.Footer>
+    <S.Footer>
+      <S.Container>
+        © Lipz.
+      </S.Container>
+    </S.Footer>
   );
 };
 

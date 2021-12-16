@@ -14,3 +14,9 @@ export const Content = styled.div`
     justify-content: space-between;
   `}
 `;
+
+export const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 95%;
+`
