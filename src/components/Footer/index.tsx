@@ -4,9 +4,7 @@ import * as S from "../Footer/styles";
 const Footer = () => {
   return (
     <S.Footer>
-      <S.Container>
-        © Lipz.
-      </S.Container>
+      <S.Container>© Lipz.</S.Container>
     </S.Footer>
   );
 };
