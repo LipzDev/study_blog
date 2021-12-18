@@ -9,6 +9,7 @@ export const Nav = styled.nav`
 
     li {
       list-style: none;
+      cursor: pointer;
     }
 
     li + li {

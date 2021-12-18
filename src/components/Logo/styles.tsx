@@ -4,5 +4,6 @@ export const Logo = styled.div`
   img {
     max-width: 90px;
     vertical-align: middle;
+    cursor: pointer;
   }
 `;
