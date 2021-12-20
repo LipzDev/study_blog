@@ -8,7 +8,7 @@ type CardProps = {
   title?: string;
   description?: string;
   children?: React.ReactNode;
-  id?: string;
+  id?: number;
 };
 
 const Card = ({

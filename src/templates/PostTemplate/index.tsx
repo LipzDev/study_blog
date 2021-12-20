@@ -4,7 +4,7 @@ import { posts } from "../HomeTemplate/mock";
 import * as S from "./styles";
 
 type PostTemplateProps = {
-  url?: string | string[];
+  url?: number | string[];
 };
 
 const PostTemplate = ({ url }: PostTemplateProps) => {
@@ -13,7 +13,7 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
       <S.Wrapper>
         {posts.map(
           (post, index) =>
-            post.id === url && (
+            post.id === Number(url) && (
               <div key={index}>
                 <h1>{post.title}</h1>
                 <h2>{post.description}</h2>
