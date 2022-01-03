@@ -6,7 +6,7 @@ export const posts = [
     title: "Lorem ipsum",
     description:
       "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    date: "01 de Janeiro de 2022",
+    date: "01 de Janeiro 2022",
     author: "Filipe Gomes",
     text: "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
   },
@@ -17,7 +17,7 @@ export const posts = [
     title: "Lorem ipsum",
     description:
       "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    date: "01 de Janeiro de 2022",
+    date: "01 de Janeiro 2022",
     author: "Filipe Gomes",
     text: "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
   },
@@ -29,7 +29,7 @@ export const posts = [
     title: "Lorem ipsum",
     description:
       "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    date: "01 de Janeiro de 2022",
+    date: "01 de Janeiro 2022",
     author: "Filipe Gomes",
     text: "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
   },
@@ -39,7 +39,7 @@ export const posts = [
     title: "Lorem ipsum 4",
     description:
       "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    date: "01 de Janeiro de 2022",
+    date: "01 de Janeiro 2022",
     author: "Filipe Gomes",
     text: "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
   },
@@ -51,7 +51,7 @@ export const posts = [
     title: "Lorem ipsum 4",
     description:
       "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    date: "01 de Janeiro de 2022",
+    date: "01 de Janeiro 2022",
     author: "Filipe Gomes",
     text: "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
   },
@@ -62,7 +62,7 @@ export const posts = [
     title: "Lorem ipsum 5",
     description:
       "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    date: "01 de Janeiro de 2022",
+    date: "01 de Janeiro 2022",
     author: "Filipe Gomes",
     text: "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
   },
@@ -73,7 +73,7 @@ export const posts = [
     title: "Lorem ipsum 6",
     description:
       "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    date: "01 de Janeiro de 2022",
+    date: "01 de Janeiro 2022",
     author: "Filipe Gomes",
     text: "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
   },
@@ -84,7 +84,7 @@ export const posts = [
     title: "Lorem ipsum 6",
     description:
       "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    date: "01 de Janeiro de 2022",
+    date: "01 de Janeiro 2022",
     author: "Filipe Gomes",
     text: "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
   },

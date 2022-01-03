@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import { posts } from "../HomeTemplate/mock";
+import Link from "next/link";
 import * as S from "./styles";
 
 type PostTemplateProps = {
@@ -12,6 +13,9 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
     <Layout>
       <S.Wrapper>
         <S.Container>
+          <div className="return">
+            <Link href="/">← Voltar</Link>
+          </div>
           {posts.map(
             (post, index) =>
               post.id === Number(url) && (

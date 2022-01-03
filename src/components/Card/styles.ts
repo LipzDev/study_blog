@@ -65,4 +65,11 @@ export const LargeCard = styled.div`
     line-clamp: 2;
     -webkit-box-orient: vertical;
   }
+
+  @media screen and (max-width: 1024px) {
+    img {
+      max-height: 200px;
+      margin-bottom: 2rem;
+    }
+  }
 `;

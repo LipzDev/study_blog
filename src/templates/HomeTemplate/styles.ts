@@ -7,6 +7,10 @@ export const GridLayout = styled.div`
   grid-template-columns: 800px auto;
   grid-column-gap: 100px;
   margin-top: 3rem;
+
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: 100% auto;
+  }
 `;
 
 export const Container = styled.div`

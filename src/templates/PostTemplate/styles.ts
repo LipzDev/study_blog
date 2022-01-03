@@ -1,10 +1,19 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.section``;
+export const Wrapper = styled.section`
+  .return {
+    margin-top: 20px;
+    a {
+      text-decoration: none;
+      color: #0055ff;
+    }
+  }
+`;
 
 export const Container = styled.div`
   margin: 0 auto;
   max-width: 1200px;
+  width: 95%;
 `;
 
 export const PostContent = styled.div`
@@ -22,7 +31,7 @@ export const PostContent = styled.div`
 
   img {
     width: 100%;
-    height: 700px;
+    height: 600px;
     object-fit: cover;
     object-position: right center;
     border-radius: 10px;
@@ -33,5 +42,15 @@ export const PostContent = styled.div`
     margin-top: 3rem;
     text-align: justify;
     margin-bottom: 5rem;
+  }
+
+  @media screen and (max-width: 1024px) {
+    h2 {
+      font-size: 2rem;
+    }
+
+    img {
+      height: auto;
+    }
   }
 `;
