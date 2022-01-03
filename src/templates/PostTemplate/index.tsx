@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../../components/Layout";
-import { posts } from "../HomeTemplate/mock";
+import { posts } from "../BlogTemplate/mock";
 import Link from "next/link";
 import * as S from "./styles";
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { IconMenuProps } from "../IconMenu/index";
+import Link from "next/link";
 import * as Styles from "../Menu/styles";
 
 const Menu = ({ expanded }: IconMenuProps) => {
@@ -10,13 +11,13 @@ const Menu = ({ expanded }: IconMenuProps) => {
     <Styles.Nav className={expanded ? "active" : ""}>
       <ul>
         <li>
-          <a href="#">Início</a>
+          <Link href="/">Início</Link>
         </li>
         <li>
-          <a href="#">News</a>
+          <Link href="/blog">Blog</Link>
         </li>
         <li>
-          <a onClick={() => router.push("/login")}>Login</a>
+          <Link href="/login">Login</Link>
         </li>
       </ul>
     </Styles.Nav>
