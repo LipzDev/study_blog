@@ -3,11 +3,12 @@ import styled from "styled-components";
 export const SmallCard = styled.div`
   margin-bottom: 5rem;
   cursor: pointer;
-  max-width: 300px;
+  width: 100%;
 
   img {
     width: 100%;
-    max-height: 200px;
+    max-height: 300px;
+    height: 200px;
     object-fit: cover;
   }
 
@@ -40,7 +41,7 @@ export const LargeCard = styled.div`
 
   img {
     width: 100%;
-    max-height: 500px;
+    max-height: 600px;
     object-fit: cover;
   }
 
@@ -69,7 +70,6 @@ export const LargeCard = styled.div`
   @media screen and (max-width: 1024px) {
     img {
       max-height: 200px;
-      margin-bottom: 2rem;
     }
   }
 `;

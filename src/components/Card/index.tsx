@@ -6,7 +6,10 @@ type CardProps = {
   large?: boolean;
   image?: string;
   title?: string;
+  author?: string;
+  date?: string;
   description?: string;
+  hasDate?: boolean;
   children?: React.ReactNode;
   id?: number;
 };
@@ -14,8 +17,11 @@ type CardProps = {
 const Card = ({
   id,
   large,
+  hasDate,
   image,
   title,
+  author,
+  date,
   description,
   children,
 }: CardProps) => {
@@ -23,6 +29,11 @@ const Card = ({
     <Link href={`/post/${id}`}>
       <S.LargeCard>
         <img src={image}></img>
+        {hasDate && (
+          <>
+            <span>{author}</span> - <span>{date}</span>
+          </>
+        )}
         <h1>{title}</h1>
         <h2>{description}</h2>
 

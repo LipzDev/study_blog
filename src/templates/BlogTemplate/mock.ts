@@ -3,7 +3,7 @@ export const posts = [
     id: 1,
     image:
       "https://media.gazetadopovo.com.br/2020/01/17155825/lamborghini-huracan-Alexander-Migl-wikimedia-commons.jpg",
-    title: "Lorem ipsum",
+    title: "Lorem ipsum 1",
     description:
       "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
     date: "01 de Janeiro 2022",
@@ -14,7 +14,7 @@ export const posts = [
   {
     id: 2,
     image: "https://cdn.motor1.com/images/mgl/Y0jMW/s3/volkswagen-id.4.jpg",
-    title: "Lorem ipsum",
+    title: "Lorem ipsum 2",
     description:
       "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
     date: "01 de Janeiro 2022",
@@ -26,7 +26,7 @@ export const posts = [
     id: 3,
     image:
       "https://blog.nakata.com.br/wp-content/uploads/2020/08/post_thumbnail-1f77e8996174df4fb19587977331de22-780x450.jpg",
-    title: "Lorem ipsum",
+    title: "Lorem ipsum 3",
     description:
       "Industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
     date: "01 de Janeiro 2022",
