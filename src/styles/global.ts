@@ -32,6 +32,10 @@ const GlobalStyles: GlobalStyleComponent<
         font-size: 62.5%;
       }
 
+      img{
+        vertical-align: middle;
+      }
+
       body {
         background: ${theme.colors.white};
         font-family: ${theme.font.family};

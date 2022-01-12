@@ -33,7 +33,7 @@ export const PostContent = styled.div`
     object-fit: cover;
     object-position: right center;
     border-radius: 10px;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
   }
 
   p {

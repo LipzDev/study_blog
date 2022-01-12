@@ -9,14 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.10",
+    "@firebase/auth": "^0.19.5",
     "@types/styled-components": "^5.1.13",
     "@types/uuid": "^8.3.3",
     "babel-plugin-styled-components": "^1.13.2",
     "babel-preset-next": "^1.4.0",
     "dotenv": "^10.0.0",
-    "graphql": "^15.5.2",
-    "nanoid": "^3.1.30",
+    "firebase": "^9.6.2",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
