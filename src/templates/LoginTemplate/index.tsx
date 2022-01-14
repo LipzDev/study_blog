@@ -1,28 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import Link from "next/link";
-import firebase from "../../config/firebase";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-// import * as S from "./styles";
-console.log(firebase);
+import { auth, signIn } from "../../config/firebase";
+import { useRouter } from "next/router";
+import cookie from "js-cookie";
+import * as S from "./styles";
 
 const LoginTemplate = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const route = useRouter();
 
-  async function Login(e: any) {
+  function Login(e: any) {
     e.preventDefault();
 
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log("Entrou");
+    signIn(auth, email, password)
+      .then((userCredential: any) => {
+        route.push("/admin");
         const user = userCredential.user;
-        console.log(user);
+        cookie.set("auth-token", user.accessToken, {
+          expires: 1,
+        });
       })
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
       });
   }
 
