@@ -34,7 +34,7 @@ export const Icon = styled.div`
 
     &.active {
       .icon-1 {
-        transform: rotate(45deg) translate(5px, 4px);
+        transform: rotate(45deg) translate(5px, 5px);
       }
       .icon-2 {
         opacity: 0;

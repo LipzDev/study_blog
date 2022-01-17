@@ -1,11 +1,11 @@
 import React from "react";
 import { IconMenuProps } from "../IconMenu/index";
 import Link from "next/link";
-import * as Styles from "../Menu/styles";
+import * as S from "../Menu/styles";
 
 const Menu = ({ expanded }: IconMenuProps) => {
   return (
-    <Styles.Nav className={expanded ? "active" : ""}>
+    <S.Nav className={expanded ? "active" : ""}>
       <ul>
         <li>
           <Link href="/">Início</Link>
@@ -17,7 +17,7 @@ const Menu = ({ expanded }: IconMenuProps) => {
           <Link href="/login">Login</Link>
         </li>
       </ul>
-    </Styles.Nav>
+    </S.Nav>
   );
 };
 

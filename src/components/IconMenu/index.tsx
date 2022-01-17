@@ -1,5 +1,5 @@
 import React from "react";
-import * as Styles from "./styles";
+import * as S from "./styles";
 
 export type IconMenuProps = {
   onClick?: () => void;
@@ -9,11 +9,11 @@ export type IconMenuProps = {
 const IconMenu = ({ onClick, expanded }: IconMenuProps) => {
   return (
     <>
-      <Styles.Icon className={expanded ? "active" : ""} onClick={onClick}>
+      <S.Icon className={expanded ? "active" : ""} onClick={onClick}>
         <span className="icon-1"></span>
         <span className="icon-2"></span>
         <span className="icon-3"></span>
-      </Styles.Icon>
+      </S.Icon>
     </>
   );
 };
