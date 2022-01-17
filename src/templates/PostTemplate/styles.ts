@@ -1,14 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.section`
-  .return {
-    margin-top: 20px;
-    a {
-      text-decoration: none;
-      color: #0055ff;
-    }
-  }
-`;
+export const Wrapper = styled.section``;
 
 export const Container = styled.div`
   margin: 0 auto;
@@ -18,15 +10,19 @@ export const Container = styled.div`
 
 export const PostContent = styled.div`
   h1 {
-    margin: 3rem 0 1rem 0;
-    font-size: 5rem;
-    font-weight: 400;
+    color: #313131;
+    margin: 1.5rem 0;
+    font-weight: 500;
   }
 
   h2 {
-    margin: 3rem 0 2rem 0;
-    font-size: 3rem;
-    font-weight: 300;
+    color: #3e3e3e;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    color: #3e3e3e;
   }
 
   img {
@@ -34,8 +30,7 @@ export const PostContent = styled.div`
     height: 600px;
     object-fit: cover;
     object-position: right center;
-    border-radius: 10px;
-    /* margin-bottom: 1rem; */
+    margin-bottom: 10px;
   }
 
   p {
@@ -44,13 +39,18 @@ export const PostContent = styled.div`
     margin-bottom: 5rem;
   }
 
+  span {
+    color: #3e3e3e;
+  }
+
   @media screen and (max-width: 1024px) {
     h2 {
-      font-size: 2rem;
+      margin: 0 0 1rem 0;
     }
 
     img {
       height: auto;
+      margin-bottom: 1rem;
     }
   }
 `;

@@ -5,21 +5,22 @@ export const SmallCard = styled.div`
   cursor: pointer;
   width: 100%;
 
+  h1 {
+    color: #313131;
+    margin: 1.5rem 0;
+    font-weight: 500;
+  }
+
+  h2 {
+    color: #3e3e3e;
+    font-weight: 400;
+  }
+
   img {
     width: 100%;
     max-height: 300px;
     height: 200px;
     object-fit: cover;
-  }
-
-  h1 {
-    font-size: 2rem;
-    font-weight: 600;
-  }
-
-  h2 {
-    font-size: 1.4rem;
-    font-weight: 500;
   }
 
   p {
@@ -32,6 +33,7 @@ export const SmallCard = styled.div`
     -webkit-line-clamp: 2; /* number of lines to show */
     line-clamp: 2;
     -webkit-box-orient: vertical;
+    color: #3e3e3e;
   }
 `;
 
@@ -39,20 +41,26 @@ export const LargeCard = styled.div`
   margin-bottom: 5rem;
   cursor: pointer;
 
+  h1 {
+    color: #313131;
+    margin: 1.5rem 0;
+    font-weight: 500;
+  }
+
+  h2 {
+    color: #3e3e3e;
+    font-weight: 400;
+  }
+
+  p {
+    color: #3e3e3e;
+  }
+
   img {
     width: 100%;
     max-height: 600px;
     object-fit: cover;
-  }
-
-  h1 {
-    font-size: 2rem;
-    font-weight: 600;
-  }
-
-  h2 {
-    font-size: 1.4rem;
-    font-weight: 500;
+    margin-bottom: 15px;
   }
 
   p {

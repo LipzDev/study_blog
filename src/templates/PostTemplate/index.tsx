@@ -1,11 +1,11 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import { posts } from "../BlogTemplate/mock";
-import Link from "next/link";
 import * as S from "./styles";
+import ButtonReturn from "../../components/ButtonReturn";
 
 type PostTemplateProps = {
-  url?: number | string[];
+  url?: string | string[];
 };
 
 const PostTemplate = ({ url }: PostTemplateProps) => {
@@ -13,9 +13,7 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
     <Layout>
       <S.Wrapper>
         <S.Container>
-          <div className="return">
-            <Link href="/">← Voltar</Link>
-          </div>
+          <ButtonReturn returnTo="/blog" />
           {posts.map(
             (post, index) =>
               post.id === Number(url) && (

@@ -36,6 +36,16 @@ const GlobalStyles: GlobalStyleComponent<
         vertical-align: middle;
       }
 
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+        font-weight: 500;
+      }
+
       body {
         background: ${theme.colors.white};
         font-family: ${theme.font.family};

@@ -5,6 +5,7 @@ import { auth, signIn } from "../../config/firebase";
 import { useRouter } from "next/router";
 import cookie from "js-cookie";
 import * as S from "./styles";
+import ButtonReturn from "../../components/ButtonReturn";
 
 const LoginTemplate = () => {
   const [email, setEmail] = useState("");
@@ -29,14 +30,26 @@ const LoginTemplate = () => {
 
   return (
     <>
-      <Link href="/">← Voltar</Link>
-      <form>
-        <input type="text" onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit" onClick={(e) => Login(e)}>
-          Logar
-        </button>
-      </form>
+      <S.Container>
+        <ButtonReturn returnTo="/blog" />
+        <S.FlexContent>
+          <S.Form>
+            <input
+              type="text"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Login"
+            />
+            <input
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Senha"
+            />
+            <button type="submit" onClick={(e) => Login(e)}>
+              Logar
+            </button>
+          </S.Form>
+        </S.FlexContent>
+      </S.Container>
     </>
   );
 };

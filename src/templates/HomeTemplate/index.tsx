@@ -9,7 +9,7 @@ const HomeTemplate = () => {
     <Layout>
       <S.Wrapper>
         <S.Container>
-          <h1>Destaques da semana</h1>
+          <S.HighlightTitle>Destaques da semana</S.HighlightTitle>
           <Card
             id={posts[0].id}
             large={true}
