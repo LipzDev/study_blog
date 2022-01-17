@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import Link from "next/link";
 import { auth, signIn } from "../../config/firebase";
 import { useRouter } from "next/router";
 import cookie from "js-cookie";
-import * as S from "./styles";
 import ButtonReturn from "../../components/ButtonReturn";
+import Head from "next/head";
+import * as S from "./styles";
 
 const LoginTemplate = () => {
   const [email, setEmail] = useState("");
@@ -17,11 +17,11 @@ const LoginTemplate = () => {
 
     signIn(auth, email, password)
       .then((userCredential: any) => {
-        route.push("/admin");
         const user = userCredential.user;
         cookie.set("auth-token", user.accessToken, {
           expires: 1,
         });
+        route.push("/admin");
       })
       .catch((error) => {
         // console.log(error.message);
@@ -30,6 +30,15 @@ const LoginTemplate = () => {
 
   return (
     <>
+      <Head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if(document.cookie.includes('auth-token')){
+        window.location.href="/admin"
+      }`,
+          }}
+        />
+      </Head>
       <S.Container>
         <ButtonReturn returnTo="/blog" />
         <S.FlexContent>
