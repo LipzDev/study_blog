@@ -1,18 +1,11 @@
 import React from "react";
 import Head from "next/head";
 import ButtonReturn from "../../components/ButtonReturn";
-import cookie from "js-cookie";
-import { useRouter } from "next/router";
+
 import * as S from "./styles";
+import Header from "../../components/Header";
 
 const AdminTemplate = () => {
-  const route = useRouter();
-
-  function exclude() {
-    cookie.remove("auth-token");
-    route.push("/login");
-  }
-
   return (
     <>
       <Head>
@@ -24,9 +17,10 @@ const AdminTemplate = () => {
           }}
         />
       </Head>
+      <Header isLoggedIn={true} />
       <S.Container>
         <ButtonReturn returnTo="/blog" />
-        <button onClick={() => exclude()}>SAIR</button>
+        <h1>Olá</h1>
       </S.Container>
     </>
   );

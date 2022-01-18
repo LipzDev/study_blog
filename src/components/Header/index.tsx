@@ -4,7 +4,11 @@ import Menu from "../Menu";
 import IconMenu from "../IconMenu";
 import * as S from "./styles";
 
-const Header = () => {
+type HeaderProps = {
+  isLoggedIn?: boolean;
+};
+
+const Header = ({ isLoggedIn }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -12,7 +16,7 @@ const Header = () => {
       <S.Container>
         <S.Content>
           <Logo />
-          <Menu expanded={isOpen} />
+          <Menu expanded={isOpen} isLoggedIn={isLoggedIn} />
           <IconMenu onClick={() => setIsOpen(!isOpen)} expanded={isOpen} />
         </S.Content>
       </S.Container>
