@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import * as S from "./styles";
-import MediaMatch from "../MediaMatch";
 
 type CardProps = {
   large?: boolean;
@@ -43,16 +42,14 @@ const Card = ({
       </S.LargeCard>
     </Link>
   ) : (
-    <MediaMatch greaterThan="large">
-      <Link href={`/post/${id}`}>
-        <S.SmallCard>
-          <img src={image}></img>
-          <h1>{title}</h1>
-          <h2>{description}</h2>
-          <p>{children}</p>
-        </S.SmallCard>
-      </Link>
-    </MediaMatch>
+    <Link href={`/post/${id}`}>
+      <S.SmallCard>
+        <img src={image}></img>
+        <h1>{title}</h1>
+        <h2>{description}</h2>
+        <p>{children}</p>
+      </S.SmallCard>
+    </Link>
   );
 };
 

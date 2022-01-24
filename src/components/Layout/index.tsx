@@ -2,10 +2,15 @@ import React from "react";
 import Footer from "../Footer";
 import Header from "../Header";
 
-const Layout: React.FC = ({ children }) => {
+type LayoutProps = {
+  children: React.ReactNode;
+  isLoggedIn?: boolean;
+};
+
+const Layout = ({ children, isLoggedIn }: LayoutProps) => {
   return (
     <>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       {children}
       <Footer />
     </>

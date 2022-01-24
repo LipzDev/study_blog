@@ -4,6 +4,7 @@ export const SmallCard = styled.div`
   margin-bottom: 5rem;
   cursor: pointer;
   width: 100%;
+  max-width: 400px;
 
   h1 {
     color: #313131;
@@ -34,6 +35,10 @@ export const SmallCard = styled.div`
     line-clamp: 2;
     -webkit-box-orient: vertical;
     color: #3e3e3e;
+  }
+
+  @media screen and (max-width: 1024px) {
+    min-width: 80%;
   }
 `;
 
