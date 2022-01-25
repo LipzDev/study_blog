@@ -17,7 +17,7 @@ const BlogTemplate = () => {
               <S.FeaturedPost>
                 {posts.map(
                   (post, index) =>
-                    index < 3 && (
+                    index < 4 && (
                       <Card
                         id={post.id}
                         key={index}

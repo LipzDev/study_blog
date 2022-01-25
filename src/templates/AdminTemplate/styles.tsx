@@ -13,19 +13,22 @@ export const Container = styled.div`
 `;
 
 export const RecentsPosts = styled.div`
-  margin-top: 3rem;
+  margin: 3rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
+export const Form = styled.form`
+  margin-bottom: 3rem;
+`;
+
 export const PostFlex = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 3rem;
 
   @media screen and (max-width: 1024px) {
-    overflow-y: scroll;
+    grid-template-columns: 1fr;
   }
 `;

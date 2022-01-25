@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import * as S from "./styles";
+import { Button } from "../Button/styles";
 
 type CardProps = {
   large?: boolean;
@@ -12,6 +13,7 @@ type CardProps = {
   hasDate?: boolean;
   children?: React.ReactNode;
   id?: number;
+  isAdmin?: boolean;
 };
 
 const Card = ({
@@ -24,6 +26,7 @@ const Card = ({
   date,
   description,
   children,
+  isAdmin,
 }: CardProps) => {
   return large ? (
     <Link href={`/post/${id}`}>
@@ -38,7 +41,7 @@ const Card = ({
         <h2>{description}</h2>
 
         <p>{children}</p>
-        <a href="#">LER MAIS</a>
+        <Button>LER MAIS</Button>
       </S.LargeCard>
     </Link>
   ) : (
@@ -48,6 +51,12 @@ const Card = ({
         <h1>{title}</h1>
         <h2>{description}</h2>
         <p>{children}</p>
+
+        {isAdmin && (
+          <S.Options>
+            <Button>Editar</Button> <Button>Excluir</Button>
+          </S.Options>
+        )}
       </S.SmallCard>
     </Link>
   );
