@@ -11,6 +11,7 @@
   "dependencies": {
     "@firebase/auth": "^0.19.5",
     "@types/js-cookie": "^3.0.1",
+    "@types/react-modal": "^3.13.1",
     "@types/styled-components": "^5.1.13",
     "@types/uuid": "^8.3.3",
     "babel-plugin-styled-components": "^1.13.2",
@@ -21,6 +22,7 @@
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-modal": "^3.14.4",
     "styled-components": "^5.3.1",
     "styled-media-query": "^2.1.2"
   },

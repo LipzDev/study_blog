@@ -5,9 +5,20 @@ import ButtonReturn from "../../components/ButtonReturn";
 import Card from "../../components/Card";
 import Layout from "../../components/Layout";
 import Button from "../../components/Button";
+import Modal from "react-modal";
 import * as S from "./styles";
 
 const AdminTemplate = () => {
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   return (
     <Layout isLoggedIn={true}>
       <Head>
@@ -26,12 +37,12 @@ const AdminTemplate = () => {
 
           <S.RecentsPosts>
             <h2>Postagens recentes</h2>
-            <Button>Criar nova postagem</Button>
+            <Button onClick={openModal}>Criar nova postagem</Button>
           </S.RecentsPosts>
-          <S.Form>
+          <S.SearchBar>
             <input type="text"></input>
             <Button>Pesquisar</Button>
-          </S.Form>
+          </S.SearchBar>
           <S.PostFlex>
             {posts
               .slice()
@@ -51,6 +62,18 @@ const AdminTemplate = () => {
           </S.PostFlex>
         </S.Container>
       </S.Wrapper>
+
+      {/* MODAL FORM */}
+
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+        <S.Form>
+          <input type="file" />
+          <input type="text" placeholder="Título" />
+          <input type="text" placeholder="Descrição" />
+          <textarea placeholder="Mensagem"></textarea>
+          <Button>Postar</Button>
+        </S.Form>
+      </Modal>
     </Layout>
   );
 };

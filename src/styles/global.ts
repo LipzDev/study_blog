@@ -51,6 +51,17 @@ const GlobalStyles: GlobalStyleComponent<
         font-family: ${theme.font.family};
         font-size: ${theme.font.sizes.medium};
     `}
+
+    .ReactModal__Overlay{
+      background: rgba(0,0,0,0.5)!important;      
+    }
+
+    .ReactModal__Content{
+      height: 50vh;
+      width: 50%;
+      top: 25vh!important;    
+      left: 25%!important;
+    }
   `;
 
 export default GlobalStyles;
