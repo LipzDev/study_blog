@@ -90,4 +90,8 @@ export const LargeCard = styled.div`
   }
 `;
 
-export const Options = styled.div``;
+export const Options = styled.div`
+  button {
+    margin-right: 20px;
+  }
+`;

@@ -12,7 +12,7 @@ const Header = ({ isLoggedIn }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <S.Header>
+    <S.Header isOpen={isOpen}>
       <S.Container>
         <S.Content>
           <Logo />

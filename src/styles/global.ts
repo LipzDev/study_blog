@@ -46,6 +46,12 @@ const GlobalStyles: GlobalStyleComponent<
         font-weight: 500;
       }
 
+      button,label, input, textarea{
+        font-family: ${theme.font.family};
+        font-weight: 500;
+        font-size: 1.4rem;
+      }
+
       body {
         background: ${theme.colors.white};
         font-family: ${theme.font.family};
@@ -57,10 +63,20 @@ const GlobalStyles: GlobalStyleComponent<
     }
 
     .ReactModal__Content{
-      height: 50vh;
-      width: 50%;
-      top: 25vh!important;    
-      left: 25%!important;
+      width: 600px;
+      height: 400px;
+
+      top: 50% !important;
+      left: 50% !important; 
+      transform: translate(-50%, -50%); 
+
+      @media screen and (max-width: 1024px) {
+        width: 80%;
+      }
+
+      @media screen and (max-width: 580px) {
+        width: 90%;
+      }
     }
   `;
 

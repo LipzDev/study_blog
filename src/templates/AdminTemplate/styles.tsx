@@ -19,10 +19,6 @@ export const RecentsPosts = styled.div`
   justify-content: space-between;
 `;
 
-export const SearchBar = styled.form`
-  margin-bottom: 3rem;
-`;
-
 export const PostFlex = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -37,14 +33,11 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
 
-  input {
-    padding: 10px;
-    margin-bottom: 1rem;
+  input[type="file"] {
+    margin-bottom: 3rem;
   }
 
-  textarea {
-    padding: 10px;
-    height: 100px;
-    resize: none;
+  button {
+    border-radius: 10px;
   }
 `;

@@ -6,6 +6,9 @@ import Card from "../../components/Card";
 import Layout from "../../components/Layout";
 import Button from "../../components/Button";
 import Modal from "react-modal";
+import SearchBar from "../../components/SearchBar";
+import Input from "../../components/Input";
+import Textarea from "../../components/Textarea";
 import * as S from "./styles";
 
 const AdminTemplate = () => {
@@ -37,12 +40,13 @@ const AdminTemplate = () => {
 
           <S.RecentsPosts>
             <h2>Postagens recentes</h2>
-            <Button onClick={openModal}>Criar nova postagem</Button>
+            <Button onClick={openModal} themeColor="primary">
+              Criar nova postagem
+            </Button>
           </S.RecentsPosts>
-          <S.SearchBar>
-            <input type="text"></input>
-            <Button>Pesquisar</Button>
-          </S.SearchBar>
+
+          <SearchBar />
+
           <S.PostFlex>
             {posts
               .slice()
@@ -68,10 +72,10 @@ const AdminTemplate = () => {
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <S.Form>
           <input type="file" />
-          <input type="text" placeholder="Título" />
-          <input type="text" placeholder="Descrição" />
-          <textarea placeholder="Mensagem"></textarea>
-          <Button>Postar</Button>
+          <Input placeholder="Título" />
+          <Input placeholder="Descrição" />
+          <Textarea placeholder="Mensagem" />
+          <Button themeColor="primary">Postar</Button>
         </S.Form>
       </Modal>
     </Layout>

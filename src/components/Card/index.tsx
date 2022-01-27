@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import * as S from "./styles";
-import { Button } from "../Button/styles";
+import Button from "../Button";
 
 type CardProps = {
   large?: boolean;
@@ -41,7 +41,7 @@ const Card = ({
         <h2>{description}</h2>
 
         <p>{children}</p>
-        <Button>LER MAIS</Button>
+        <Button buttonStyle="link">LER MAIS</Button>
       </S.LargeCard>
     </Link>
   ) : (
@@ -54,7 +54,8 @@ const Card = ({
 
         {isAdmin && (
           <S.Options>
-            <Button>Editar</Button> <Button>Excluir</Button>
+            <Button buttonStyle="link">Editar</Button>
+            <Button buttonStyle="link">Excluir</Button>
           </S.Options>
         )}
       </S.SmallCard>

@@ -1,9 +1,17 @@
 import styled, { css } from "styled-components";
 
-export const Header = styled.header`
-  ${({ theme }) => css`
+type HeaderProps = {
+  isOpen?: boolean;
+};
+
+export const Header = styled.header<HeaderProps>`
+  ${({ theme, isOpen }) => css`
+    position: ${isOpen ? "fixed" : "initial"};
     background-color: ${theme.colors.black};
     padding: 10px 0;
+    width: 100%;
+    top: 0;
+    z-index: 999;
   `}
 `;
 

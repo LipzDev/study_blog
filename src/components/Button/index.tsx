@@ -1,13 +1,28 @@
 import React from "react";
 import * as S from "./styles";
 
-type ButtonProps = {
+export type ButtonProps = {
   children?: React.ReactNode;
   onClick?: () => void;
+  buttonStyle?: "transparent" | "link";
+  themeColor?: "primary" | "secondary";
 };
 
-const Button = ({ children, onClick }: ButtonProps) => {
-  return <S.Button onClick={onClick}>{children}</S.Button>;
+const Button = ({
+  children,
+  onClick,
+  buttonStyle,
+  themeColor,
+}: ButtonProps) => {
+  return (
+    <S.Button
+      onClick={onClick}
+      buttonStyle={buttonStyle}
+      themeColor={themeColor}
+    >
+      {children}
+    </S.Button>
+  );
 };
 
 export default Button;

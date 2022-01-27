@@ -18,19 +18,23 @@ export const Nav = styled.nav`
 
     a {
       text-decoration: none;
-      color: ${theme.colors.primaryLight};
+      color: ${theme.colors.secondary};
       transition: 0.3s;
 
+      font-weight: 500;
+      font-size: 1.4rem;
+
       &:hover {
-        color: white;
+        color: ${theme.colors.terciary};
       }
     }
 
     @media screen and (max-width: 768px) {
       ul {
-        position: absolute;
+        position: fixed;
         left: -100rem;
         top: 0;
+        z-index: 999;
 
         background-color: black;
         width: 100%;
@@ -50,7 +54,7 @@ export const Nav = styled.nav`
       }
 
       a {
-        color: ${theme.colors.primaryLight};
+        color: ${theme.colors.secondary};
       }
 
       &.active {
