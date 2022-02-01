@@ -1,8 +1,8 @@
 import React from "react";
-import ButtonReturn from "../../components/ButtonReturn";
-import Card from "../../components/Card";
-import Layout from "../../components/Layout";
-import MediaMatch from "../../components/MediaMatch";
+import ButtonReturn from "../../components/atoms/ButtonReturn";
+import Card from "../../components/molecules/Card";
+import Layout from "../../components/molecules/Layout";
+import MediaMatch from "../../components/molecules/MediaMatch";
 import { posts } from "./mock";
 import * as S from "./styles";
 

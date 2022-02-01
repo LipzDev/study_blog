@@ -5,9 +5,6 @@ export const SmallCard = styled.div`
   cursor: pointer;
   width: 100%;
   max-width: 400px;
-  /* box-shadow: 0.5rem 0.3rem 2rem #ccc;
-  border-radius: 5px;
-  padding: 10px; */
 
   h1 {
     color: #313131;

@@ -17,6 +17,15 @@ export const RecentsPosts = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    button {
+      margin-top: 20px;
+    }
+  }
 `;
 
 export const PostFlex = styled.div`
@@ -38,6 +47,22 @@ export const Form = styled.form`
   }
 
   button {
-    border-radius: 10px;
+    border-radius: 5px;
   }
 `;
+
+export const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    width: "500px",
+    height: "400px",
+  },
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+};

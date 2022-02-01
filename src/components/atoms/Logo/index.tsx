@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import * as S from "../Logo/styles";
+import * as S from "./styles";
 
 const Logo = () => {
   const router = useRouter();

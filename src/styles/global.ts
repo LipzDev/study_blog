@@ -34,6 +34,7 @@ const GlobalStyles: GlobalStyleComponent<
 
       img{
         vertical-align: middle;
+        border-radius: 5px;
       }
 
       h1 {
@@ -58,24 +59,14 @@ const GlobalStyles: GlobalStyleComponent<
         font-size: ${theme.font.sizes.medium};
     `}
 
-    .ReactModal__Overlay{
-      background: rgba(0,0,0,0.5)!important;      
-    }
 
-    .ReactModal__Content{
-      width: 600px;
-      height: 400px;
-
-      top: 50% !important;
-      left: 50% !important; 
-      transform: translate(-50%, -50%); 
-
+    .ReactModal__Content{     
       @media screen and (max-width: 1024px) {
-        width: 80%;
+        width: 80% !important;
       }
 
       @media screen and (max-width: 580px) {
-        width: 90%;
+        width: 90% !important;
       }
     }
   `;

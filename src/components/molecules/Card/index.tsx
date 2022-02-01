@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import * as S from "./styles";
-import Button from "../Button";
+import Button from "../../atoms/Button";
 
 type CardProps = {
   large?: boolean;

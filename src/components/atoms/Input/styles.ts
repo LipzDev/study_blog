@@ -6,13 +6,13 @@ export const Wrapper = styled.form<InputProps>`
     margin-bottom: 1.5rem;
     max-width: 100%;
     border: 2px solid ${isFocused ? theme.colors.primary : "#ccc"};
-    border-radius: 10px;
     position: relative;
+    border-radius: 5px;
 
     label {
       position: absolute;
-      top: ${isFocused ? "-12px" : "13px"};
-      left: ${isFocused ? "40px" : "12px"};
+      top: ${isFocused ? "-12px" : "10px"};
+      left: ${isFocused ? "20px" : "12px"};
       padding: 0 8px;
       background: linear-gradient(transparent 41%, #fff 41%, #fff 59%);
       transition: 0.2s;
@@ -24,11 +24,10 @@ export const Wrapper = styled.form<InputProps>`
       width: 100%;
       height: 0;
       border: 0;
-      padding: 23px 20px;
-      background: transparent;
-      border-radius: 20px;
+      padding: 20px 20px;
+      border-radius: 5px;
       outline: none;
-      /* padding-left: 20px; */
+      background-color: transparent;
     }
   `}
 `;

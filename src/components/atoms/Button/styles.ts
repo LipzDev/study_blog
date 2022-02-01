@@ -58,7 +58,7 @@ export const Button = styled.button<ButtonProps>`
     padding: 10px 20px;
     border: 0;
 
-    border-radius: 20px;
+    border-radius: 5px;
     cursor: pointer;
     transition: 0.2s ease-in-out;
     box-shadow: 0.3rem 0.2rem 1rem rgba(29, 29, 29, 0.2);

@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "../../components/Card";
-import Layout from "../../components/Layout";
+import Card from "../../components/molecules/Card";
+import Layout from "../../components/molecules/Layout";
 import { posts } from "../BlogTemplate/mock";
 import * as S from "./styles";
 

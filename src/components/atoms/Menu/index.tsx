@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import cookie from "js-cookie";
 import { useRouter } from "next/router";
-import * as S from "../Menu/styles";
+import * as S from "./styles";
 
 type MenuProps = {
   isLoggedIn?: boolean;

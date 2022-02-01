@@ -1,8 +1,8 @@
 import React from "react";
-import Layout from "../../components/Layout";
+import Layout from "../../components/molecules/Layout";
 import { posts } from "../BlogTemplate/mock";
 import * as S from "./styles";
-import ButtonReturn from "../../components/ButtonReturn";
+import ButtonReturn from "../../components/atoms/ButtonReturn";
 
 type PostTemplateProps = {
   url?: string | string[];

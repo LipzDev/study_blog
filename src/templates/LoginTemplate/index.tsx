@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { auth, signIn } from "../../config/firebase";
 import { useRouter } from "next/router";
 import cookie from "js-cookie";
-import ButtonReturn from "../../components/ButtonReturn";
+import ButtonReturn from "../../components/atoms/ButtonReturn";
 import Head from "next/head";
 import * as S from "./styles";
 

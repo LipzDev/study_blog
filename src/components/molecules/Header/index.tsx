@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Logo from "../Logo";
-import Menu from "../Menu";
-import IconMenu from "../IconMenu";
+import Logo from "../../atoms/Logo";
+import Menu from "../../atoms/Menu";
+import IconMenu from "../../atoms/IconMenu";
 import * as S from "./styles";
 
 type HeaderProps = {

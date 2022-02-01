@@ -1,14 +1,15 @@
 import React from "react";
 import Head from "next/head";
 import { posts } from "../BlogTemplate/mock";
-import ButtonReturn from "../../components/ButtonReturn";
-import Card from "../../components/Card";
-import Layout from "../../components/Layout";
-import Button from "../../components/Button";
+import ButtonReturn from "../../components/atoms/ButtonReturn";
+import Card from "../../components/molecules/Card";
+import Layout from "../../components/molecules/Layout";
+import Button from "../../components/atoms/Button";
 import Modal from "react-modal";
-import SearchBar from "../../components/SearchBar";
-import Input from "../../components/Input";
-import Textarea from "../../components/Textarea";
+import SearchBar from "../../components/atoms/SearchBar";
+import Input from "../../components/atoms/Input";
+import Textarea from "../../components/atoms/Textarea";
+import { customStyles } from "./styles";
 import * as S from "./styles";
 
 const AdminTemplate = () => {
@@ -69,7 +70,11 @@ const AdminTemplate = () => {
 
       {/* MODAL FORM */}
 
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+      >
         <S.Form>
           <input type="file" />
           <Input placeholder="Título" />

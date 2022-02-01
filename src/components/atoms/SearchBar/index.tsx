@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from "../Button";
 import { ReactSVG } from "react-svg";
 import * as S from "./styles";
 

@@ -6,13 +6,13 @@ export const Wrapper = styled.form<SearchBar>`
     margin-bottom: 3rem;
     max-width: 414px;
     border: 2px solid ${isFocused ? theme.colors.primary : "#ccc"};
-    border-radius: 20px;
+    border-radius: 5px;
     position: relative;
 
     label {
       position: absolute;
       top: ${isFocused ? "-12px" : "9px"};
-      left: ${isFocused ? "40px" : "20px"};
+      left: ${isFocused ? "20px" : "12px"};
       padding: 0 8px;
       background: linear-gradient(transparent 41%, #fff 41%, #fff 59%);
       transition: 0.2s;
@@ -25,7 +25,7 @@ export const Wrapper = styled.form<SearchBar>`
       height: 38px;
       border: 0;
       background: transparent;
-      border-radius: 20px;
+      border-radius: 5px;
       outline: none;
       padding-left: 20px;
     }
@@ -34,7 +34,7 @@ export const Wrapper = styled.form<SearchBar>`
       border: 0;
       width: 70px;
       height: 100%;
-      border-radius: 20px;
+      border-radius: 5px;
       position: absolute;
       right: 0;
       cursor: pointer;
