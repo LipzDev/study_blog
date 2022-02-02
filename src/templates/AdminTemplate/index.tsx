@@ -10,10 +10,12 @@ import SearchBar from "../../components/atoms/SearchBar";
 import Input from "../../components/atoms/Input";
 import Textarea from "../../components/atoms/Textarea";
 import { customStyles } from "./styles";
+import { useRouter } from "next/router";
 import * as S from "./styles";
 
 const AdminTemplate = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const route = useRouter();
 
   function openModal() {
     setIsOpen(true);
@@ -21,6 +23,14 @@ const AdminTemplate = () => {
 
   function closeModal() {
     setIsOpen(false);
+  }
+
+  function exclude() {
+    alert("Modal de excluir");
+  }
+
+  function edit(post: any) {
+    route.push(`/admin/editar-postagem/${post.id}`);
   }
 
   return (
@@ -60,6 +70,8 @@ const AdminTemplate = () => {
                   title={post.title}
                   description={post.description}
                   isAdmin={true}
+                  exclude={() => exclude()}
+                  edit={() => edit(post)}
                 >
                   {post.text}
                 </Card>

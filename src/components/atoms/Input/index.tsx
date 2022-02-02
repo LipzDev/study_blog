@@ -4,20 +4,26 @@ import * as S from "./styles";
 export type InputProps = {
   isFocused?: boolean;
   placeholder?: string;
+  value?: any;
 };
 
-const Input = ({ placeholder }: InputProps) => {
+const Input = ({ placeholder, value }: InputProps) => {
   const [focus, setFocus] = useState(false);
-  const [value, setValue] = useState("");
+  const [valueState, setValueState] = useState("");
 
   return (
-    <S.Wrapper isFocused={focus || (value !== "" && value !== undefined)}>
+    <S.Wrapper
+      isFocused={
+        focus || (valueState !== "" && valueState !== undefined) || value
+      }
+    >
       <label>{placeholder}</label>
       <input
+        value={value}
         type="text"
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setValueState(e.target.value)}
       ></input>
     </S.Wrapper>
   );

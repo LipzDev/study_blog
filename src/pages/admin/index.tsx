@@ -1,5 +1,5 @@
 import React from "react";
-import AdminTemplate from "../templates/AdminTemplate";
+import AdminTemplate from "../../templates/AdminTemplate";
 
 const admin = () => {
   return <AdminTemplate />;

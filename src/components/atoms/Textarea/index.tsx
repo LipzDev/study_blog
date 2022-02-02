@@ -4,19 +4,25 @@ import * as S from "./styles";
 export type TextareaProps = {
   isFocused?: boolean;
   placeholder?: string;
+  value?: any;
 };
 
-const Input = ({ placeholder }: TextareaProps) => {
+const Input = ({ placeholder, value }: TextareaProps) => {
   const [focus, setFocus] = useState(false);
-  const [value, setValue] = useState("");
+  const [valueState, setValueState] = useState("");
 
   return (
-    <S.Wrapper isFocused={focus || (value !== "" && value !== undefined)}>
+    <S.Wrapper
+      isFocused={
+        focus || (valueState !== "" && valueState !== undefined) || value
+      }
+    >
       <label>{placeholder}</label>
       <textarea
+        value={value}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setValueState(e.target.value)}
       ></textarea>
     </S.Wrapper>
   );

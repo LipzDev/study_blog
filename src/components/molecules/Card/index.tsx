@@ -14,6 +14,8 @@ type CardProps = {
   children?: React.ReactNode;
   id?: number;
   isAdmin?: boolean;
+  exclude?: () => void;
+  edit?: () => void;
 };
 
 const Card = ({
@@ -27,39 +29,47 @@ const Card = ({
   description,
   children,
   isAdmin,
+  exclude,
+  edit,
 }: CardProps) => {
   return large ? (
-    <Link href={`/post/${id}`}>
-      <S.LargeCard>
+    <S.LargeCard>
+      <Link href={`/post/${id}`}>
         <img src={image}></img>
-        {hasDate && (
-          <>
-            <span>{author}</span> - <span>{date}</span>
-          </>
-        )}
-        <h1>{title}</h1>
-        <h2>{description}</h2>
+      </Link>
+      {hasDate && (
+        <>
+          <span>{author}</span> - <span>{date}</span>
+        </>
+      )}
+      <h1>{title}</h1>
+      <h2>{description}</h2>
 
-        <p>{children}</p>
+      <p>{children}</p>
+      <Link href={`/post/${id}`}>
         <Button buttonStyle="link">LER MAIS</Button>
-      </S.LargeCard>
-    </Link>
+      </Link>
+    </S.LargeCard>
   ) : (
-    <Link href={`/post/${id}`}>
-      <S.SmallCard>
+    <S.SmallCard>
+      <Link href={`/post/${id}`}>
         <img src={image}></img>
-        <h1>{title}</h1>
-        <h2>{description}</h2>
-        <p>{children}</p>
+      </Link>
+      <h1>{title}</h1>
+      <h2>{description}</h2>
+      <p>{children}</p>
 
-        {isAdmin && (
-          <S.Options>
-            <Button buttonStyle="link">Editar</Button>
-            <Button buttonStyle="link">Excluir</Button>
-          </S.Options>
-        )}
-      </S.SmallCard>
-    </Link>
+      {isAdmin && (
+        <S.Options>
+          <Button buttonStyle="link" onClick={edit}>
+            Editar
+          </Button>
+          <Button buttonStyle="link" onClick={exclude}>
+            Excluir
+          </Button>
+        </S.Options>
+      )}
+    </S.SmallCard>
   );
 };
 
