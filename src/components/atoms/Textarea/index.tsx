@@ -9,17 +9,17 @@ export type TextareaProps = {
 
 const Input = ({ placeholder, value }: TextareaProps) => {
   const [focus, setFocus] = useState(false);
-  const [valueState, setValueState] = useState("");
+  const [valueState, setValueState] = useState(value);
 
   return (
     <S.Wrapper
       isFocused={
-        focus || (valueState !== "" && valueState !== undefined) || value
+        focus || (valueState !== "" && valueState !== undefined) || valueState
       }
     >
       <label>{placeholder}</label>
       <textarea
-        value={value}
+        value={valueState}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         onChange={(e) => setValueState(e.target.value)}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import * as S from "./styles";
 
@@ -9,17 +10,17 @@ export type InputProps = {
 
 const Input = ({ placeholder, value }: InputProps) => {
   const [focus, setFocus] = useState(false);
-  const [valueState, setValueState] = useState("");
+  const [valueState, setValueState] = useState(value);
 
   return (
     <S.Wrapper
       isFocused={
-        focus || (valueState !== "" && valueState !== undefined) || value
+        focus || (valueState !== "" && valueState !== undefined) || valueState
       }
     >
       <label>{placeholder}</label>
       <input
-        value={value}
+        value={valueState}
         type="text"
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
