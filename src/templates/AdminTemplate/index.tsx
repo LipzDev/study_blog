@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState } from "react";
 import Head from "next/head";
 import { posts } from "../BlogTemplate/mock";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
@@ -11,11 +12,16 @@ import Input from "../../components/atoms/Input";
 import Textarea from "../../components/atoms/Textarea";
 import { customStyles } from "./styles";
 import { useRouter } from "next/router";
+import { storage, db } from "../../config/firebase";
+import { ref, uploadBytes } from "firebase/storage";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 import * as S from "./styles";
 
 const AdminTemplate = () => {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
   const route = useRouter();
+  const [image, setImage]: any = useState("");
+  const imageRef = ref(storage, `image/${image.name}`);
 
   function openModal() {
     setIsOpen(true);
@@ -31,6 +37,29 @@ const AdminTemplate = () => {
 
   function edit(post: any) {
     route.push(`/admin/editar-postagem/${post.id}`);
+  }
+
+  const docData = {
+    author: "Filipe Teste",
+    title: "Lorem ipsum",
+    description: "TEstando a description",
+    date: Timestamp.fromDate(new Date("December 10, 1815")),
+    image: image.name,
+    text: " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis ut, error labore autem vitae dolore, dolorem molestiae perspiciatis laboriosam iusto quidem repudiandae mollitia ipsa amet hic laborum est, ullam earum.",
+  };
+
+  async function handleClickToUpload(event: any) {
+    event.preventDefault();
+
+    uploadBytes(imageRef, image)
+      .then(() => {
+        alert("Imagem enviada");
+      })
+      .catch(() => {
+        alert("Erro ao enviar imagem");
+      });
+
+    await addDoc(collection(db, "posts"), docData);
   }
 
   return (
@@ -88,11 +117,19 @@ const AdminTemplate = () => {
         style={customStyles}
       >
         <S.Form>
-          <input type="file" />
+          <input
+            type="file"
+            onChange={(e: any) => setImage(e.target.files[0])}
+          />
           <Input placeholder="Título" />
           <Input placeholder="Descrição" />
           <Textarea placeholder="Mensagem" />
-          <Button themeColor="primary">Postar</Button>
+          <Button
+            themeColor="primary"
+            onClick={(event: void) => handleClickToUpload(event)}
+          >
+            Postar
+          </Button>
         </S.Form>
       </Modal>
     </Layout>
