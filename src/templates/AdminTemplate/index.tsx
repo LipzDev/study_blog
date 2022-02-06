@@ -14,10 +14,10 @@ import { customStyles } from "./styles";
 import { useRouter } from "next/router";
 import { storage, db } from "../../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
-import { collection, addDoc, Timestamp, getDocs } from "firebase/firestore";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+import data from "../../services/firebase/database/data";
 import { nanoid } from "nanoid";
 import * as S from "./styles";
-import { DataTypes } from "../BlogTemplate";
 
 const AdminTemplate = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -72,23 +72,6 @@ const AdminTemplate = () => {
     }
   }
 
-  // EXIBIR POSTAGENS
-
-  const [data, setData] = useState<DataTypes>();
-  const posts: any = [];
-
-  async function getPosts() {
-    const querySnapshot = await getDocs(collection(db, "posts"));
-    querySnapshot.forEach((doc) => {
-      posts.push({ ...doc.data() });
-    });
-    setData(posts);
-  }
-
-  useEffect(() => {
-    getPosts();
-  }, []);
-
   return (
     <Layout isLoggedIn={true}>
       <Head>
@@ -115,8 +98,7 @@ const AdminTemplate = () => {
           <SearchBar />
 
           <S.PostFlex>
-            {data === undefined && <p>Não há postagens no momento!</p>}
-            {data?.map((post: any, index: number) => (
+            {data()?.map((post: any, index: number) => (
               <Card
                 id={post?.id}
                 key={index}

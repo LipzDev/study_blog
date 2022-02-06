@@ -1,13 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import React from "react";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
 import Card from "../../components/molecules/Card";
 import Layout from "../../components/molecules/Layout";
 import MediaMatch from "../../components/molecules/MediaMatch";
-import { db } from "../../config/firebase";
+import data from "../../services/firebase/database/data";
 import * as S from "./styles";
 
 export type DataTypes = {
@@ -23,21 +22,6 @@ export type DataTypes = {
 };
 
 const BlogTemplate = () => {
-  const [data, setData] = useState<DataTypes>();
-  let posts: any = [];
-
-  async function getPosts() {
-    const querySnapshot = await getDocs(collection(db, "posts"));
-    querySnapshot.forEach((doc) => {
-      posts.push({ ...doc.data() });
-    });
-    setData(posts);
-  }
-
-  useEffect(() => {
-    getPosts();
-  }, []);
-
   return (
     <Layout>
       <S.Wrapper>
@@ -48,7 +32,7 @@ const BlogTemplate = () => {
               {data === undefined && <p>Não há postagens no momento!</p>}
 
               <S.FeaturedPost>
-                {data?.map((post: any, index: number) => (
+                {data()?.map((post: any, index: number) => (
                   <Card
                     id={post?.id}
                     key={index}
@@ -67,11 +51,10 @@ const BlogTemplate = () => {
             {/* VERSÃO MOBILE */}
             <MediaMatch lessThan="large">
               <S.FeaturedPost>
-                {data?.map((post: any, index: number) => (
+                {data()?.map((post: any, index: number) => (
                   <Card
                     id={post?.id}
                     key={index}
-                    large={true}
                     image={
                       "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
                     }

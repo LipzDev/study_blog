@@ -1,29 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { collection, getDocs } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Card from "../../components/molecules/Card";
 import Layout from "../../components/molecules/Layout";
-import { db } from "../../config/firebase";
-import { DataTypes } from "../BlogTemplate";
+import data from "../../services/firebase/database/data";
 import * as S from "./styles";
 
 const HomeTemplate = () => {
-  const [data, setData] = useState<DataTypes>();
-  const posts: any = [];
-  const lastPost = data?.slice(-1)[0];
-
-  async function getPosts() {
-    const querySnapshot = await getDocs(collection(db, "posts"));
-    querySnapshot.forEach((doc) => {
-      posts.push({ ...doc.data() });
-    });
-    setData(posts);
-  }
-
-  useEffect(() => {
-    getPosts();
-  }, []);
+  const lastPost = data()?.slice(-1)[0];
 
   return (
     <Layout>
@@ -46,16 +30,14 @@ const HomeTemplate = () => {
             </Card>
           }
 
-          {data === undefined && <p>Não há postagens no momento!</p>}
-
           <S.PostFlex>
-            {data
-              ?.slice(-4)
+            {data()
+              ?.slice(-5)
               .reverse()
               .map(
                 (post: any, index: number) =>
                   index > 0 &&
-                  index < 4 && (
+                  index < 5 && (
                     <Card
                       id={post?.id}
                       key={index}

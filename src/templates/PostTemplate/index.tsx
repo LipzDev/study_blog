@@ -1,41 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Layout from "../../components/molecules/Layout";
-import * as S from "./styles";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
-import { DataTypes } from "../BlogTemplate";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../config/firebase";
+import data from "../../services/firebase/database/data";
+import * as S from "./styles";
 
 type PostTemplateProps = {
   url?: string | string[];
 };
 
 const PostTemplate = ({ url }: PostTemplateProps) => {
-  // EXIBIR POSTAGENS
-
-  const [data, setData] = useState<DataTypes>();
-  const posts: any = [];
-
-  async function getPosts() {
-    const querySnapshot = await getDocs(collection(db, "posts"));
-    querySnapshot.forEach((doc) => {
-      posts.push({ ...doc.data() });
-    });
-    setData(posts);
-  }
-
-  useEffect(() => {
-    getPosts();
-  }, []);
-
   return (
     <Layout>
       <S.Wrapper>
         <S.Container>
           <ButtonReturn returnTo="/blog" />
-          {data?.map(
+          {data()?.map(
             (post: any, index: number) =>
               post.id === url && (
                 <S.PostContent key={index}>
@@ -53,7 +34,7 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
               ),
           )}
 
-          {/* {data?.map(
+          {data()?.map(
             (post: any, index: number) =>
               post.id === Number(url) && (
                 <S.PostContent key={index}>
@@ -65,7 +46,7 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
                   <p>{post?.text}</p>
                 </S.PostContent>
               ),
-          )} */}
+          )}
         </S.Container>
       </S.Wrapper>
     </Layout>

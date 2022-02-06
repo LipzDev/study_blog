@@ -32,13 +32,13 @@ const GlobalStyles: GlobalStyleComponent<
         font-size: 62.5%;
       }
 
-      img{
+      img {
         vertical-align: middle;
         border-radius: 5px;
       }
 
       h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
         font-weight: 600;
       }
 
@@ -47,7 +47,10 @@ const GlobalStyles: GlobalStyleComponent<
         font-weight: 500;
       }
 
-      button,label, input, textarea{
+      button,
+      label,
+      input,
+      textarea {
         font-family: ${theme.font.family};
         font-weight: 500;
         font-size: 1.4rem;
@@ -57,28 +60,18 @@ const GlobalStyles: GlobalStyleComponent<
         background: ${theme.colors.white};
         font-family: ${theme.font.family};
         font-size: ${theme.font.sizes.medium};
+      }
     `}
+    
+    .ReactModal__Content {
+        @media screen and (max-width: 1024px) {
+          width: 80% !important;
+        }
 
-    @media screen and (max-width: 1024px){
-      h1 {
-        font-size: 1.5rem;
-      }
-
-      h2 {
-        font-size: 1.2rem;
-      }
-    }
-
-
-    .ReactModal__Content{     
-      @media screen and (max-width: 1024px) {
-        width: 80% !important;
-      }
-
-      @media screen and (max-width: 580px) {
-        width: 90% !important;
-      }
-    }
+        @media screen and (max-width: 580px) {
+          width: 90% !important;
+        }
+      }    
   `;
 
 export default GlobalStyles;

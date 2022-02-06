@@ -43,10 +43,9 @@ export const PostContent = styled.div`
 `;
 
 export const PostFlex = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 3rem;
 
   @media screen and (max-width: 1024px) {
     overflow-y: scroll;

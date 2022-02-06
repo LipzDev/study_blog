@@ -40,7 +40,9 @@ export const SmallCard = styled.div`
   }
 
   @media screen and (max-width: 1024px) {
-    min-width: 80%;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
   }
 `;
 

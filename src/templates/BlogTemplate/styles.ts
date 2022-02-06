@@ -16,6 +16,7 @@ export const FeaturedPost = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 3rem;
+  margin-top: 1.5rem;
 
   img {
     width: 100%;
