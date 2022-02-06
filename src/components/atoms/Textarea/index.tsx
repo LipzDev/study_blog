@@ -5,10 +5,11 @@ import * as S from "./styles";
 export type TextareaProps = {
   isFocused?: boolean;
   placeholder?: string;
+  setValueToForm?: any;
   value?: any;
 };
 
-const Input = ({ placeholder, value }: TextareaProps) => {
+const Input = ({ placeholder, value, setValueToForm }: TextareaProps) => {
   const [focus, setFocus] = useState(false);
   const [valueState, setValueState] = useState(value);
 
@@ -23,7 +24,9 @@ const Input = ({ placeholder, value }: TextareaProps) => {
         value={valueState}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        onChange={(e) => setValueState(e.target.value)}
+        onChange={(e) => (
+          setValueState(e.target.value), setValueToForm(e.target.value)
+        )}
       ></textarea>
     </S.Wrapper>
   );

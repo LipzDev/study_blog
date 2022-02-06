@@ -1,43 +1,69 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { collection, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import Card from "../../components/molecules/Card";
 import Layout from "../../components/molecules/Layout";
-import { posts } from "../BlogTemplate/mock";
+import { db } from "../../config/firebase";
+import { DataTypes } from "../BlogTemplate";
 import * as S from "./styles";
 
 const HomeTemplate = () => {
-  const lastPost = posts.slice(-1)[0];
+  const [data, setData] = useState<DataTypes>();
+  const posts: any = [];
+  const lastPost = data?.slice(-1)[0];
+
+  async function getPosts() {
+    const querySnapshot = await getDocs(collection(db, "posts"));
+    querySnapshot.forEach((doc) => {
+      posts.push({ ...doc.data() });
+    });
+    setData(posts);
+  }
+
+  useEffect(() => {
+    if (data !== undefined) getPosts();
+  }, []);
 
   return (
     <Layout>
       <S.Wrapper>
         <S.Container>
           <S.HighlightTitle>Destaques da semana</S.HighlightTitle>
-          <Card
-            id={lastPost.id}
-            large={true}
-            hasDate={true}
-            author={lastPost.author}
-            date={lastPost.date}
-            image={lastPost.image}
-            title={lastPost.title}
-          >
-            {lastPost.text}
-          </Card>
+          {data !== undefined && (
+            <Card
+              id={lastPost?.id}
+              large={true}
+              hasDate={true}
+              author={lastPost?.author}
+              date={lastPost?.date}
+              image={
+                "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
+              }
+              title={lastPost?.title}
+            >
+              {lastPost?.text}
+            </Card>
+          )}
+
+          {data === undefined && <p>Não há postagens no momento!</p>}
 
           <S.PostFlex>
-            {posts
-              .slice(-4)
+            {data
+              ?.slice(-4)
               .reverse()
               .map(
-                (post, index) =>
+                (post: any, index: number) =>
                   index > 0 &&
                   index < 4 && (
                     <Card
-                      id={post.id}
+                      id={post?.id}
                       key={index}
-                      image={post.image}
-                      title={post.title}
-                      description={post.description}
+                      image={
+                        "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
+                      }
+                      title={post?.title}
+                      description={post?.description}
                     >
                       {post.text}
                     </Card>

@@ -5,10 +5,11 @@ import * as S from "./styles";
 export type InputProps = {
   isFocused?: boolean;
   placeholder?: string;
+  setValueToForm?: any;
   value?: any;
 };
 
-const Input = ({ placeholder, value }: InputProps) => {
+const Input = ({ placeholder, value, setValueToForm }: InputProps) => {
   const [focus, setFocus] = useState(false);
   const [valueState, setValueState] = useState(value);
 
@@ -24,7 +25,9 @@ const Input = ({ placeholder, value }: InputProps) => {
         type="text"
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        onChange={(e) => setValueState(e.target.value)}
+        onChange={(e) => (
+          setValueState(e.target.value), setValueToForm(e.target.value)
+        )}
       ></input>
     </S.Wrapper>
   );

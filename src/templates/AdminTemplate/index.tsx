@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { posts } from "../BlogTemplate/mock";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
@@ -14,14 +15,24 @@ import { customStyles } from "./styles";
 import { useRouter } from "next/router";
 import { storage, db } from "../../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { collection, addDoc, Timestamp, getDocs } from "firebase/firestore";
+import { nanoid } from "nanoid";
 import * as S from "./styles";
+import { DataTypes } from "../BlogTemplate";
 
 const AdminTemplate = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const route = useRouter();
+
+  // FORM CONTENT
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [image, setImage]: any = useState("");
-  const imageRef = ref(storage, `image/${image.name}`);
+  const [author, setAuthor] = useState("");
+  const [text, setText] = useState("");
+
+  const imageRef = ref(storage, `image/${image?.name}`);
 
   function openModal() {
     setIsOpen(true);
@@ -40,27 +51,44 @@ const AdminTemplate = () => {
   }
 
   const docData = {
-    author: "Filipe Teste",
-    title: "Lorem ipsum",
-    description: "TEstando a description",
-    date: Timestamp.fromDate(new Date("December 10, 1815")),
-    image: image.name,
-    text: " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis ut, error labore autem vitae dolore, dolorem molestiae perspiciatis laboriosam iusto quidem repudiandae mollitia ipsa amet hic laborum est, ullam earum.",
+    id: nanoid(),
+    author: author,
+    title: title,
+    description: description,
+    date: Timestamp.fromDate(new Date()),
+    image: image?.name === undefined ? "" : image?.name,
+    text: text,
   };
 
   async function handleClickToUpload(event: any) {
     event.preventDefault();
 
-    uploadBytes(imageRef, image)
-      .then(() => {
-        alert("Imagem enviada");
-      })
-      .catch(() => {
-        alert("Erro ao enviar imagem");
-      });
-
-    await addDoc(collection(db, "posts"), docData);
+    try {
+      await uploadBytes(imageRef, image);
+      await addDoc(collection(db, "posts"), docData);
+      alert("Postagem efetuada com sucesso!");
+      closeModal();
+    } catch (e) {
+      alert("Erro ao criar postagem :(");
+    }
   }
+
+  // EXIBIR POSTAGENS
+
+  const [data, setData] = useState<DataTypes>();
+  const posts: any = [];
+
+  async function getPosts() {
+    const querySnapshot = await getDocs(collection(db, "posts"));
+    querySnapshot.forEach((doc) => {
+      posts.push({ ...doc.data() });
+    });
+    setData(posts);
+  }
+
+  useEffect(() => {
+    if (data !== undefined) getPosts();
+  }, []);
 
   return (
     <Layout isLoggedIn={true}>
@@ -88,16 +116,20 @@ const AdminTemplate = () => {
           <SearchBar />
 
           <S.PostFlex>
+            {data === undefined && <p>Não há postagens no momento!</p>}
             {posts
               .slice()
               .reverse()
-              .map((post, index) => (
+              .map((post: any, index: number) => (
                 <Card
-                  id={post.id}
+                  id={post?.id}
                   key={index}
-                  image={post.image}
-                  title={post.title}
-                  description={post.description}
+                  large={true}
+                  image={
+                    "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
+                  }
+                  title={post?.title}
+                  description={post?.description}
                   isAdmin={true}
                   exclude={() => exclude()}
                   edit={() => edit(post)}
@@ -121,9 +153,10 @@ const AdminTemplate = () => {
             type="file"
             onChange={(e: any) => setImage(e.target.files[0])}
           />
-          <Input placeholder="Título" />
-          <Input placeholder="Descrição" />
-          <Textarea placeholder="Mensagem" />
+          <Input placeholder="Título" setValueToForm={setTitle} />
+          <Input placeholder="Author" setValueToForm={setAuthor} />
+          <Input placeholder="Descrição" setValueToForm={setDescription} />
+          <Textarea placeholder="Mensagem" setValueToForm={setText} />
           <Button
             themeColor="primary"
             onClick={(event: void) => handleClickToUpload(event)}
