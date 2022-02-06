@@ -4,12 +4,14 @@ export const SmallCard = styled.div`
   margin-bottom: 5rem;
   cursor: pointer;
   width: 100%;
-  max-width: 400px;
+  min-width: 280px;
+  max-width: 100%;
 
   h1 {
     color: #313131;
     margin: 1.5rem 0;
     font-weight: 500;
+    overflow: hidden;
   }
 
   h2 {

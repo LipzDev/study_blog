@@ -86,7 +86,7 @@ const AdminTemplate = () => {
   }
 
   useEffect(() => {
-    if (data !== undefined) getPosts();
+    getPosts();
   }, []);
 
   return (
@@ -116,26 +116,22 @@ const AdminTemplate = () => {
 
           <S.PostFlex>
             {data === undefined && <p>Não há postagens no momento!</p>}
-            {posts
-              .slice()
-              .reverse()
-              .map((post: any, index: number) => (
-                <Card
-                  id={post?.id}
-                  key={index}
-                  large={true}
-                  image={
-                    "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
-                  }
-                  title={post?.title}
-                  description={post?.description}
-                  isAdmin={true}
-                  exclude={() => exclude()}
-                  edit={() => edit(post)}
-                >
-                  {post.text}
-                </Card>
-              ))}
+            {data?.map((post: any, index: number) => (
+              <Card
+                id={post?.id}
+                key={index}
+                image={
+                  "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
+                }
+                title={post?.title}
+                description={post?.description}
+                isAdmin={true}
+                exclude={() => exclude()}
+                edit={() => edit(post)}
+              >
+                {post.text}
+              </Card>
+            ))}
           </S.PostFlex>
         </S.Container>
       </S.Wrapper>

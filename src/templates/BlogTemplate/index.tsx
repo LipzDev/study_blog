@@ -34,7 +34,7 @@ const BlogTemplate = () => {
   }
 
   useEffect(() => {
-    if (data !== undefined) getPosts();
+    getPosts();
   }, []);
 
   return (

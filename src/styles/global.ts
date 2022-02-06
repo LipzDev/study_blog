@@ -59,6 +59,16 @@ const GlobalStyles: GlobalStyleComponent<
         font-size: ${theme.font.sizes.medium};
     `}
 
+    @media screen and (max-width: 1024px){
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+
 
     .ReactModal__Content{     
       @media screen and (max-width: 1024px) {

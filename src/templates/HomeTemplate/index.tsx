@@ -22,7 +22,7 @@ const HomeTemplate = () => {
   }
 
   useEffect(() => {
-    if (data !== undefined) getPosts();
+    getPosts();
   }, []);
 
   return (
@@ -30,13 +30,13 @@ const HomeTemplate = () => {
       <S.Wrapper>
         <S.Container>
           <S.HighlightTitle>Destaques da semana</S.HighlightTitle>
-          {data !== undefined && (
+          {
             <Card
               id={lastPost?.id}
               large={true}
               hasDate={true}
               author={lastPost?.author}
-              date={lastPost?.date}
+              date={lastPost?.date.seconds}
               image={
                 "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
               }
@@ -44,7 +44,7 @@ const HomeTemplate = () => {
             >
               {lastPost?.text}
             </Card>
-          )}
+          }
 
           {data === undefined && <p>Não há postagens no momento!</p>}
 
