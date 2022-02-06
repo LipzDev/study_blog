@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import { posts } from "../BlogTemplate/mock";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
 import Card from "../../components/molecules/Card";
 import Layout from "../../components/molecules/Layout";

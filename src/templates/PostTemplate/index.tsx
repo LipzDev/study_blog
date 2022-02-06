@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "../../components/molecules/Layout";
-import { posts } from "../BlogTemplate/mock";
 import * as S from "./styles";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
 
@@ -14,7 +13,7 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
       <S.Wrapper>
         <S.Container>
           <ButtonReturn returnTo="/blog" />
-          {posts.map(
+          {/* {posts.map(
             (post, index) =>
               post.id === Number(url) && (
                 <S.PostContent key={index}>
@@ -25,7 +24,7 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
                   <p>{post.text}</p>
                 </S.PostContent>
               ),
-          )}
+          )} */}
         </S.Container>
       </S.Wrapper>
     </Layout>

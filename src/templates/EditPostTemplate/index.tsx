@@ -3,7 +3,6 @@ import Input from "../../components/atoms/Input";
 import Textarea from "../../components/atoms/Textarea";
 import Button from "../../components/atoms/Button";
 import * as S from "./styles";
-import { posts } from "../BlogTemplate/mock";
 
 type EditPostTemplate = {
   url?: string | string[];
@@ -12,7 +11,7 @@ type EditPostTemplate = {
 const EditPostTemplate = ({ url }: EditPostTemplate) => {
   return (
     <S.Container>
-      {posts.map(
+      {/* {posts.map(
         (post, index) =>
           post.id === Number(url) && (
             <S.Form key={index}>
@@ -23,7 +22,7 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
               <Button themeColor="primary">Salvar</Button>
             </S.Form>
           ),
-      )}
+      )} */}
     </S.Container>
   );
 };
