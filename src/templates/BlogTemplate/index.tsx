@@ -22,6 +22,8 @@ export type DataTypes = {
 };
 
 const BlogTemplate = () => {
+  const getAllPosts = data();
+
   return (
     <Layout>
       <S.Wrapper>
@@ -32,7 +34,7 @@ const BlogTemplate = () => {
               {data === undefined && <p>Não há postagens no momento!</p>}
 
               <S.FeaturedPost>
-                {data()?.map((post: any, index: number) => (
+                {getAllPosts?.map((post: any, index: number) => (
                   <Card
                     id={post?.id}
                     key={index}
@@ -51,7 +53,7 @@ const BlogTemplate = () => {
             {/* VERSÃO MOBILE */}
             <MediaMatch lessThan="large">
               <S.FeaturedPost>
-                {data()?.map((post: any, index: number) => (
+                {getAllPosts?.map((post: any, index: number) => (
                   <Card
                     id={post?.id}
                     key={index}

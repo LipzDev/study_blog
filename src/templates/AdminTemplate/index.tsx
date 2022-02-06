@@ -22,6 +22,7 @@ import * as S from "./styles";
 const AdminTemplate = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const route = useRouter();
+  const getAllPosts = data();
 
   // FORM CONTENT
 
@@ -98,7 +99,7 @@ const AdminTemplate = () => {
           <SearchBar />
 
           <S.PostFlex>
-            {data()?.map((post: any, index: number) => (
+            {getAllPosts?.map((post: any, index: number) => (
               <Card
                 id={post?.id}
                 key={index}

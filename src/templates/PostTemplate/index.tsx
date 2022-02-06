@@ -11,12 +11,14 @@ type PostTemplateProps = {
 };
 
 const PostTemplate = ({ url }: PostTemplateProps) => {
+  const getAllPosts = data();
+
   return (
     <Layout>
       <S.Wrapper>
         <S.Container>
           <ButtonReturn returnTo="/blog" />
-          {data()?.map(
+          {getAllPosts?.map(
             (post: any, index: number) =>
               post.id === url && (
                 <S.PostContent key={index}>
@@ -34,7 +36,7 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
               ),
           )}
 
-          {data()?.map(
+          {getAllPosts?.map(
             (post: any, index: number) =>
               post.id === Number(url) && (
                 <S.PostContent key={index}>
