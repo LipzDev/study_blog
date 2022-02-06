@@ -55,9 +55,20 @@ const Card = ({
       <Link href={`/post/${id}`}>
         <img src={image}></img>
       </Link>
+      {hasDate && (
+        <>
+          <span>{author}</span> - <span>{date}</span>
+        </>
+      )}
       <h1>{title}</h1>
       <h2>{description}</h2>
       <p>{children}</p>
+
+      {!isAdmin && (
+        <Link href={`/post/${id}`}>
+          <Button buttonStyle="link">LER MAIS</Button>
+        </Link>
+      )}
 
       {isAdmin && (
         <S.Options>

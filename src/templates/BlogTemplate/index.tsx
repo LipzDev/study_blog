@@ -12,6 +12,7 @@ import * as S from "./styles";
 
 export type DataTypes = {
   author: string;
+  id: string;
   title: string;
   description: string;
   slice: any;
