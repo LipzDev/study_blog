@@ -6,7 +6,7 @@ import ButtonReturn from "../../components/atoms/ButtonReturn";
 import Card from "../../components/molecules/Card";
 import Layout from "../../components/molecules/Layout";
 import MediaMatch from "../../components/molecules/MediaMatch";
-import data from "../../services/firebase/database/data";
+import data from "../../services/firebase/database/getPosts";
 import * as S from "./styles";
 
 export type DataTypes = {

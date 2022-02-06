@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { storage, db } from "../../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
-import data from "../../services/firebase/database/data";
+import data from "../../services/firebase/database/getPosts";
 import { nanoid } from "nanoid";
 import * as S from "./styles";
 

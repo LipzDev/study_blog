@@ -3,7 +3,7 @@
 import React from "react";
 import Layout from "../../components/molecules/Layout";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
-import data from "../../services/firebase/database/data";
+import data from "../../services/firebase/database/getPosts";
 import * as S from "./styles";
 
 type PostTemplateProps = {

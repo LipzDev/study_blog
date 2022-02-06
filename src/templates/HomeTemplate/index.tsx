@@ -3,11 +3,12 @@
 import React from "react";
 import Card from "../../components/molecules/Card";
 import Layout from "../../components/molecules/Layout";
-import data from "../../services/firebase/database/data";
+import getRecentPosts from "../../services/firebase/database/recentsPosts";
 import * as S from "./styles";
 
 const HomeTemplate = () => {
-  const lastPost = data()?.slice(-1)[0];
+  const recentPost = getRecentPosts();
+  const highlight: any = recentPost !== undefined && recentPost;
 
   return (
     <Layout>
@@ -16,41 +17,37 @@ const HomeTemplate = () => {
           <S.HighlightTitle>Destaques da semana</S.HighlightTitle>
           {
             <Card
-              id={lastPost?.id}
+              id={highlight[0]?.id}
               large={true}
               hasDate={true}
-              author={lastPost?.author}
-              date={lastPost?.date.seconds}
+              author={highlight[0]?.author}
+              date={highlight[0]?.date.seconds}
               image={
                 "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
               }
-              title={lastPost?.title}
+              title={highlight[0]?.title}
             >
-              {lastPost?.text}
+              {highlight[0]?.text}
             </Card>
           }
 
           <S.PostFlex>
-            {data()
-              ?.slice(-5)
-              .reverse()
-              .map(
-                (post: any, index: number) =>
-                  index > 0 &&
-                  index < 5 && (
-                    <Card
-                      id={post?.id}
-                      key={index}
-                      image={
-                        "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
-                      }
-                      title={post?.title}
-                      description={post?.description}
-                    >
-                      {post.text}
-                    </Card>
-                  ),
-              )}
+            {recentPost?.map(
+              (post: any, index: number) =>
+                index > 0 && (
+                  <Card
+                    id={post?.id}
+                    key={index}
+                    image={
+                      "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
+                    }
+                    title={post?.title}
+                    description={post?.description}
+                  >
+                    {post.text}
+                  </Card>
+                ),
+            )}
           </S.PostFlex>
         </S.Container>
       </S.Wrapper>
