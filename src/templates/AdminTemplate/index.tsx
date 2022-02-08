@@ -78,7 +78,7 @@ const AdminTemplate = () => {
   }
 
   const filterPosts = getAllPosts?.filter((data: any) =>
-    data?.title?.startsWith(value),
+    data?.title?.toLocaleLowerCase().startsWith(value),
   );
 
   return (
