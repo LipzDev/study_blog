@@ -24,11 +24,7 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
                 <S.PostContent key={index}>
                   <h1>{post?.title}</h1>
                   <h2>{post?.description}</h2>
-                  <img
-                    src={
-                      "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
-                    }
-                  />
+                  <img src={post?.image} />
                   <span>{post?.author}</span> -{" "}
                   <span>{post?.date.seconds}</span>
                   <p>{post?.text}</p>

@@ -22,9 +22,7 @@ const HomeTemplate = () => {
               hasDate={true}
               author={highlight[0]?.author}
               date={highlight[0]?.date.seconds}
-              image={
-                "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
-              }
+              image={highlight[0]?.image}
               title={highlight[0]?.title}
             >
               {highlight[0]?.text}
@@ -38,9 +36,7 @@ const HomeTemplate = () => {
                   <Card
                     id={post?.id}
                     key={index}
-                    image={
-                      "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
-                    }
+                    image={post?.image}
                     title={post?.title}
                     description={post?.description}
                   >

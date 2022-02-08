@@ -1,14 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { ReactSVG } from "react-svg";
 import * as S from "./styles";
 
 export type SearchBar = {
   isFocused?: boolean;
+  onChange?: (e: any) => void;
+  value?: string;
 };
 
-const SearchBar = () => {
+const SearchBar = ({ onChange, value }: SearchBar) => {
   const [focus, setFocus] = useState(false);
-  const [value, setValue] = useState("");
 
   return (
     <S.Wrapper isFocused={focus || (value !== "" && value !== undefined)}>
@@ -17,7 +19,7 @@ const SearchBar = () => {
         type="text"
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={onChange}
       ></input>
       <button>
         <ReactSVG src="/icons/lupe.svg" alt="Icon" wrapper="span" />

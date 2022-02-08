@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
@@ -13,7 +14,7 @@ import Textarea from "../../components/atoms/Textarea";
 import { customStyles } from "./styles";
 import { useRouter } from "next/router";
 import { storage, db } from "../../config/firebase";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import data from "../../services/firebase/database/getPosts";
 import { nanoid } from "nanoid";
@@ -30,8 +31,8 @@ const AdminTemplate = () => {
   const [description, setDescription] = useState("");
   const [image, setImage]: any = useState("");
   const [author, setAuthor] = useState("");
+  const [value, setValue] = useState("");
   const [text, setText] = useState("");
-
   const imageRef = ref(storage, `image/${image?.name}`);
 
   function openModal() {
@@ -56,7 +57,10 @@ const AdminTemplate = () => {
     title: title,
     description: description,
     date: Timestamp.fromDate(new Date()),
-    image: image?.name === undefined ? "" : image?.name,
+    image:
+      image?.name === undefined
+        ? "/img/att.jpg"
+        : `https://firebasestorage.googleapis.com/v0/b/blog-47a62.appspot.com/o/image%2F${image?.name}?alt=media`,
     text: text,
   };
 
@@ -72,6 +76,10 @@ const AdminTemplate = () => {
       alert("Erro ao criar postagem :(");
     }
   }
+
+  const filterPosts = getAllPosts?.filter((data: any) =>
+    data?.title?.startsWith(value),
+  );
 
   return (
     <Layout isLoggedIn={true}>
@@ -96,16 +104,17 @@ const AdminTemplate = () => {
             </Button>
           </S.RecentsPosts>
 
-          <SearchBar />
+          <SearchBar
+            onChange={(e: any) => setValue(e.target.value)}
+            value={value}
+          />
 
           <S.PostFlex>
-            {getAllPosts?.map((post: any, index: number) => (
+            {filterPosts?.map((post: any, index: number) => (
               <Card
                 id={post?.id}
                 key={index}
-                image={
-                  "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
-                }
+                image={post?.image}
                 title={post?.title}
                 description={post?.description}
                 isAdmin={true}

@@ -19,6 +19,7 @@ export type DataTypes = {
   map: any;
   image: string;
   push: any;
+  filter?: any;
 };
 
 const BlogTemplate = () => {
@@ -38,9 +39,7 @@ const BlogTemplate = () => {
                   <Card
                     id={post?.id}
                     key={index}
-                    image={
-                      "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
-                    }
+                    image={post?.image}
                     title={post?.title}
                     description={post?.description}
                   >
@@ -57,9 +56,7 @@ const BlogTemplate = () => {
                   <Card
                     id={post?.id}
                     key={index}
-                    image={
-                      "https://i0.wp.com/multarte.com.br/wp-content/uploads/2018/12/fundo-preto-background.png?resize=696%2C392&ssl=1"
-                    }
+                    image={post?.image}
                     title={post?.title}
                     description={post?.description}
                   >
