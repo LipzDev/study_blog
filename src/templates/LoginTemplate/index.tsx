@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { auth, signIn } from "../../config/firebase";
@@ -5,11 +6,13 @@ import { useRouter } from "next/router";
 import cookie from "js-cookie";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
 import Head from "next/head";
+import { useToast } from "../../hooks/toast";
 import * as S from "./styles";
 
 const LoginTemplate = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { addToast } = useToast();
   const route = useRouter();
 
   function Login(e: any) {
@@ -24,7 +27,11 @@ const LoginTemplate = () => {
         route.push("/admin");
       })
       .catch((error) => {
-        // console.log(error.message);
+        addToast({
+          title: "Login ou senha inválidos!",
+          type: "error",
+          duration: 5000,
+        });
       });
   }
 

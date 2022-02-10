@@ -10,7 +10,6 @@ const Pagination = () => {
   return (
     <S.Pagination>
       <div className="prev">
-        <span>Primeira</span>{" "}
         <span onClick={() => setSelectedElement(selectedElement - 1)}>
           Anterior
         </span>
@@ -30,7 +29,6 @@ const Pagination = () => {
         <span onClick={() => setSelectedElement(selectedElement + 1)}>
           Próxima
         </span>{" "}
-        <span>Última</span>
       </div>
     </S.Pagination>
   );

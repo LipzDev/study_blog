@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 export const Pagination = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 2rem;
 
   span,
   button {
@@ -11,6 +12,12 @@ export const Pagination = styled.div`
 
   span {
     font-size: 1.6rem;
+    color: #3e3e3e;
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
   }
 
   span + span {
@@ -23,19 +30,22 @@ export const Buttons = styled.div`
     margin: 0 20px;
 
     .actived {
-      background: blue;
+      background: ${theme.colors.primary};
       color: white;
     }
 
     button {
-      padding: 2px 7px;
-      border: none;
-      border-radius: 5px;
+      width: 22px;
+      height: 22px;
+      border-radius: 3px;
       font-weight: 600;
       font-size: 1.4rem;
+      border: none;
+      background: transparent;
+      color: #3e3e3e;
 
       :hover {
-        background: blue;
+        background: ${theme.colors.primary};
         color: white;
       }
     }

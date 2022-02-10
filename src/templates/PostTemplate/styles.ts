@@ -6,6 +6,7 @@ export const Container = styled.div`
   margin: 0 auto;
   max-width: 1200px;
   width: 95%;
+  min-height: 100vh;
 `;
 
 export const PostContent = styled.div`
@@ -23,6 +24,20 @@ export const PostContent = styled.div`
 
   p {
     color: #3e3e3e;
+  }
+
+  .skeleton {
+    /* opacity: 0.8; */
+    animation: skeleton-loading 1s linear infinite alternate;
+  }
+
+  @keyframes skeleton-loading {
+    0% {
+      background-color: hsl(200, 0%, 70%);
+    }
+    100% {
+      background-color: hsl(200, 20%, 95%);
+    }
   }
 
   img {

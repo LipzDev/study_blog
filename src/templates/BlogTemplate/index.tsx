@@ -6,6 +6,7 @@ import ButtonReturn from "../../components/atoms/ButtonReturn";
 import Card from "../../components/molecules/Card";
 import Layout from "../../components/molecules/Layout";
 import MediaMatch from "../../components/molecules/MediaMatch";
+import Pagination from "../../components/molecules/Pagination";
 import data from "../../services/firebase/database/getPosts";
 import * as S from "./styles";
 
@@ -39,6 +40,9 @@ const BlogTemplate = () => {
                   <Card
                     id={post?.id}
                     key={index}
+                    hasDate={true}
+                    date={post?.date.seconds}
+                    author={post.author}
                     image={post?.image}
                     title={post?.title}
                     description={post?.description}
@@ -66,6 +70,7 @@ const BlogTemplate = () => {
               </S.FeaturedPost>
             </MediaMatch>
           </S.GridLayout>
+          <Pagination />
         </S.Container>
       </S.Wrapper>
     </Layout>

@@ -35,7 +35,7 @@ const Card = ({
   return large ? (
     <S.LargeCard>
       <Link href={`/post/${id}`}>
-        <img src={image}></img>
+        <img src={image} className="skeleton" loading="lazy"></img>
       </Link>
       {hasDate && (
         <>
@@ -53,12 +53,14 @@ const Card = ({
   ) : (
     <S.SmallCard>
       <Link href={`/post/${id}`}>
-        <img src={image}></img>
+        <img src={image} className="skeleton" loading="lazy"></img>
       </Link>
       {hasDate && (
-        <>
-          <span>{author}</span> - <span>{date}</span>
-        </>
+        <S.PostInfo>
+          <span>{author}</span>
+          <small>-</small>
+          <span>{date}</span>
+        </S.PostInfo>
       )}
       <h1>{title}</h1>
       <h2>{description}</h2>

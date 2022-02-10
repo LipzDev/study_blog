@@ -12,6 +12,7 @@ export const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   width: 95%;
+  min-height: 100vh;
 `;
 
 export const PostContent = styled.div`

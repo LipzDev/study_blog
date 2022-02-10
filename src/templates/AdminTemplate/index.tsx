@@ -20,11 +20,13 @@ import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { nanoid } from "nanoid";
 import { useToast } from "../../hooks/toast";
 import * as S from "./styles";
+import Pagination from "../../components/molecules/Pagination";
 
 const AdminTemplate = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const route = useRouter();
   const getAllPosts = data();
+  const { addToast } = useToast();
 
   // FORM CONTENT
 
@@ -35,7 +37,6 @@ const AdminTemplate = () => {
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
   const imageRef = ref(storage, `image/${image?.name}`);
-  const { addToast } = useToast();
 
   function openModal() {
     setIsOpen(true);
@@ -124,6 +125,9 @@ const AdminTemplate = () => {
               <Card
                 id={post?.id}
                 key={index}
+                hasDate={true}
+                date={post?.date.seconds}
+                author={post.author}
                 image={post?.image}
                 title={post?.title}
                 description={post?.description}
@@ -135,6 +139,7 @@ const AdminTemplate = () => {
               </Card>
             ))}
           </S.PostFlex>
+          <Pagination />
         </S.Container>
       </S.Wrapper>
 

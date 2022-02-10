@@ -36,6 +36,9 @@ const HomeTemplate = () => {
                   <Card
                     id={post?.id}
                     key={index}
+                    hasDate={true}
+                    date={post?.date.seconds}
+                    author={post.author}
                     image={post?.image}
                     title={post?.title}
                     description={post?.description}
