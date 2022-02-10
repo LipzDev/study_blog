@@ -5,6 +5,7 @@ import theme from "../styles/theme";
 import GlobalStyles from "../styles/global";
 import { ThemeProvider } from "styled-components";
 import { UserProvider } from "../context/user";
+import { ToastProvider } from "../hooks/toast";
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -22,7 +23,9 @@ function App({ Component, pageProps }: AppProps) {
         </Head>
         <GlobalStyles />
         <UserProvider>
-          <Component {...pageProps} />
+          <ToastProvider>
+            <Component {...pageProps} />
+          </ToastProvider>
         </UserProvider>
       </ThemeProvider>
     </>

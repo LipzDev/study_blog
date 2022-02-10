@@ -13,6 +13,7 @@
     "@types/js-cookie": "^3.0.1",
     "@types/react-modal": "^3.13.1",
     "@types/styled-components": "^5.1.13",
+    "@types/uuid": "^8.3.4",
     "babel-plugin-styled-components": "^1.13.2",
     "babel-preset-next": "^1.4.0",
     "dotenv": "^10.0.0",
@@ -23,10 +24,13 @@
     "polished": "^4.1.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
     "react-modal": "^3.14.4",
+    "react-spring": "^9.2.4",
     "react-svg": "^14.1.9",
     "styled-components": "^5.3.1",
-    "styled-media-query": "^2.1.2"
+    "styled-media-query": "^2.1.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/react": "17.0.19",

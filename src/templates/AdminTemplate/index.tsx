@@ -11,13 +11,14 @@ import Modal from "react-modal";
 import SearchBar from "../../components/atoms/SearchBar";
 import Input from "../../components/atoms/Input";
 import Textarea from "../../components/atoms/Textarea";
+import data from "../../services/firebase/database/getPosts";
 import { customStyles } from "./styles";
 import { useRouter } from "next/router";
 import { storage, db } from "../../config/firebase";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
-import data from "../../services/firebase/database/getPosts";
 import { nanoid } from "nanoid";
+import { useToast } from "../../hooks/toast";
 import * as S from "./styles";
 
 const AdminTemplate = () => {
@@ -34,6 +35,7 @@ const AdminTemplate = () => {
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
   const imageRef = ref(storage, `image/${image?.name}`);
+  const { addToast } = useToast();
 
   function openModal() {
     setIsOpen(true);
@@ -70,10 +72,18 @@ const AdminTemplate = () => {
     try {
       await uploadBytes(imageRef, image);
       await addDoc(collection(db, "posts"), docData);
-      alert("Postagem efetuada com sucesso!");
+      addToast({
+        title: "Postagem enviada com sucesso!",
+        type: "success",
+        duration: 5000,
+      });
       closeModal();
     } catch (e) {
-      alert("Erro ao criar postagem :(");
+      addToast({
+        title: "Erro ao criar postagem",
+        type: "error",
+        duration: 5000,
+      });
     }
   }
 
