@@ -54,6 +54,8 @@ const AdminTemplate = () => {
     route.push(`/admin/editar-postagem/${post.id}`);
   }
 
+  // const slug = title.toLocaleLowerCase().replaceAll(" ", "-");
+
   const docData = {
     id: nanoid(),
     author: author,

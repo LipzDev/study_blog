@@ -62,7 +62,7 @@ export const SmallCard = styled.div`
 
   @media screen and (max-width: 1024px) {
     width: 100%;
-    min-width: 100%;
+    min-width: 280px;
     max-width: 100%;
   }
 `;
@@ -139,7 +139,7 @@ export const LargeCard = styled.div`
 
   @media screen and (max-width: 1024px) {
     img {
-      max-height: 200px;
+      min-height: 300px;
     }
   }
 `;
