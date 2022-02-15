@@ -12,7 +12,7 @@ type CardProps = {
   description?: string;
   hasDate?: boolean;
   children?: React.ReactNode;
-  id?: number;
+  id?: string;
   isAdmin?: boolean;
   exclude?: () => void;
   edit?: () => void;

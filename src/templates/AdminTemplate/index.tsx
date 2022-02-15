@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
 import Card from "../../components/molecules/Card";
@@ -16,11 +16,10 @@ import { customStyles } from "./styles";
 import { useRouter } from "next/router";
 import { storage, db } from "../../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
-import { nanoid } from "nanoid";
+import { collection, addDoc, Timestamp, doc, setDoc } from "firebase/firestore";
 import { useToast } from "../../hooks/toast";
-import * as S from "./styles";
 import Pagination from "../../components/molecules/Pagination";
+import * as S from "./styles";
 
 const AdminTemplate = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -57,7 +56,7 @@ const AdminTemplate = () => {
   // const slug = title.toLocaleLowerCase().replaceAll(" ", "-");
 
   const docData = {
-    id: nanoid(),
+    id: "",
     author: author,
     title: title,
     description: description,
@@ -74,7 +73,10 @@ const AdminTemplate = () => {
 
     try {
       await uploadBytes(imageRef, image);
-      await addDoc(collection(db, "posts"), docData);
+      const docRef = await addDoc(collection(db, "posts"), docData);
+      const postIdRef: any = doc(db, "posts", docRef.id);
+      setDoc(postIdRef, { id: docRef.id }, { merge: true });
+
       addToast({
         title: "Postagem enviada com sucesso!",
         type: "success",

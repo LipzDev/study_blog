@@ -4,11 +4,11 @@ import Input from "../../components/atoms/Input";
 import Textarea from "../../components/atoms/Textarea";
 import Button from "../../components/atoms/Button";
 import data from "../../services/firebase/database/getPosts";
-import { nanoid } from "nanoid";
 import { storage, db } from "../../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { doc, Timestamp, setDoc } from "firebase/firestore";
 import { useToast } from "../../hooks/toast";
+import { useRouter } from "next/router";
 import * as S from "./styles";
 
 type EditPostTemplate = {
@@ -18,6 +18,7 @@ type EditPostTemplate = {
 const EditPostTemplate = ({ url }: EditPostTemplate) => {
   const getAllPosts = data();
   const { addToast } = useToast();
+  const route = useRouter();
 
   // FORM CONTENT
 
@@ -25,12 +26,11 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
   const [description, setDescription] = useState("");
   const [image, setImage]: any = useState("");
   const [author, setAuthor] = useState("");
-  const [value, setValue] = useState("");
   const [text, setText] = useState("");
   const imageRef = ref(storage, `image/${image?.name}`);
 
   const docData = {
-    id: nanoid(),
+    id: url,
     author: author,
     title: title,
     description: description,
@@ -47,12 +47,17 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
 
     try {
       await uploadBytes(imageRef, image);
-      await addDoc(collection(db, "posts"), docData);
+      // DEVEMOS ADICIONAR O ID DO POST QUE QUEREMOS EDITAR NO CAMPO ABAIXO (docData.id)
+      const postRef = doc(db, "posts", docData.id as any);
+      setDoc(postRef, docData, { merge: true });
+
       addToast({
-        title: "Postagem enviada com sucesso!",
+        title: "Postagem editada com sucesso!",
         type: "success",
         duration: 5000,
       });
+
+      route.push("/admin");
     } catch (e) {
       addToast({
         title: "Erro ao criar postagem",
@@ -70,12 +75,30 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
             <S.Form key={index}>
               <input
                 type="file"
+                accept=".jpg, .jpeg, .png"
                 onChange={(e: any) => setImage(e.target.files[0])}
+                // value="https://firebasestorage.googleapis.com/v0/b/blog-47a62.appspot.com/o/image%2F${image?.name}?alt=media"
               />
-              <Input placeholder="Título" setValueToForm={setTitle} />
-              <Input placeholder="Author" setValueToForm={setAuthor} />
-              <Input placeholder="Descrição" setValueToForm={setDescription} />
-              <Textarea placeholder="Mensagem" setValueToForm={setText} />
+              <Input
+                placeholder="Título"
+                setValueToForm={setTitle}
+                value={post.title}
+              />
+              <Input
+                placeholder="Author"
+                setValueToForm={setAuthor}
+                value={post.author}
+              />
+              <Input
+                placeholder="Descrição"
+                setValueToForm={setDescription}
+                value={post.description}
+              />
+              <Textarea
+                placeholder="Mensagem"
+                setValueToForm={setText}
+                value={post.text}
+              />
               <Button
                 themeColor="primary"
                 onClick={(event: void) => handleClickToUpload(event)}
