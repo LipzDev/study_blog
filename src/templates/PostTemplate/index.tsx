@@ -5,6 +5,7 @@ import Layout from "../../components/molecules/Layout";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
 import data from "../../services/firebase/database/getPosts";
 import * as S from "./styles";
+import timestamp from "time-stamp";
 
 type PostTemplateProps = {
   url?: string | string[];
@@ -26,21 +27,17 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
                   <S.ContainerTop>
                     <img src={post?.image} loading="lazy" />
                   </S.ContainerTop>
-                  <span>{post?.author}</span> -{" "}
-                  <span>{post?.date.seconds}</span>
-                  <p>{post?.text}</p>
-                </S.PostContent>
-              ),
-          )}
-
-          {getAllPosts?.map(
-            (post: any, index: number) =>
-              post.id === Number(url) && (
-                <S.PostContent key={index}>
-                  <h1>{post?.title}</h1>
-                  <img src={post?.image} loading="lazy"></img>
-                  <span>{post?.author}</span> -{" "}
-                  <span>{post?.date.seconds}</span>
+                  <S.Date>
+                    <span>{post?.author ? post?.author : "Desconhecido"}</span>{" "}
+                    |{" "}
+                    <span className="dateNumber">
+                      <img src="/icons/clock.svg" alt="icon" />
+                      {timestamp(
+                        "DD/MM/YYYY",
+                        new Date((post?.date.seconds as any) * 1000),
+                      )}
+                    </span>
+                  </S.Date>
                   <p>{post?.text}</p>
                 </S.PostContent>
               ),

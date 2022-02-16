@@ -36,6 +36,10 @@ export const PostFlex = styled.div`
   margin: 1.5rem 0;
 
   @media screen and (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 580px) {
     grid-template-columns: 1fr;
   }
 `;

@@ -48,29 +48,17 @@ export const CardTop = styled.div`
 `;
 
 export const CardBottom = styled.div`
-  /* padding: 0 15px 15px 15px; */
-
   max-height: 100%;
 
   h1 {
     color: #313131;
     font-weight: 500;
+    margin-top: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 1; /* number of lines to show */
     line-clamp: 1;
-    -webkit-box-orient: vertical;
-  }
-
-  h2 {
-    color: #3e3e3e;
-    font-weight: 400;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* number of lines to show */
-    line-clamp: 2;
     -webkit-box-orient: vertical;
   }
 
@@ -85,18 +73,6 @@ export const CardBottom = styled.div`
     line-clamp: 2;
     -webkit-box-orient: vertical;
     color: #3e3e3e;
-  }
-`;
-
-// DATE
-
-export const PostInfo = styled.div`
-  span {
-    font-size: 1.3rem;
-  }
-
-  small {
-    margin: 5px 10px 0 10px;
   }
 `;
 
@@ -155,16 +131,8 @@ export const ContainerBottom = styled.div`
     font-weight: 500;
   }
 
-  h2 {
-    color: #3e3e3e;
-    font-weight: 400;
-  }
-
   p {
     color: #3e3e3e;
-  }
-
-  p {
     margin-top: 15px;
     font-size: 1.3rem;
     text-align: justify;
@@ -175,6 +143,30 @@ export const ContainerBottom = styled.div`
     line-clamp: 2;
     -webkit-box-orient: vertical;
   }
+`;
+
+export const Date = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    margin-right: 5px;
+    color: #3e3e3e;
+  }
+
+  img {
+    margin: 0 5px;
+    position: relative;
+    top: -1px;
+    max-width: 17px;
+    max-height: 17px;
+  }
+
+  .dateNumber {
+    font-size: 1.4rem;
+  }
+
+  margin-top: 5px;
 `;
 
 export const Options = styled.div`

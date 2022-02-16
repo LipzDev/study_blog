@@ -19,6 +19,7 @@
     "dotenv": "^10.0.0",
     "firebase": "^9.6.2",
     "js-cookie": "^3.0.1",
+    "moment": "^2.29.1",
     "nanoid": "^3.2.0",
     "next": "11.1.2",
     "polished": "^4.1.4",
@@ -26,10 +27,12 @@
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
     "react-modal": "^3.14.4",
+    "react-simple-timestamp-to-date": "^1.0.3",
     "react-spring": "^9.2.4",
     "react-svg": "^14.1.9",
     "styled-components": "^5.3.1",
     "styled-media-query": "^2.1.2",
+    "time-stamp": "^2.2.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

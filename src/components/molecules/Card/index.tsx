@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import Link from "next/link";
-import * as S from "./styles";
 import Button from "../../atoms/Button";
+import timestamp from "time-stamp";
+import * as S from "./styles";
 
 type CardProps = {
   large?: boolean;
@@ -30,6 +33,9 @@ const Card = ({
   exclude,
   edit,
 }: CardProps) => {
+  const dateTime = new Date((date as any) * 1000);
+  const formatedDate = timestamp("DD/MM/YYYY", dateTime);
+
   return large ? (
     <S.LargeCard>
       <S.ContainerTop>
@@ -39,9 +45,13 @@ const Card = ({
       </S.ContainerTop>
       <S.ContainerBottom>
         {hasDate && (
-          <>
-            <span>{author}</span> - <span>{date}</span>
-          </>
+          <S.Date>
+            <span>{author ? author : "Desconhecido"}</span> |{" "}
+            <span className="dateNumber">
+              <img src="/icons/clock.svg" alt="icon" />
+              {formatedDate}
+            </span>
+          </S.Date>
         )}
         <h1>{title}</h1>
 
@@ -61,11 +71,13 @@ const Card = ({
 
       <S.CardBottom>
         {hasDate && (
-          <S.PostInfo>
-            <span>{author}</span>
-            <small>-</small>
-            <span>{date}</span>
-          </S.PostInfo>
+          <S.Date>
+            <span>{author ? author : "Desconhecido"}</span> |{" "}
+            <span className="dateNumber">
+              <img src="/icons/clock.svg" alt="icon" />
+              {formatedDate}
+            </span>
+          </S.Date>
         )}
         <h1>{title}</h1>
         <p>{children}</p>

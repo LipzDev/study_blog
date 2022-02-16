@@ -30,7 +30,7 @@ export const PostContent = styled.div`
     width: 100%;
     height: 600px;
     object-fit: cover;
-    object-position: right center;
+    object-position: center;
   }
 
   p {
@@ -103,4 +103,30 @@ export const ContainerTop = styled.div`
       height: 280px;
     }
   }
+`;
+
+export const Date = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    margin-right: 5px;
+    color: #3e3e3e;
+  }
+
+  img {
+    margin: 0 5px;
+    position: relative;
+    top: -1px;
+    max-width: 17px;
+    max-height: 17px;
+  }
+
+  .dateNumber {
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+  }
+
+  margin-top: 5px;
 `;
