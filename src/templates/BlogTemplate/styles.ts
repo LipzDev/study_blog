@@ -16,8 +16,8 @@ export const Container = styled.div`
 export const FeaturedPost = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-column-gap: 3rem;
-  margin-top: 1.5rem;
+  grid-gap: 3rem;
+  margin: 1.5rem 0;
 
   img {
     width: 100%;
@@ -29,6 +29,10 @@ export const FeaturedPost = styled.div`
   }
 
   @media screen and (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 580px) {
     grid-template-columns: 1fr;
   }
 `;

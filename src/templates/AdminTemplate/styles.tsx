@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.section`
   h1 {
-    margin-top: 20px;
+    margin-top: 10px;
   }
 `;
 
@@ -32,7 +32,8 @@ export const RecentsPosts = styled.div`
 export const PostFlex = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-column-gap: 3rem;
+  grid-gap: 3rem;
+  margin: 1.5rem 0;
 
   @media screen and (max-width: 1024px) {
     grid-template-columns: 1fr;
@@ -61,7 +62,7 @@ export const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     width: "500px",
-    height: "450px",
+    height: "390px",
   },
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)",

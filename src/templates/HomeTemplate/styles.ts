@@ -47,6 +47,7 @@ export const PostFlex = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 3rem;
+  margin-bottom: 5rem;
 
   @media screen and (max-width: 1024px) {
     overflow-y: scroll;

@@ -23,7 +23,6 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
   // FORM CONTENT
 
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
   const [image, setImage]: any = useState("");
   const [author, setAuthor] = useState("");
   const [text, setText] = useState("");
@@ -33,7 +32,6 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
     id: url,
     author: author,
     title: title,
-    description: description,
     date: Timestamp.fromDate(new Date()),
     image:
       image?.name === undefined
@@ -88,11 +86,6 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
                 placeholder="Author"
                 setValueToForm={setAuthor}
                 value={post.author}
-              />
-              <Input
-                placeholder="Descrição"
-                setValueToForm={setDescription}
-                value={post.description}
               />
               <Textarea
                 placeholder="Mensagem"

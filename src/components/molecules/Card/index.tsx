@@ -9,7 +9,6 @@ type CardProps = {
   title?: string;
   author?: string;
   date?: string;
-  description?: string;
   hasDate?: boolean;
   children?: React.ReactNode;
   id?: string;
@@ -26,7 +25,6 @@ const Card = ({
   title,
   author,
   date,
-  description,
   children,
   isAdmin,
   exclude,
@@ -34,54 +32,63 @@ const Card = ({
 }: CardProps) => {
   return large ? (
     <S.LargeCard>
-      <Link href={`/post/${id}`}>
-        <img src={image} className="skeleton" loading="lazy"></img>
-      </Link>
-      {hasDate && (
-        <>
-          <span>{author}</span> - <span>{date}</span>
-        </>
-      )}
-      <h1>{title}</h1>
-      <h2>{description}</h2>
+      <S.ContainerTop>
+        <Link href={`/post/${id}`}>
+          <img src={image} loading="lazy"></img>
+        </Link>
+      </S.ContainerTop>
+      <S.ContainerBottom>
+        {hasDate && (
+          <>
+            <span>{author}</span> - <span>{date}</span>
+          </>
+        )}
+        <h1>{title}</h1>
 
-      <p>{children}</p>
-      <Link href={`/post/${id}`}>
-        <Button buttonStyle="link">LER MAIS</Button>
-      </Link>
-    </S.LargeCard>
-  ) : (
-    <S.SmallCard>
-      <Link href={`/post/${id}`}>
-        <img src={image} className="skeleton" loading="lazy"></img>
-      </Link>
-      {hasDate && (
-        <S.PostInfo>
-          <span>{author}</span>
-          <small>-</small>
-          <span>{date}</span>
-        </S.PostInfo>
-      )}
-      <h1>{title}</h1>
-      <h2>{description}</h2>
-      <p>{children}</p>
-
-      {!isAdmin && (
+        <p>{children}</p>
         <Link href={`/post/${id}`}>
           <Button buttonStyle="link">LER MAIS</Button>
         </Link>
-      )}
+      </S.ContainerBottom>
+    </S.LargeCard>
+  ) : (
+    <S.SmallCard>
+      <S.CardTop>
+        <Link href={`/post/${id}`}>
+          <img src={image} loading="lazy"></img>
+        </Link>
+      </S.CardTop>
 
-      {isAdmin && (
-        <S.Options>
-          <Button buttonStyle="link" onClick={edit}>
-            Editar
-          </Button>
-          <Button buttonStyle="link" onClick={exclude}>
-            Excluir
-          </Button>
-        </S.Options>
-      )}
+      <S.CardBottom>
+        {hasDate && (
+          <S.PostInfo>
+            <span>{author}</span>
+            <small>-</small>
+            <span>{date}</span>
+          </S.PostInfo>
+        )}
+        <h1>{title}</h1>
+        <p>{children}</p>
+
+        {!isAdmin && (
+          <S.Button>
+            <Link href={`/post/${id}`}>
+              <Button buttonStyle="link">LER MAIS</Button>
+            </Link>
+          </S.Button>
+        )}
+
+        {isAdmin && (
+          <S.Button>
+            <Button buttonStyle="link" className="left-button" onClick={edit}>
+              Editar
+            </Button>
+            <Button buttonStyle="link" onClick={exclude}>
+              Excluir
+            </Button>
+          </S.Button>
+        )}
+      </S.CardBottom>
     </S.SmallCard>
   );
 };

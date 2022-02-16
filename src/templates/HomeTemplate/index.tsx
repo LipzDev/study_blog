@@ -41,7 +41,6 @@ const HomeTemplate = () => {
                     author={post.author}
                     image={post?.image}
                     title={post?.title}
-                    description={post?.description}
                   >
                     {post.text}
                   </Card>

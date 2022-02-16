@@ -14,7 +14,6 @@ export type DataTypes = {
   author: string;
   id: string;
   title: string;
-  description: string;
   slice: any;
   text: string;
   map: any;
@@ -45,7 +44,6 @@ const BlogTemplate = () => {
                     author={post.author}
                     image={post?.image}
                     title={post?.title}
-                    description={post?.description}
                   >
                     {post?.text}
                   </Card>
@@ -62,7 +60,6 @@ const BlogTemplate = () => {
                     key={index}
                     image={post?.image}
                     title={post?.title}
-                    description={post?.description}
                   >
                     {post?.text}
                   </Card>

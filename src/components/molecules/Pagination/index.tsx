@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import * as S from "./styles";
 
 const Pagination = () => {
-  const [active, setActive] = useState(false);
   const [selectedElement, setSelectedElement] = useState<number>(0);
 
   const pages = [1, 2, 3, 4, 5];

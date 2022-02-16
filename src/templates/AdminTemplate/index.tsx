@@ -30,7 +30,6 @@ const AdminTemplate = () => {
   // FORM CONTENT
 
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
   const [image, setImage]: any = useState("");
   const [author, setAuthor] = useState("");
   const [value, setValue] = useState("");
@@ -59,7 +58,6 @@ const AdminTemplate = () => {
     id: "",
     author: author,
     title: title,
-    description: description,
     date: Timestamp.fromDate(new Date()),
     image:
       image?.name === undefined
@@ -134,7 +132,6 @@ const AdminTemplate = () => {
                 author={post.author}
                 image={post?.image}
                 title={post?.title}
-                description={post?.description}
                 isAdmin={true}
                 exclude={() => exclude()}
                 edit={() => edit(post)}
@@ -161,7 +158,6 @@ const AdminTemplate = () => {
           />
           <Input placeholder="Título" setValueToForm={setTitle} />
           <Input placeholder="Author" setValueToForm={setAuthor} />
-          <Input placeholder="Descrição" setValueToForm={setDescription} />
           <Textarea placeholder="Mensagem" setValueToForm={setText} />
           <Button
             themeColor="primary"

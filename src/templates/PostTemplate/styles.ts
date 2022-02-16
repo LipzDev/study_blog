@@ -26,26 +26,11 @@ export const PostContent = styled.div`
     color: #3e3e3e;
   }
 
-  .skeleton {
-    /* opacity: 0.8; */
-    animation: skeleton-loading 1s linear infinite alternate;
-  }
-
-  @keyframes skeleton-loading {
-    0% {
-      background-color: hsl(200, 0%, 70%);
-    }
-    100% {
-      background-color: hsl(200, 20%, 95%);
-    }
-  }
-
   img {
     width: 100%;
     height: 600px;
     object-fit: cover;
     object-position: right center;
-    margin-bottom: 10px;
   }
 
   p {
@@ -65,7 +50,57 @@ export const PostContent = styled.div`
 
     img {
       height: auto;
-      margin-bottom: 1rem;
+    }
+  }
+`;
+
+export const ContainerTop = styled.div`
+  animation: placeholderShimmer 1s linear infinite forwards;
+  background: #f6f7f8;
+
+  width: 100%;
+  min-height: 580px;
+  margin-bottom: 10px;
+
+  img {
+    width: 100%;
+    height: 580px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+
+  background-image: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
+  );
+  background-size: 80rem 14rem;
+
+  @keyframes placeholderShimmer {
+    0% {
+      background-position: -40rem 0;
+    }
+    100% {
+      background-position: 40rem 0;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    min-height: 480px;
+
+    img {
+      height: 480px;
+    }
+  }
+
+  @media screen and (max-width: 580px) {
+    min-height: 280px;
+
+    img {
+      height: 280px;
     }
   }
 `;

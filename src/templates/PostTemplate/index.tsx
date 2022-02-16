@@ -23,8 +23,9 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
               post.id === url && (
                 <S.PostContent key={index}>
                   <h1>{post?.title}</h1>
-                  <h2>{post?.description}</h2>
-                  <img src={post?.image} className="skeleton" loading="lazy" />
+                  <S.ContainerTop>
+                    <img src={post?.image} loading="lazy" />
+                  </S.ContainerTop>
                   <span>{post?.author}</span> -{" "}
                   <span>{post?.date.seconds}</span>
                   <p>{post?.text}</p>
@@ -37,12 +38,7 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
               post.id === Number(url) && (
                 <S.PostContent key={index}>
                   <h1>{post?.title}</h1>
-                  <h2>{post?.description}</h2>
-                  <img
-                    src={post?.image}
-                    className="skeleton"
-                    loading="lazy"
-                  ></img>
+                  <img src={post?.image} loading="lazy"></img>
                   <span>{post?.author}</span> -{" "}
                   <span>{post?.date.seconds}</span>
                   <p>{post?.text}</p>

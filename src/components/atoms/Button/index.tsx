@@ -6,6 +6,7 @@ export type ButtonProps = {
   onClick?: () => void;
   buttonStyle?: "transparent" | "link";
   themeColor?: "primary" | "secondary";
+  className?: string;
 };
 
 const Button = ({
@@ -13,9 +14,11 @@ const Button = ({
   onClick,
   buttonStyle,
   themeColor,
+  className,
 }: ButtonProps) => {
   return (
     <S.Button
+      className={className}
       onClick={onClick}
       buttonStyle={buttonStyle}
       themeColor={themeColor}
