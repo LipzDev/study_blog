@@ -30,46 +30,23 @@ const BlogTemplate = () => {
       <S.Wrapper>
         <S.Container>
           <ButtonReturn returnTo="/" />
-          <S.GridLayout>
-            <MediaMatch greaterThan="large">
-              {data === undefined && <p>Não há postagens no momento!</p>}
+          {data === undefined && <p>Não há postagens no momento!</p>}
 
-              <S.FeaturedPost>
-                {getAllPosts?.map((post: any, index: number) => (
-                  <Card
-                    id={post?.id}
-                    key={index}
-                    hasDate={true}
-                    date={post?.date.seconds}
-                    author={post.author}
-                    image={post?.image}
-                    title={post?.title}
-                  >
-                    {post?.text}
-                  </Card>
-                ))}
-              </S.FeaturedPost>
-            </MediaMatch>
-
-            {/* VERSÃO MOBILE */}
-            <MediaMatch lessThan="large">
-              <S.FeaturedPost>
-                {getAllPosts?.map((post: any, index: number) => (
-                  <Card
-                    id={post?.id}
-                    key={index}
-                    hasDate={true}
-                    date={post?.date.seconds}
-                    author={post.author}
-                    image={post?.image}
-                    title={post?.title}
-                  >
-                    {post?.text}
-                  </Card>
-                ))}
-              </S.FeaturedPost>
-            </MediaMatch>
-          </S.GridLayout>
+          <S.FeaturedPost>
+            {getAllPosts?.map((post: any, index: number) => (
+              <Card
+                id={post?.id}
+                key={index}
+                hasDate={true}
+                date={post?.date.seconds}
+                author={post.author}
+                image={post?.image}
+                title={post?.title}
+              >
+                {post?.text}
+              </Card>
+            ))}
+          </S.FeaturedPost>
           <Pagination />
         </S.Container>
       </S.Wrapper>

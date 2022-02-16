@@ -12,17 +12,26 @@ import SearchBar from "../../components/atoms/SearchBar";
 import Input from "../../components/atoms/Input";
 import Textarea from "../../components/atoms/Textarea";
 import data from "../../services/firebase/database/getPosts";
-import { customStyles } from "./styles";
+import { customStyles, customStylesConfirmationModal } from "./styles";
 import { useRouter } from "next/router";
 import { storage, db } from "../../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
-import { collection, addDoc, Timestamp, doc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  Timestamp,
+  doc,
+  setDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { useToast } from "../../hooks/toast";
 import Pagination from "../../components/molecules/Pagination";
 import * as S from "./styles";
 
 const AdminTemplate = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
+  const [postInfo, setPostInfo] = useState("");
   const route = useRouter();
   const getAllPosts = data();
   const { addToast } = useToast();
@@ -44,15 +53,31 @@ const AdminTemplate = () => {
     setIsOpen(false);
   }
 
-  function exclude() {
-    alert("Modal de excluir");
+  function confirmExclude(post: any) {
+    setOpenConfirmationModal(true);
+    setPostInfo(post);
+  }
+
+  async function exclude(post: any) {
+    try {
+      await deleteDoc(doc(db, "posts", post.id));
+      addToast({
+        title: "Publicação excluida com sucesso!",
+        type: "success",
+        duration: 5000,
+      });
+    } catch (e) {
+      addToast({
+        title: "Erro ao excluir publicação",
+        type: "error",
+        duration: 5000,
+      });
+    }
   }
 
   function edit(post: any) {
     route.push(`/admin/editar-postagem/${post.id}`);
   }
-
-  // const slug = title.toLocaleLowerCase().replaceAll(" ", "-");
 
   const docData = {
     id: "",
@@ -108,10 +133,9 @@ const AdminTemplate = () => {
       <S.Wrapper>
         <S.Container>
           <ButtonReturn returnTo="/blog" />
-          <h1>Olá Admin</h1>
 
           <S.RecentsPosts>
-            <h2>Postagens recentes</h2>
+            <h1>Olá seja bem vindo(a).</h1>
             <Button onClick={openModal} themeColor="primary">
               Criar nova postagem
             </Button>
@@ -133,7 +157,7 @@ const AdminTemplate = () => {
                 image={post?.image}
                 title={post?.title}
                 isAdmin={true}
-                exclude={() => exclude()}
+                exclude={() => confirmExclude(post)}
                 edit={() => edit(post)}
               >
                 {post.text}
@@ -166,6 +190,32 @@ const AdminTemplate = () => {
             Postar
           </Button>
         </S.Form>
+      </Modal>
+
+      {/* MODAL DE CONFIRMAÇÃO */}
+
+      <Modal
+        isOpen={openConfirmationModal}
+        onRequestClose={() => setOpenConfirmationModal(false)}
+        style={customStylesConfirmationModal}
+      >
+        <S.ConfirmExclude>
+          <h2>Deseja mesmo excluir esta publicação?</h2>
+
+          <S.Options>
+            <button onClick={() => setOpenConfirmationModal(false)}>
+              CANCELAR
+            </button>
+            <button
+              onClick={() => (
+                exclude(postInfo), setOpenConfirmationModal(false)
+              )}
+              className="confirm-button"
+            >
+              SIM, EXCLUIR
+            </button>
+          </S.Options>
+        </S.ConfirmExclude>
       </Modal>
     </Layout>
   );

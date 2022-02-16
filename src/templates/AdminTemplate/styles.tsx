@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Wrapper = styled.section`
   h1 {
@@ -57,6 +57,53 @@ export const Form = styled.form`
   }
 `;
 
+export const ConfirmExclude = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  @media screen and (max-width: 580px) {
+    h2 {
+      font-size: 1.4rem;
+    }
+  }
+`;
+
+export const Options = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    margin-top: 20px;
+
+    button {
+      border: none;
+      cursor: pointer;
+      padding: 10px 15px;
+      width: 150px;
+      border-radius: 5px;
+    }
+
+    button + button {
+      margin-left: 20px;
+    }
+
+    .confirm-button {
+      background-color: ${theme.colors.dangerLight};
+      color: ${theme.colors.white};
+    }
+
+    @media screen and (max-width: 580px) {
+      button {
+        width: 140px;
+        font-size: 1.3rem;
+      }
+    }
+  `}
+`;
+
+// CUSTOM STYLES TO MODAL
+
 export const customStyles = {
   content: {
     top: "50%",
@@ -67,6 +114,22 @@ export const customStyles = {
     transform: "translate(-50%, -50%)",
     width: "500px",
     height: "390px",
+  },
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+};
+
+export const customStylesConfirmationModal = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    width: "500px",
+    height: "190px",
   },
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)",
