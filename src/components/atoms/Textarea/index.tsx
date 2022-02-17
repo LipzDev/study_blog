@@ -1,17 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./styles";
 
 export type TextareaProps = {
   isFocused?: boolean;
   placeholder?: string;
   setValueToForm?: any;
-  value?: any;
+  initialValue?: any;
 };
 
-const Input = ({ placeholder, value, setValueToForm }: TextareaProps) => {
+const Textarea = ({
+  placeholder,
+  initialValue,
+  setValueToForm,
+}: TextareaProps) => {
   const [focus, setFocus] = useState(false);
-  const [valueState, setValueState] = useState(value);
+  const [valueState, setValueState] = useState(initialValue);
+  const [newValue, setNewValue] = useState("");
+
+  useEffect(() => {
+    setValueToForm(valueState, newValue);
+  }, [setValueToForm, newValue, valueState]);
 
   return (
     <S.Wrapper
@@ -25,11 +34,11 @@ const Input = ({ placeholder, value, setValueToForm }: TextareaProps) => {
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         onChange={(e) => (
-          setValueState(e.target.value), setValueToForm(e.target.value)
+          setValueState(e.target.value), setNewValue(e.target.value)
         )}
       ></textarea>
     </S.Wrapper>
   );
 };
 
-export default Input;
+export default Textarea;

@@ -23,7 +23,6 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
             (post: any, index: number) =>
               post.id === url && (
                 <S.PostContent key={index}>
-                  <h1>{post?.title}</h1>
                   <S.ContainerTop>
                     <img src={post?.image} loading="lazy" />
                   </S.ContainerTop>
@@ -38,6 +37,7 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
                       )}
                     </span>
                   </S.Date>
+                  <h1>{post?.title}</h1>
                   <p>{post?.text}</p>
                 </S.PostContent>
               ),

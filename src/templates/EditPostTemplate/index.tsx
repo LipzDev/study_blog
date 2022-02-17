@@ -40,6 +40,9 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
     text: text,
   };
 
+  console.log(docData.title);
+  console.log(docData.author);
+
   async function handleClickToUpload(event: any) {
     event.preventDefault();
 
@@ -80,17 +83,17 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
               <Input
                 placeholder="Título"
                 setValueToForm={setTitle}
-                value={post.title}
+                initialValue={post.title}
               />
               <Input
                 placeholder="Author"
                 setValueToForm={setAuthor}
-                value={post.author}
+                initialValue={post.author}
               />
               <Textarea
                 placeholder="Mensagem"
                 setValueToForm={setText}
-                value={post.text}
+                initialValue={post.text}
               />
               <Button
                 themeColor="primary"
