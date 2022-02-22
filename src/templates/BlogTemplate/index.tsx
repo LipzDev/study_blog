@@ -47,8 +47,8 @@ const BlogTemplate = () => {
               </Card>
             ))}
           </S.FeaturedPost>
-          <Pagination />
         </S.Container>
+        <Pagination />
       </S.Wrapper>
     </Layout>
   );

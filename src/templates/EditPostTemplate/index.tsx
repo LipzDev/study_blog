@@ -32,16 +32,12 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
     id: url,
     author: author,
     title: title,
-    date: Timestamp.fromDate(new Date()),
     image:
       image?.name === undefined
         ? "/img/att.jpg"
         : `https://firebasestorage.googleapis.com/v0/b/blog-47a62.appspot.com/o/image%2F${image?.name}?alt=media`,
     text: text,
   };
-
-  console.log(docData.title);
-  console.log(docData.author);
 
   async function handleClickToUpload(event: any) {
     event.preventDefault();
