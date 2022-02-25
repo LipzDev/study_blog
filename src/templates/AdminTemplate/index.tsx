@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
 import Card from "../../components/molecules/Card";
@@ -32,8 +32,10 @@ const AdminTemplate = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
   const [postInfo, setPostInfo] = useState("");
+  const [postId, setPostId] = useState("");
+  const [filterData, setFilterData]: any = useState();
   const route = useRouter();
-  const getAllPosts = data();
+  const getAllPosts: any = data();
   const { addToast } = useToast();
 
   // FORM CONTENT
@@ -44,6 +46,10 @@ const AdminTemplate = () => {
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
   const imageRef = ref(storage, `image/${image?.name}`);
+
+  useEffect(() => {
+    setFilterData(getAllPosts);
+  }, [getAllPosts]);
 
   function openModal() {
     setIsOpen(true);
@@ -60,6 +66,7 @@ const AdminTemplate = () => {
 
   async function exclude(post: any) {
     try {
+      setPostId(post?.id);
       await deleteDoc(doc(db, "posts", post.id));
       addToast({
         title: "Publicação excluida com sucesso!",
@@ -115,9 +122,13 @@ const AdminTemplate = () => {
     }
   }
 
-  const filterPosts = getAllPosts?.filter((data: any) =>
-    data?.title?.toLocaleLowerCase().startsWith(value),
-  );
+  // FAZ A FILTRAGEM PARA ATUALIZAR POSTS EXCLUIDOS.
+
+  useEffect(() => {
+    setFilterData((prev: any) =>
+      prev?.filter((data: any) => data.id !== postId),
+    );
+  }, [postId]);
 
   return (
     <Layout isLoggedIn={true}>
@@ -147,7 +158,7 @@ const AdminTemplate = () => {
           />
 
           <S.PostFlex>
-            {filterPosts?.map((post: any, index: number) => (
+            {filterData?.map((post: any, index: number) => (
               <Card
                 id={post?.id}
                 key={index}
@@ -164,7 +175,7 @@ const AdminTemplate = () => {
               </Card>
             ))}
           </S.PostFlex>
-          <Pagination />
+          {/* <Pagination /> */}
         </S.Container>
       </S.Wrapper>
 
