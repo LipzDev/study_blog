@@ -1,33 +1,30 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { query, orderBy, limit, collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import {
+  query,
+  orderBy,
+  limit,
+  collection,
+  getDocs,
+  QueryDocumentSnapshot,
+  Query,
+} from "firebase/firestore";
 import { db } from "../../../config/firebase";
-import { DataTypes } from "../../../templates/BlogTemplate";
+import { PostTypes } from "../../../types/types";
 
-const RecentPosts = () => {
-  const [data, setData] = useState<DataTypes>();
+export const getRecentPosts = async () => {
   const posts: any = [];
 
-  async function getRecentPosts() {
-    const q: any = query(
-      collection(db, "posts"),
-      orderBy("date", "desc"),
-      limit(5),
-    );
-    const querySnapshot = await getDocs(q);
+  const dataQuery: Query = query(
+    collection(db, "posts"),
+    orderBy("date", "desc"),
+    limit(5),
+  );
+  const getContent = await getDocs(dataQuery);
 
-    querySnapshot.forEach((doc: any) => {
-      posts.push({ ...doc.data() });
-    });
-    setData(posts);
-  }
+  getContent.forEach((doc: QueryDocumentSnapshot) => {
+    posts.push({ ...doc.data() } as PostTypes);
+  });
 
-  useEffect(() => {
-    getRecentPosts();
-  }, []);
-
-  return data;
+  return posts;
 };
-
-export default RecentPosts;

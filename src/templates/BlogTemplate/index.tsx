@@ -1,39 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
 import Card from "../../components/molecules/Card";
 import Layout from "../../components/molecules/Layout";
-import MediaMatch from "../../components/molecules/MediaMatch";
 import Pagination from "../../components/molecules/Pagination";
-import data from "../../services/firebase/database/getPosts";
+import { getPosts } from "../../services/firebase/database/getPosts";
+import { PostTypes } from "../../types/types";
 import * as S from "./styles";
 
-export type DataTypes = {
-  author: string;
-  id: string;
-  title: string;
-  slice: any;
-  text: string;
-  map: any;
-  image: string;
-  push: any;
-  filter?: any;
-};
-
 const BlogTemplate = () => {
-  const getAllPosts = data();
+  const [posts, setPosts] = useState<PostTypes | any>();
+
+  // Puxa o conteúdo.
+
+  useEffect(() => {
+    getPosts().then((response: any) => setPosts(response));
+  }, []);
 
   return (
     <Layout>
       <S.Wrapper>
         <S.Container>
           <ButtonReturn returnTo="/" />
-          {data === undefined && <p>Não há postagens no momento!</p>}
 
           <S.FeaturedPost>
-            {getAllPosts?.map((post: any, index: number) => (
+            {posts?.map((post: any, index: number) => (
               <Card
                 id={post?.id}
                 key={index}

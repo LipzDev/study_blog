@@ -1,29 +1,27 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import {
+  collection,
+  getDocs,
+  orderBy,
+  Query,
+  query,
+  QueryDocumentSnapshot,
+} from "firebase/firestore";
 import { db } from "../../../config/firebase";
-import { DataTypes } from "../../../templates/BlogTemplate";
+import { PostTypes } from "../../../types/types";
 
-const GetAllPosts = () => {
-  const [data, setData] = useState<DataTypes>();
+export const getPosts = async () => {
   const posts: any = [];
 
-  async function getPosts() {
-    const q: any = query(collection(db, "posts"), orderBy("date", "desc"));
-    const querySnapshot = await getDocs(q);
+  const dataQuery: Query = query(
+    collection(db, "posts"),
+    orderBy("date", "desc"),
+  );
+  const getContent = await getDocs(dataQuery);
 
-    querySnapshot.forEach((doc: any) => {
-      posts.push({ ...doc.data() });
-    });
-    setData(posts);
-  }
+  getContent.forEach((doc: QueryDocumentSnapshot) => {
+    posts.push({ ...doc.data() } as PostTypes);
+  });
 
-  useEffect(() => {
-    getPosts();
-  }, []);
-
-  return data;
+  return posts;
 };
-
-export default GetAllPosts;

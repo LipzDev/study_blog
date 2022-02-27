@@ -1,25 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/molecules/Layout";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
-import data from "../../services/firebase/database/getPosts";
+import { getPosts } from "../../services/firebase/database/getPosts";
 import * as S from "./styles";
 import timestamp from "time-stamp";
+import { PostTypes } from "../../types/types";
 
 type PostTemplateProps = {
   url?: string | string[];
 };
 
 const PostTemplate = ({ url }: PostTemplateProps) => {
-  const getAllPosts = data();
+  const [posts, setPosts] = useState<PostTypes | any>();
+
+  // Puxa o conteúdo.
+
+  useEffect(() => {
+    getPosts().then((response: any) => setPosts(response));
+  }, []);
 
   return (
     <Layout>
       <S.Wrapper>
         <S.Container>
           <ButtonReturn returnTo="/blog" />
-          {getAllPosts?.map(
+          {posts?.map(
             (post: any, index: number) =>
               post.id === url && (
                 <S.PostContent key={index}>

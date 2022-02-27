@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
 import Card from "../../components/molecules/Card";
@@ -11,7 +11,6 @@ import Modal from "react-modal";
 import SearchBar from "../../components/atoms/SearchBar";
 import Input from "../../components/atoms/Input";
 import Textarea from "../../components/atoms/Textarea";
-import data from "../../services/firebase/database/getPosts";
 import { customStyles, customStylesConfirmationModal } from "./styles";
 import { useRouter } from "next/router";
 import { storage, db } from "../../config/firebase";
@@ -25,18 +24,19 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { useToast } from "../../hooks/toast";
-import Pagination from "../../components/molecules/Pagination";
+import { GetStaticProps } from "next";
+import { getPosts } from "../../services/firebase/database/getPosts";
 import * as S from "./styles";
+import { PostTypes } from "../../types/types";
 
 const AdminTemplate = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
-  const [postInfo, setPostInfo] = useState("");
-  const route = useRouter();
-  const getAllPosts = data();
+  const [posts, setPosts] = useState<any>();
+  const [postInfo, setPostInfo] = useState<any>("");
+  const [postId, setPostId] = useState("");
   const { addToast } = useToast();
-
-  // FORM CONTENT
+  const route = useRouter();
 
   const [title, setTitle] = useState("");
   const [image, setImage]: any = useState("");
@@ -45,39 +45,21 @@ const AdminTemplate = () => {
   const [text, setText] = useState("");
   const imageRef = ref(storage, `image/${image?.name}`);
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  // Puxa o conteúdo.
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  useEffect(() => {
+    getPosts().then((response: any) => setPosts(response));
+  }, []);
 
-  function confirmExclude(post: any) {
-    setOpenConfirmationModal(true);
-    setPostInfo(post);
-  }
+  useEffect(() => {
+    setPosts(
+      (prev: any) =>
+        prev?.filter((oldPosts: PostTypes) => oldPosts.id !== postId),
+      // Atualiza o array removendo a postagem exclída.
+    );
+  }, [postId]);
 
-  async function exclude(post: any) {
-    try {
-      await deleteDoc(doc(db, "posts", post.id));
-      addToast({
-        title: "Publicação excluida com sucesso!",
-        type: "success",
-        duration: 5000,
-      });
-    } catch (e) {
-      addToast({
-        title: "Erro ao excluir publicação",
-        type: "error",
-        duration: 5000,
-      });
-    }
-  }
-
-  function edit(post: any) {
-    route.push(`/admin/editar-postagem/${post.id}`);
-  }
+  // Informações a serem enviadas
 
   const docData = {
     id: "",
@@ -90,6 +72,8 @@ const AdminTemplate = () => {
         : `https://firebasestorage.googleapis.com/v0/b/blog-47a62.appspot.com/o/image%2F${image?.name}?alt=media`,
     text: text,
   };
+
+  // Faz o upload das informações
 
   async function handleClickToUpload(event: any) {
     event.preventDefault();
@@ -115,9 +99,44 @@ const AdminTemplate = () => {
     }
   }
 
-  const filterPosts = getAllPosts?.filter((data: any) =>
-    data?.title?.toLocaleLowerCase().startsWith(value),
-  );
+  // Excluir publicação
+
+  async function exclude(post: PostTypes) {
+    try {
+      setPostId(post?.id);
+      await deleteDoc(doc(db, "posts", post.id));
+      addToast({
+        title: "Publicação excluida com sucesso!",
+        type: "success",
+        duration: 5000,
+      });
+    } catch (e) {
+      addToast({
+        title: "Erro ao excluir publicação",
+        type: "error",
+        duration: 5000,
+      });
+    }
+  }
+
+  function confirmExclude(post: PostTypes) {
+    setOpenConfirmationModal(true);
+    setPostInfo(post);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  // Editar publicação
+
+  function edit(post: PostTypes) {
+    route.push(`/admin/editar-postagem/${post.id}`);
+  }
 
   return (
     <Layout isLoggedIn={true}>
@@ -134,12 +153,12 @@ const AdminTemplate = () => {
         <S.Container>
           <ButtonReturn returnTo="/blog" />
 
-          <S.RecentsPosts>
+          <S.CreateNewPost>
             <h1>Olá seja bem vindo(a).</h1>
             <Button onClick={openModal} themeColor="primary">
               Criar nova postagem
             </Button>
-          </S.RecentsPosts>
+          </S.CreateNewPost>
 
           <SearchBar
             onChange={(e: any) => setValue(e.target.value)}
@@ -147,7 +166,7 @@ const AdminTemplate = () => {
           />
 
           <S.PostFlex>
-            {filterPosts?.map((post: any, index: number) => (
+            {posts?.map((post: any, index: number) => (
               <Card
                 id={post?.id}
                 key={index}
@@ -164,7 +183,7 @@ const AdminTemplate = () => {
               </Card>
             ))}
           </S.PostFlex>
-          <Pagination />
+          {/* <Pagination /> */}
         </S.Container>
       </S.Wrapper>
 
@@ -208,7 +227,7 @@ const AdminTemplate = () => {
             </button>
             <button
               onClick={() => (
-                exclude(postInfo), setOpenConfirmationModal(false)
+                exclude(postInfo as any), setOpenConfirmationModal(false)
               )}
               className="confirm-button"
             >
@@ -222,3 +241,12 @@ const AdminTemplate = () => {
 };
 
 export default AdminTemplate;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = await getPosts();
+
+  return {
+    props: { posts },
+    revalidate: 5,
+  };
+};

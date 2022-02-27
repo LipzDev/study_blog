@@ -1,14 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../../components/molecules/Card";
 import Layout from "../../components/molecules/Layout";
-import getRecentPosts from "../../services/firebase/database/recentsPosts";
+import { getRecentPosts } from "../../services/firebase/database/recentsPosts";
+import { PostTypes } from "../../types/types";
 import * as S from "./styles";
 
 const HomeTemplate = () => {
-  const recentPost = getRecentPosts();
-  const highlight: any = recentPost !== undefined && recentPost;
+  const [recentPosts, setRecentPosts] = useState<PostTypes | any>();
+
+  // Puxa o conteúdo.
+
+  useEffect(() => {
+    getRecentPosts().then((response: any) => setRecentPosts(response));
+  }, []);
+
+  const postHighlight: any = recentPosts !== undefined && recentPosts;
 
   return (
     <Layout>
@@ -17,20 +25,20 @@ const HomeTemplate = () => {
           <S.HighlightTitle>Destaques da semana</S.HighlightTitle>
           {
             <Card
-              id={highlight[0]?.id}
+              id={postHighlight[0]?.id}
               large={true}
               hasDate={true}
-              author={highlight[0]?.author}
-              date={highlight[0]?.date.seconds}
-              image={highlight[0]?.image}
-              title={highlight[0]?.title}
+              author={postHighlight[0]?.author}
+              date={postHighlight[0]?.date.seconds}
+              image={postHighlight[0]?.image}
+              title={postHighlight[0]?.title}
             >
-              {highlight[0]?.text}
+              {postHighlight[0]?.text}
             </Card>
           }
 
           <S.PostFlex>
-            {recentPost?.map(
+            {recentPosts?.map(
               (post: any, index: number) =>
                 index > 0 && (
                   <Card

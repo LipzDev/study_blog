@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../components/atoms/Input";
 import Textarea from "../../components/atoms/Textarea";
 import Button from "../../components/atoms/Button";
-import data from "../../services/firebase/database/getPosts";
+import { getPosts } from "../../services/firebase/database/getPosts";
 import { storage, db } from "../../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
 import { doc, Timestamp, setDoc } from "firebase/firestore";
@@ -16,8 +16,8 @@ type EditPostTemplate = {
 };
 
 const EditPostTemplate = ({ url }: EditPostTemplate) => {
-  const getAllPosts = data();
   const { addToast } = useToast();
+  const [posts, setPosts] = useState<any>();
   const route = useRouter();
 
   // FORM CONTENT
@@ -27,6 +27,12 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
   const [author, setAuthor] = useState("");
   const [text, setText] = useState("");
   const imageRef = ref(storage, `image/${image?.name}`);
+
+  // Puxa o conteudo
+
+  useEffect(() => {
+    getPosts().then((response: any) => setPosts(response));
+  }, []);
 
   const docData = {
     id: url,
@@ -45,7 +51,7 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
 
     try {
       await uploadBytes(imageRef, image);
-      // DEVEMOS ADICIONAR O ID DO POST QUE QUEREMOS EDITAR NO CAMPO ABAIXO (docData.id)
+      // Adicionamos no campo (docData.id) o id da publicação que queremos editar.
       const postRef = doc(db, "posts", docData.id as any);
       setDoc(postRef, docData, { merge: true });
 
@@ -67,7 +73,7 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
 
   return (
     <S.Container>
-      {getAllPosts?.map(
+      {posts?.map(
         (post: any, index: number) =>
           post.id === url && (
             <S.Form key={index}>
@@ -75,7 +81,6 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
                 type="file"
                 accept=".jpg, .jpeg, .png"
                 onChange={(e: any) => setImage(e.target.files[0])}
-                // value="https://firebasestorage.googleapis.com/v0/b/blog-47a62.appspot.com/o/image%2F${image?.name}?alt=media"
               />
               <Input
                 placeholder="Título"
