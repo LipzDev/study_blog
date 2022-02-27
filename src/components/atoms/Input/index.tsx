@@ -1,17 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./styles";
 
 export type InputProps = {
   isFocused?: boolean;
   placeholder?: string;
   setValueToForm?: any;
-  value?: any;
+  initialValue?: any;
 };
 
-const Input = ({ placeholder, value, setValueToForm }: InputProps) => {
+const Input = ({ placeholder, initialValue, setValueToForm }: InputProps) => {
   const [focus, setFocus] = useState(false);
-  const [valueState, setValueState] = useState(value);
+  const [valueState, setValueState] = useState(initialValue);
+  const [newValue, setNewValue]: any = useState("");
+
+  useEffect(() => {
+    setValueToForm(valueState, newValue);
+  }, [setValueToForm, newValue, valueState]);
 
   return (
     <S.Wrapper
@@ -26,7 +31,7 @@ const Input = ({ placeholder, value, setValueToForm }: InputProps) => {
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         onChange={(e) => (
-          setValueState(e.target.value), setValueToForm(e.target.value)
+          setValueState(e.target.value), setNewValue(e.target.value)
         )}
       ></input>
     </S.Wrapper>

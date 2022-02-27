@@ -32,9 +32,11 @@ import * as S from "./styles";
 const AdminTemplate = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
+
   const [posts, setPosts] = useState<any>();
   const [postInfo, setPostInfo] = useState<any>("");
   const [postId, setPostId] = useState("");
+
   const { addToast } = useToast();
   const route = useRouter();
 

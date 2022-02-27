@@ -62,6 +62,10 @@ const GlobalStyles: GlobalStyleComponent<
         font-size: ${theme.font.sizes.medium};
       }
     `}
+
+    .ReactModal__Overlay{
+      z-index:9999;
+    }
     
     .ReactModal__Content {
         @media screen and (max-width: 1024px) {

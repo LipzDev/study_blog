@@ -58,6 +58,8 @@ export const ContainerTop = styled.div`
   animation: placeholderShimmer 1s linear infinite forwards;
   background: #f6f7f8;
 
+  margin-top: 1.5rem;
+
   width: 100%;
   min-height: 580px;
   margin-bottom: 10px;

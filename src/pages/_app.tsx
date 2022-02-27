@@ -12,7 +12,7 @@ function App({ Component, pageProps }: AppProps) {
     <>
       <ThemeProvider theme={theme}>
         <Head>
-          <title>Titulo</title>
+          <title>Blog</title>
           <link rel="shortcut icon" href="/img/icon-512.png" />
           <link rel="apple-touch-icon" href="/img/icon-512.png" />
           <link rel="manifest" href="/manifest.json" />
@@ -20,6 +20,24 @@ function App({ Component, pageProps }: AppProps) {
             href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
             rel="stylesheet"
           ></link>
+          {/* TAGS DE SEO OG*/}
+          <meta property="og:title" content="Blog"></meta>
+          <meta property="og:locale" content="pt-BR" />
+          <meta property="og:site_name" content="Blog"></meta>
+          <meta property="og:description" content="Blog criado por LipzDev." />
+          <meta name="description" content="Blog criado por LipzDev."></meta>
+          <meta property="og:image" content="/img/logo.png"></meta>
+          {/* TAGS DE SEO TWITTER*/}
+          <meta name="twitter:card" content="summary_large_image"></meta>
+          <meta name="twitter:title" content="Blog"></meta>
+          <meta
+            name="twitter:description"
+            content="Blog criado por LipzDev."
+          ></meta>
+          <meta name="twitter:site" content="@LipzDev"></meta>
+          <meta name="twitter:creator" content="@LipzDev"></meta>
+          <meta name="twitter:image" content="/img/logo.png"></meta>
+          <meta name="theme-color" content="#5500ff"></meta>
         </Head>
         <GlobalStyles />
         <UserProvider>
