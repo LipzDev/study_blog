@@ -38,7 +38,6 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
     id: url,
     author: author,
     title: title,
-    date: Timestamp.fromDate(new Date()),
     image:
       image?.name === undefined
         ? "/img/att.jpg"

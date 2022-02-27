@@ -26,8 +26,8 @@ import {
 import { useToast } from "../../hooks/toast";
 import { GetStaticProps } from "next";
 import { getPosts } from "../../services/firebase/database/getPosts";
-import * as S from "./styles";
 import { PostTypes } from "../../types/types";
+import * as S from "./styles";
 
 const AdminTemplate = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -51,11 +51,11 @@ const AdminTemplate = () => {
     getPosts().then((response: any) => setPosts(response));
   }, []);
 
+  // Atualiza o array removendo a postagem exclída.
+
   useEffect(() => {
-    setPosts(
-      (prev: any) =>
-        prev?.filter((oldPosts: PostTypes) => oldPosts.id !== postId),
-      // Atualiza o array removendo a postagem exclída.
+    setPosts((prev: any) =>
+      prev?.filter((oldPosts: PostTypes) => oldPosts.id !== postId),
     );
   }, [postId]);
 
@@ -73,7 +73,7 @@ const AdminTemplate = () => {
     text: text,
   };
 
-  // Faz o upload das informações
+  // Faz o post das informações
 
   async function handleClickToUpload(event: any) {
     event.preventDefault();
@@ -99,7 +99,7 @@ const AdminTemplate = () => {
     }
   }
 
-  // Excluir publicação
+  // Exclui a publicação
 
   async function exclude(post: PostTypes) {
     try {
@@ -132,7 +132,7 @@ const AdminTemplate = () => {
     setIsOpen(true);
   }
 
-  // Editar publicação
+  // Edita a publicação
 
   function edit(post: PostTypes) {
     route.push(`/admin/editar-postagem/${post.id}`);
@@ -242,11 +242,11 @@ const AdminTemplate = () => {
 
 export default AdminTemplate;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getPosts();
+// export const getStaticProps: GetStaticProps = async () => {
+//   const posts = getPosts();
 
-  return {
-    props: { posts },
-    revalidate: 5,
-  };
-};
+//   return {
+//     props: { posts },
+//     revalidate: 5,
+//   };
+// };
