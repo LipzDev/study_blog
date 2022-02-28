@@ -105,7 +105,7 @@ const AdminTemplate = () => {
   // Exclui a publicação
 
   async function exclude(post: PostTypes) {
-    const imageToDelete = ref(storage, `image/${post?.imagePath}`);
+    const imageToDelete = ref(storage, post.image);
 
     try {
       setPostId(post?.id);
