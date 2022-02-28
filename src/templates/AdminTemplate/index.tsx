@@ -14,7 +14,7 @@ import Textarea from "../../components/atoms/Textarea";
 import { customStyles, customStylesConfirmationModal } from "./styles";
 import { useRouter } from "next/router";
 import { storage, db } from "../../config/firebase";
-import { ref, uploadBytes } from "firebase/storage";
+import { deleteObject, ref, uploadBytes } from "firebase/storage";
 import {
   collection,
   addDoc,
@@ -72,6 +72,7 @@ const AdminTemplate = () => {
       image?.name === undefined
         ? "/img/att.jpg"
         : `https://firebasestorage.googleapis.com/v0/b/blog-47a62.appspot.com/o/image%2F${image?.name}?alt=media`,
+    imagePath: image?.name,
     text: text,
   };
 
@@ -104,8 +105,11 @@ const AdminTemplate = () => {
   // Exclui a publicação
 
   async function exclude(post: PostTypes) {
+    const imageToDelete = ref(storage, `image/${post?.imagePath}`);
+
     try {
       setPostId(post?.id);
+      deleteObject(imageToDelete);
       await deleteDoc(doc(db, "posts", post.id));
       addToast({
         title: "Publicação excluida com sucesso!",

@@ -3,6 +3,7 @@ export type PostTypes = {
   author: string;
   title: string;
   date: Date;
+  imagePath: string;
   image: string;
   text: string;
 };
