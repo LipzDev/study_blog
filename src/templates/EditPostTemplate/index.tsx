@@ -5,8 +5,8 @@ import Textarea from "../../components/atoms/Textarea";
 import Button from "../../components/atoms/Button";
 import { getPosts } from "../../services/firebase/database/getPosts";
 import { storage, db } from "../../config/firebase";
-import { deleteObject, ref, uploadBytes } from "firebase/storage";
-import { doc, Timestamp, setDoc } from "firebase/firestore";
+import { ref, uploadBytes } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
 import { useToast } from "../../hooks/toast";
 import { useRouter } from "next/router";
 import * as S from "./styles";
@@ -47,10 +47,8 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
 
   async function handleClickToUpload(event: any) {
     event.preventDefault();
-    const imageToDelete = ref(storage, `image/${posts[0]?.imagePath}`);
 
     try {
-      deleteObject(imageToDelete);
       await uploadBytes(imageRef, image);
       // Adicionamos no campo (docData.id) o id da publicação que queremos editar.
       const postRef = doc(db, "posts", docData.id as any);
