@@ -67,7 +67,7 @@ export const ContainerTop = styled.div`
   img {
     width: 100%;
     height: 580px;
-    object-fit: cover;
+    /* object-fit: cover; */
     border: 1px solid #ccc;
     cursor: pointer;
   }
