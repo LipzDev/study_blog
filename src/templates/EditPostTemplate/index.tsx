@@ -17,7 +17,7 @@ type EditPostTemplate = {
 
 const EditPostTemplate = ({ url }: EditPostTemplate) => {
   const { addToast } = useToast();
-  const [posts, setPosts] = useState<any>();
+  const [posts, setPosts]: any = useState();
   const route = useRouter();
 
   // FORM CONTENT

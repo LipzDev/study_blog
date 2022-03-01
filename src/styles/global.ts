@@ -64,7 +64,7 @@ const GlobalStyles: GlobalStyleComponent<
     `}
 
     .ReactModal__Overlay{
-      z-index:9999;
+      z-index:9998;
     }
     
     .ReactModal__Content {

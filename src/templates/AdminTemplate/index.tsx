@@ -109,7 +109,9 @@ const AdminTemplate = () => {
 
     try {
       setPostId(post?.id);
-      deleteObject(imageToDelete);
+      deleteObject(imageToDelete).catch(() => {
+        ("");
+      });
       await deleteDoc(doc(db, "posts", post.id));
       addToast({
         title: "Publicação excluida com sucesso!",
