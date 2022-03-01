@@ -29,7 +29,7 @@ export const PostContent = styled.div`
   img {
     width: 100%;
     height: 600px;
-    object-fit: cover;
+    /* object-fit: cover; */
     object-position: center;
   }
 

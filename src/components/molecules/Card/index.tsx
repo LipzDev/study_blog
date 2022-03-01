@@ -48,7 +48,7 @@ const Card = ({
           <S.Date>
             <span>{author ? author : "Desconhecido"}</span> |{" "}
             <span className="dateNumber">
-              <img src="/icons/clock.svg" alt="icon" />
+              <img src="/icons/clock.svg" alt="icon" title={formatedDate} />
               {formatedDate}
             </span>
           </S.Date>

@@ -37,7 +37,14 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
                     <span>{post?.author ? post?.author : "Desconhecido"}</span>{" "}
                     |{" "}
                     <span className="dateNumber">
-                      <img src="/icons/clock.svg" alt="icon" />
+                      <img
+                        src="/icons/clock.svg"
+                        alt="icon"
+                        title={timestamp(
+                          "DD/MM/YYYY",
+                          new Date((post?.date.seconds as any) * 1000),
+                        )}
+                      />
                       {timestamp(
                         "DD/MM/YYYY",
                         new Date((post?.date.seconds as any) * 1000),
