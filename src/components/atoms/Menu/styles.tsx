@@ -50,6 +50,10 @@ export const Nav = styled.nav`
         transition: 0.5s;
       }
 
+      ol {
+        flex-direction: column;
+      }
+
       li {
         text-align: center;
       }

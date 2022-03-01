@@ -31,7 +31,7 @@ const Menu = ({ expanded, isLoggedIn }: MenuProps) => {
             <a onClick={() => exclude()}>Sair</a>
           ) : (
             <Link href="/login">
-              {document.cookie || document.cookie.includes("auth-token") ? (
+              {cookie.get("auth-token") ? (
                 <ol>
                   <li onClick={() => route.push("/admin")}>Gerenciar</li>
                   <li>

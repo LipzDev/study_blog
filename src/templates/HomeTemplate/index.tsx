@@ -23,7 +23,7 @@ const HomeTemplate = () => {
       <S.Wrapper>
         <S.Container>
           <S.HighlightTitle>Destaques da semana</S.HighlightTitle>
-          {
+          {postHighlight[0] !== undefined ? (
             <Card
               id={postHighlight[0]?.id}
               large={true}
@@ -35,7 +35,9 @@ const HomeTemplate = () => {
             >
               {postHighlight[0]?.text}
             </Card>
-          }
+          ) : (
+            <p>Não há postagens no momento!</p>
+          )}
 
           <S.PostFlex>
             {recentPosts?.map(
