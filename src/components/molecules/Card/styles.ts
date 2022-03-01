@@ -3,7 +3,9 @@ import styled from "styled-components";
 export const SmallCard = styled.div`
   border-radius: 2px;
   position: relative;
+  overflow: hidden;
 
+  width: 100%;
   height: 410px;
 
   @media screen and (max-width: 1024px) {
@@ -24,7 +26,7 @@ export const CardTop = styled.div`
     width: 100%;
     max-height: 300px;
     height: 200px;
-    object-fit: cover;
+    /* object-fit: cover; */
     cursor: pointer;
   }
 
@@ -80,6 +82,15 @@ export const CardBottom = styled.div`
 
 export const LargeCard = styled.div`
   margin-bottom: 5rem;
+
+  h1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
 `;
 
 export const ContainerTop = styled.div`
@@ -152,6 +163,12 @@ export const Date = styled.div`
   span {
     margin-right: 5px;
     color: #3e3e3e;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 
   img {

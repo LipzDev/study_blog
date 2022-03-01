@@ -7,9 +7,15 @@ export const Nav = styled.nav`
       align-items: center;
     }
 
+    ol {
+      display: flex;
+      align-items: center;
+    }
+
     li {
       list-style: none;
       cursor: pointer;
+      color: ${theme.colors.secondary};
     }
 
     li + li {
@@ -44,9 +50,13 @@ export const Nav = styled.nav`
         transition: 0.5s;
       }
 
+      li {
+        text-align: center;
+      }
+
       li + li {
+        margin-top: 20px;
         margin-left: 0;
-        margin-top: 30px;
       }
 
       a {

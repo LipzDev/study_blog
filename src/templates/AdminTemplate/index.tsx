@@ -159,7 +159,7 @@ const AdminTemplate = () => {
       </Head>
       <S.Wrapper>
         <S.Container>
-          <ButtonReturn returnTo="/blog" />
+          <ButtonReturn returnTo="/" />
 
           <S.CreateNewPost>
             <h1>Olá seja bem vindo(a).</h1>

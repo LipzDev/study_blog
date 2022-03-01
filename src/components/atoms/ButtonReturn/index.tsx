@@ -9,7 +9,7 @@ type ButtonReturnProps = {
 const ButtonReturn = ({ returnTo }: ButtonReturnProps) => {
   return (
     <S.Return>
-      <Link href={returnTo}>← Voltar</Link>
+      <Link href={returnTo}>← Início</Link>
     </S.Return>
   );
 };

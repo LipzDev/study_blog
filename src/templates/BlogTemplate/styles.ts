@@ -15,6 +15,10 @@ export const FeaturedPost = styled.div`
   grid-gap: 3rem;
   margin: 1.5rem 0;
 
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
   @media screen and (max-width: 1024px) {
     grid-template-columns: 1fr 1fr;
   }

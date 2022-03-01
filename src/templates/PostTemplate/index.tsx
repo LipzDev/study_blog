@@ -25,13 +25,13 @@ const PostTemplate = ({ url }: PostTemplateProps) => {
     <Layout>
       <S.Wrapper>
         <S.Container>
-          <ButtonReturn returnTo="/blog" />
+          <ButtonReturn returnTo="/" />
           {posts?.map(
             (post: any, index: number) =>
               post.id === url && (
                 <S.PostContent key={index}>
                   <S.ContainerTop>
-                    <img src={post?.image} loading="lazy" />
+                    <img src={post?.image} />
                   </S.ContainerTop>
                   <S.Date>
                     <span>{post?.author ? post?.author : "Desconhecido"}</span>{" "}

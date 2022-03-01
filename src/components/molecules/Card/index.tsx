@@ -40,7 +40,7 @@ const Card = ({
     <S.LargeCard>
       <S.ContainerTop>
         <Link href={`/post/${id}`}>
-          <img src={image} loading="lazy"></img>
+          <img src={image}></img>
         </Link>
       </S.ContainerTop>
       <S.ContainerBottom>
@@ -65,7 +65,7 @@ const Card = ({
     <S.SmallCard>
       <S.CardTop>
         <Link href={`/post/${id}`}>
-          <img src={image} loading="lazy"></img>
+          <img src={image}></img>
         </Link>
       </S.CardTop>
 
@@ -74,7 +74,7 @@ const Card = ({
           <S.Date>
             <span>{author ? author : "Desconhecido"}</span> |{" "}
             <span className="dateNumber">
-              <img src="/icons/clock.svg" alt="icon" />
+              <img src="/icons/clock.svg" alt="icon" title={formatedDate} />
               {formatedDate}
             </span>
           </S.Date>

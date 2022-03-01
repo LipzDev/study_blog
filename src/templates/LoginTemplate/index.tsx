@@ -25,6 +25,11 @@ const LoginTemplate = () => {
           expires: 1,
         });
         route.push("/admin");
+        addToast({
+          title: "Login efetuado com sucesso!",
+          type: "success",
+          duration: 5000,
+        });
       })
       .catch((error) => {
         addToast({
@@ -47,7 +52,7 @@ const LoginTemplate = () => {
         />
       </Head>
       <S.Container>
-        <ButtonReturn returnTo="/blog" />
+        <ButtonReturn returnTo="/" />
         <S.FlexContent>
           <S.Form>
             <input
