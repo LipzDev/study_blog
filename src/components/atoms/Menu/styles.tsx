@@ -13,6 +13,7 @@ export const Nav = styled.nav`
 
       a {
         margin-right: 20px;
+        margin-top: 3px;
       }
     }
 
