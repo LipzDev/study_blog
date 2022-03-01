@@ -10,6 +10,10 @@ export const Nav = styled.nav`
     ol {
       display: flex;
       align-items: center;
+
+      a {
+        margin-right: 20px;
+      }
     }
 
     li {
@@ -52,6 +56,10 @@ export const Nav = styled.nav`
 
       ol {
         flex-direction: column;
+        a {
+          margin-right: 0;
+          margin-bottom: 20px;
+        }
       }
 
       li {
