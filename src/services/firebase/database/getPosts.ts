@@ -11,17 +11,23 @@ import { db } from "../../../config/firebase";
 import { PostTypes } from "../../../types/types";
 
 export const getPosts = async () => {
-  const posts: any = [];
+  const postContent: PostTypes[] = [];
 
   const dataQuery: Query = query(
     collection(db, "posts"),
     orderBy("date", "desc"),
   );
   const getContent = await getDocs(dataQuery);
+  // getContent.docs.map((ids) => console.log(ids.id));
 
   getContent.forEach((doc: QueryDocumentSnapshot) => {
-    posts.push({ ...doc.data() } as PostTypes);
+    const newData: PostTypes = {
+      ...doc.data(),
+      documentId: doc.id,
+    };
+
+    postContent.push(newData);
   });
 
-  return posts;
+  return postContent;
 };

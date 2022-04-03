@@ -13,58 +13,29 @@ import Input from "../../components/atoms/Input";
 import Textarea from "../../components/atoms/Textarea";
 import { customStyles, customStylesConfirmationModal } from "./styles";
 import { useRouter } from "next/router";
-import { storage, db } from "../../config/firebase";
-import { deleteObject, ref, uploadBytes } from "firebase/storage";
-import {
-  collection,
-  addDoc,
-  Timestamp,
-  doc,
-  setDoc,
-  deleteDoc,
-} from "firebase/firestore";
-import { useToast } from "../../hooks/toast";
-import { GetStaticProps } from "next";
-import { getPosts } from "../../services/firebase/database/getPosts";
+import { Timestamp } from "firebase/firestore";
 import { PostTypes } from "../../types/types";
+import { usePost } from "../../hooks/usePosts";
+import { nanoid } from "nanoid";
 import * as S from "./styles";
 
 const AdminTemplate = () => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const { posts, addPost, removePost, setImage, image } = usePost();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
-
-  const [posts, setPosts] = useState<any>();
-  const [postInfo, setPostInfo] = useState<any>("");
-  const [postId, setPostId] = useState("");
-
-  const { addToast } = useToast();
+  const [post, setPost] = useState<PostTypes>("" as PostTypes);
   const route = useRouter();
 
   const [title, setTitle] = useState("");
-  const [image, setImage]: any = useState("");
   const [author, setAuthor] = useState("");
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
-  const imageRef = ref(storage, `image/${image?.name}`);
-
-  // Puxa o conteúdo.
-
-  useEffect(() => {
-    getPosts().then((response: any) => setPosts(response));
-  }, []);
-
-  // Atualiza o array removendo a postagem exclída.
-
-  useEffect(() => {
-    setPosts((prev: any) =>
-      prev?.filter((oldPosts: PostTypes) => oldPosts.id !== postId),
-    );
-  }, [postId]);
 
   // Informações a serem enviadas
 
-  const docData = {
-    id: "",
+  const formData = {
+    id: nanoid(),
+    slug: "",
     author: author,
     title: title,
     date: Timestamp.fromDate(new Date()),
@@ -80,70 +51,36 @@ const AdminTemplate = () => {
 
   async function handleClickToUpload(event: any) {
     event.preventDefault();
-
-    try {
-      await uploadBytes(imageRef, image);
-      const docRef = await addDoc(collection(db, "posts"), docData);
-      const postIdRef: any = doc(db, "posts", docRef.id);
-      setDoc(postIdRef, { id: docRef.id }, { merge: true });
-
-      addToast({
-        title: "Postagem enviada com sucesso!",
-        type: "success",
-        duration: 5000,
-      });
-      closeModal();
-    } catch (e) {
-      addToast({
-        title: "Erro ao criar postagem",
-        type: "error",
-        duration: 5000,
-      });
-    }
+    addPost(formData);
+    closeModal();
   }
 
   // Exclui a publicação
 
-  async function exclude(post: PostTypes) {
-    const imageToDelete = ref(storage, post.image);
-
-    try {
-      setPostId(post?.id);
-      deleteObject(imageToDelete).catch(() => {
-        ("");
-      });
-      await deleteDoc(doc(db, "posts", post.id));
-      addToast({
-        title: "Publicação excluida com sucesso!",
-        type: "success",
-        duration: 5000,
-      });
-    } catch (e) {
-      addToast({
-        title: "Erro ao excluir publicação",
-        type: "error",
-        duration: 5000,
-      });
-    }
-  }
-
-  function confirmExclude(post: PostTypes) {
+  function confirmDeletion(id: PostTypes) {
     setOpenConfirmationModal(true);
-    setPostInfo(post);
+    setPost(id);
   }
 
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
+  function exclude(id: PostTypes) {
+    removePost(id);
+    setOpenConfirmationModal(false);
   }
 
   // Edita a publicação
 
   function edit(post: PostTypes) {
     route.push(`/admin/editar-postagem/${post.id}`);
+  }
+
+  // Fecha o modal
+
+  function closeModal() {
+    setModalIsOpen(false);
+  }
+
+  function openModal() {
+    setModalIsOpen(true);
   }
 
   return (
@@ -174,7 +111,7 @@ const AdminTemplate = () => {
           />
 
           <S.PostFlex>
-            {posts?.map((post: any, index: number) => (
+            {posts?.map((post: PostTypes, index: number) => (
               <Card
                 id={post?.id}
                 key={index}
@@ -184,7 +121,7 @@ const AdminTemplate = () => {
                 image={post?.image}
                 title={post?.title}
                 isAdmin={true}
-                exclude={() => confirmExclude(post)}
+                exclude={() => confirmDeletion(post.documentId as any)}
                 edit={() => edit(post)}
               >
                 {post.text}
@@ -233,12 +170,7 @@ const AdminTemplate = () => {
             <button onClick={() => setOpenConfirmationModal(false)}>
               CANCELAR
             </button>
-            <button
-              onClick={() => (
-                exclude(postInfo as any), setOpenConfirmationModal(false)
-              )}
-              className="confirm-button"
-            >
+            <button onClick={() => exclude(post)} className="confirm-button">
               SIM, EXCLUIR
             </button>
           </S.Options>
@@ -249,12 +181,3 @@ const AdminTemplate = () => {
 };
 
 export default AdminTemplate;
-
-// export const getStaticProps: GetStaticProps = async () => {
-//   const posts = getPosts();
-
-//   return {
-//     props: { posts },
-//     revalidate: 5,
-//   };
-// };

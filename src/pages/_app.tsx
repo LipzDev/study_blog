@@ -6,6 +6,7 @@ import GlobalStyles from "../styles/global";
 import { ThemeProvider } from "styled-components";
 import { UserProvider } from "../context/user";
 import { ToastProvider } from "../hooks/toast";
+import { PostProvider } from "../hooks/usePosts";
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -40,11 +41,13 @@ function App({ Component, pageProps }: AppProps) {
           <meta name="theme-color" content="#5500ff"></meta>
         </Head>
         <GlobalStyles />
-        <UserProvider>
-          <ToastProvider>
-            <Component {...pageProps} />
-          </ToastProvider>
-        </UserProvider>
+        <ToastProvider>
+          <PostProvider>
+            <UserProvider>
+              <Component {...pageProps} />
+            </UserProvider>
+          </PostProvider>
+        </ToastProvider>
       </ThemeProvider>
     </>
   );
