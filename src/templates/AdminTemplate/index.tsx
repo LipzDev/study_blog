@@ -15,12 +15,12 @@ import { customStyles, customStylesConfirmationModal } from "./styles";
 import { useRouter } from "next/router";
 import { Timestamp } from "firebase/firestore";
 import { PostTypes } from "../../types/types";
-import { usePost } from "../../hooks/usePosts";
+import { useManagePosts } from "../../hooks/useManagePosts";
 import { nanoid } from "nanoid";
 import * as S from "./styles";
 
 const AdminTemplate = () => {
-  const { posts, addPost, removePost, setImage, image } = usePost();
+  const { posts, addPost, removePost, setImage, image } = useManagePosts();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
   const [post, setPost] = useState<PostTypes>("" as PostTypes);

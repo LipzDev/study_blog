@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useToast } from "../hooks/toast";
+import { useToast } from "./toast";
 import { storage, db } from "../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
 import { collection, addDoc, doc, deleteDoc } from "firebase/firestore";
@@ -91,7 +91,7 @@ export const PostProvider = ({ children }: PostsContext) => {
   );
 };
 
-export function usePost() {
+export function useManagePosts() {
   const context = useContext(PostContext);
   return context;
 }

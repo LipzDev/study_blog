@@ -6,7 +6,7 @@ import GlobalStyles from "../styles/global";
 import { ThemeProvider } from "styled-components";
 import { UserProvider } from "../context/user";
 import { ToastProvider } from "../hooks/toast";
-import { PostProvider } from "../hooks/usePosts";
+import { PostProvider } from "../hooks/useManagePosts";
 
 function App({ Component, pageProps }: AppProps) {
   return (
