@@ -16,11 +16,13 @@ import { useRouter } from "next/router";
 import { Timestamp } from "firebase/firestore";
 import { PostTypes } from "../../types/types";
 import { useManagePosts } from "../../hooks/useManagePosts";
+import { getPosts } from "../../services/firebase/database/getPosts";
 import { nanoid } from "nanoid";
 import * as S from "./styles";
 
 const AdminTemplate = () => {
-  const { posts, addPost, removePost, setImage, image } = useManagePosts();
+  const { posts, setPosts, addPost, removePost, setImage, image } =
+    useManagePosts();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
   const [post, setPost] = useState<PostTypes>("" as PostTypes);
@@ -30,6 +32,12 @@ const AdminTemplate = () => {
   const [author, setAuthor] = useState("");
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
+
+  // Puxa o conteúdo do firebase.
+
+  useEffect(() => {
+    getPosts().then((response: PostTypes[]) => setPosts(response));
+  }, []);
 
   // Informações a serem enviadas
 
@@ -82,6 +90,8 @@ const AdminTemplate = () => {
   function openModal() {
     setModalIsOpen(true);
   }
+
+  console.log("agora esse:", posts);
 
   return (
     <Layout isLoggedIn={true}>

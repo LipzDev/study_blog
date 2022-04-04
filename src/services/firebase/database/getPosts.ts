@@ -18,7 +18,6 @@ export const getPosts = async () => {
     orderBy("date", "desc"),
   );
   const getContent = await getDocs(dataQuery);
-  // getContent.docs.map((ids) => console.log(ids.id));
 
   getContent.forEach((doc: QueryDocumentSnapshot) => {
     const newData: PostTypes = {

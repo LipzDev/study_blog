@@ -19,16 +19,18 @@ export const PostProvider = ({ children }: PostsContext) => {
   const { addToast } = useToast();
   const imageRef = ref(storage, `image/${image?.name}`);
 
-  // Puxa o conteúdo do firebase.
-
-  useEffect(() => {
-    getPosts().then((response: PostTypes[]) => setPosts(response));
-  }, []);
-
   async function addPost(post: PostTypes[]) {
     try {
       await uploadBytes(imageRef, image);
-      await addDoc(collection(db, "posts"), post);
+      const newPost = await addDoc(collection(db, "posts"), post);
+
+      const newObject = {
+        ...post,
+        documentId: newPost.id,
+      };
+
+      console.log(newObject, "ESSE É O OBJ");
+      console.log(posts, "ESSE É O POSTS");
 
       addToast({
         title: "Postagem enviada com sucesso!",
@@ -36,7 +38,7 @@ export const PostProvider = ({ children }: PostsContext) => {
         duration: 5000,
       });
 
-      setPosts((prev: any) => [...prev, post]);
+      setPosts((prev: any) => [...prev, newObject]);
     } catch (e) {
       addToast({
         title: "Erro ao criar postagem",
@@ -48,6 +50,7 @@ export const PostProvider = ({ children }: PostsContext) => {
 
   async function removePost(id: string) {
     try {
+      console.log("esse aqui", id);
       await deleteDoc(doc(db, "posts", id));
 
       addToast({
