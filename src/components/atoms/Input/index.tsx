@@ -16,7 +16,6 @@ const Input = ({ placeholder, initialValue, setValueToForm }: InputProps) => {
 
   useEffect(() => {
     setValueToForm(valueState, newValue);
-    console.log(valueState, newValue);
   }, [setValueToForm, newValue, valueState]);
 
   return (

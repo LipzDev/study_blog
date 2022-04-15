@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { useToast } from "./toast";
 import { storage, db } from "../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
-import { collection, addDoc, doc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc, setDoc } from "firebase/firestore";
 import { PostTypes } from "../types/types";
-import { getPosts } from "../services/firebase/database/getPosts";
+import router from "next/router";
 
 interface PostsContext {
   children: React.ReactNode;
@@ -15,13 +15,16 @@ const PostContext = createContext({} as any);
 
 export const PostProvider = ({ children }: PostsContext) => {
   const [posts, setPosts] = useState<PostTypes[]>([]);
-  const [image, setImage]: any = useState("");
+  const [image, setImage] = useState<any>("");
+  const [postToEdit, setPostToEdit] = useState<PostTypes>({});
   const { addToast } = useToast();
-  const imageRef = ref(storage, `image/${image?.name}`);
 
   async function addPost(post: PostTypes[]) {
+    const imageRef = ref(storage, `image/${image?.name}`);
+    await uploadBytes(imageRef, image);
+    setImage("");
+
     try {
-      await uploadBytes(imageRef, image);
       const newPost = await addDoc(collection(db, "posts"), post);
 
       const newObject = {
@@ -29,16 +32,13 @@ export const PostProvider = ({ children }: PostsContext) => {
         documentId: newPost.id,
       };
 
-      console.log(newObject, "ESSE É O OBJ");
-      console.log(posts, "ESSE É O POSTS");
-
       addToast({
         title: "Postagem enviada com sucesso!",
         type: "success",
         duration: 5000,
       });
 
-      setPosts((prev: any) => [...prev, newObject]);
+      setPosts((prev: PostTypes[]) => [newObject, ...prev]);
     } catch (e) {
       addToast({
         title: "Erro ao criar postagem",
@@ -50,7 +50,6 @@ export const PostProvider = ({ children }: PostsContext) => {
 
   async function removePost(id: string) {
     try {
-      console.log("esse aqui", id);
       await deleteDoc(doc(db, "posts", id));
 
       addToast({
@@ -71,10 +70,30 @@ export const PostProvider = ({ children }: PostsContext) => {
     }
   }
 
-  function updatePost(post: PostTypes) {
-    setPosts((prev: any) =>
-      prev.map((p: any) => (p.id === post.id ? post : p)),
-    );
+  async function updatePost(newPostToUpload: PostTypes) {
+    try {
+      const imageRef = ref(storage, `image/${image?.name}`);
+      await uploadBytes(imageRef, image);
+      setImage("");
+
+      const postRef = doc(db, "posts", postToEdit.documentId as string);
+      setDoc(postRef, newPostToUpload, { merge: true });
+
+      addToast({
+        title: "Postagem editada com sucesso!",
+        type: "success",
+        duration: 5000,
+      });
+
+      setPosts((prev: PostTypes[]) => [...prev, newPostToUpload]);
+      router.push("/admin");
+    } catch (e) {
+      addToast({
+        title: "Erro ao criar postagem",
+        type: "error",
+        duration: 5000,
+      });
+    }
   }
 
   return (
@@ -87,6 +106,8 @@ export const PostProvider = ({ children }: PostsContext) => {
         updatePost,
         setImage,
         image,
+        postToEdit,
+        setPostToEdit,
       }}
     >
       {children}

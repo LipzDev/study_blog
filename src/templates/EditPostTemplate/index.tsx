@@ -1,14 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import Input from "../../components/atoms/Input";
 import Textarea from "../../components/atoms/Textarea";
 import Button from "../../components/atoms/Button";
+import { useManagePosts } from "../../hooks/useManagePosts";
+
+import { PostTypes } from "../../types/types";
 import { getPosts } from "../../services/firebase/database/getPosts";
-import { storage, db } from "../../config/firebase";
-import { ref, uploadBytes } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
-import { useToast } from "../../hooks/toast";
-import { useRouter } from "next/router";
 import * as S from "./styles";
 
 type EditPostTemplate = {
@@ -16,65 +15,52 @@ type EditPostTemplate = {
 };
 
 const EditPostTemplate = ({ url }: EditPostTemplate) => {
-  const { addToast } = useToast();
-  const [posts, setPosts]: any = useState();
-  const route = useRouter();
+  const [allPosts, setAllPosts] = useState<PostTypes[]>([]);
+  const { updatePost, setImage, image } = useManagePosts();
 
-  // FORM CONTENT
+  // Form content
 
   const [title, setTitle] = useState("");
-  const [image, setImage]: any = useState("");
   const [author, setAuthor] = useState("");
   const [text, setText] = useState("");
-  const imageRef = ref(storage, `image/${image?.name}`);
 
-  // Puxa o conteudo
+  // Comentário abaixo deveria puxar apenas o item do id passado na url
+
+  // useEffect(() => {
+  //   const dataQuery = query(collection(db, "posts"), where("NÃO CONSIGO PEGAR O ID DO POST", "==", id));
+  //   const getContent: any = getDocs(dataQuery);
+
+  //   getContent.then((data: any) =>
+  //     data.forEach((post: any) => {
+  //       setAllPosts([post.data()]);
+  //     }),
+  //   );
+  // }, []);
+
+  // Puxa todos os posts
 
   useEffect(() => {
-    getPosts().then((response: any) => setPosts(response));
+    getPosts().then((response: PostTypes[]) => setAllPosts(response));
   }, []);
 
-  const docData = {
-    id: url,
-    author: author,
+  const formContent = {
     title: title,
-    image:
-      image?.name === undefined
-        ? "/img/att.jpg"
-        : `https://firebasestorage.googleapis.com/v0/b/blog-47a62.appspot.com/o/image%2F${image?.name}?alt=media`,
+    author: author,
     text: text,
+    image: `https://firebasestorage.googleapis.com/v0/b/blog-47a62.appspot.com/o/image%2F${image?.name}?alt=media`,
+    imagePath: image?.name,
   };
 
-  async function handleClickToUpload(event: any) {
+  function handleClickToUpload(event: any) {
     event.preventDefault();
-
-    try {
-      await uploadBytes(imageRef, image);
-      // Adicionamos no campo (docData.id) o id da publicação que queremos editar.
-      const postRef = doc(db, "posts", docData.id as any);
-      setDoc(postRef, docData, { merge: true });
-
-      addToast({
-        title: "Postagem editada com sucesso!",
-        type: "success",
-        duration: 5000,
-      });
-
-      route.push("/admin");
-    } catch (e) {
-      addToast({
-        title: "Erro ao criar postagem",
-        type: "error",
-        duration: 5000,
-      });
-    }
+    updatePost(formContent);
   }
 
   return (
     <S.Container>
-      {posts?.map(
-        (post: any, index: number) =>
-          post.id === url && (
+      {allPosts?.map(
+        (post: PostTypes, index: number) =>
+          post.documentId === url && (
             <S.Form key={index}>
               <input
                 type="file"

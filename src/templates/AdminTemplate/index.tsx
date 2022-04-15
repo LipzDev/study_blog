@@ -21,17 +21,25 @@ import { nanoid } from "nanoid";
 import * as S from "./styles";
 
 const AdminTemplate = () => {
-  const { posts, setPosts, addPost, removePost, setImage, image } =
-    useManagePosts();
+  const {
+    posts,
+    setPosts,
+    addPost,
+    removePost,
+    setImage,
+    image,
+    setPostToEdit,
+  } = useManagePosts();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
   const [post, setPost] = useState<PostTypes>("" as PostTypes);
-  const route = useRouter();
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
+
+  const route = useRouter();
 
   // Puxa o conteúdo do firebase.
 
@@ -47,10 +55,7 @@ const AdminTemplate = () => {
     author: author,
     title: title,
     date: Timestamp.fromDate(new Date()),
-    image:
-      image?.name === undefined
-        ? "/img/att.jpg"
-        : `https://firebasestorage.googleapis.com/v0/b/blog-47a62.appspot.com/o/image%2F${image?.name}?alt=media`,
+    image: `https://firebasestorage.googleapis.com/v0/b/blog-47a62.appspot.com/o/image%2F${image?.name}?alt=media`,
     imagePath: image?.name,
     text: text,
   };
@@ -78,7 +83,8 @@ const AdminTemplate = () => {
   // Edita a publicação
 
   function edit(post: PostTypes) {
-    route.push(`/admin/editar-postagem/${post.id}`);
+    setPostToEdit(post);
+    route.push(`/admin/editar-postagem/${post.documentId}`);
   }
 
   // Fecha o modal
@@ -90,8 +96,6 @@ const AdminTemplate = () => {
   function openModal() {
     setModalIsOpen(true);
   }
-
-  console.log("agora esse:", posts);
 
   return (
     <Layout isLoggedIn={true}>
@@ -126,7 +130,7 @@ const AdminTemplate = () => {
                 id={post?.id}
                 key={index}
                 hasDate={true}
-                date={post?.date.seconds}
+                date={post?.date?.seconds}
                 author={post.author}
                 image={post?.image}
                 title={post?.title}
