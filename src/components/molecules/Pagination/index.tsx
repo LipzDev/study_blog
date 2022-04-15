@@ -10,7 +10,11 @@ const Pagination = () => {
     <S.Container>
       <S.Pagination>
         <div className="prev">
-          <span onClick={() => setSelectedElement(selectedElement - 1)}>
+          <span
+            onClick={() =>
+              setSelectedElement(selectedElement <= 0 ? 0 : selectedElement - 1)
+            }
+          >
             Anterior
           </span>
         </div>
@@ -26,7 +30,15 @@ const Pagination = () => {
           ))}
         </S.Buttons>
         <div className="next">
-          <span onClick={() => setSelectedElement(selectedElement + 1)}>
+          <span
+            onClick={() =>
+              setSelectedElement(
+                selectedElement >= pages.length - 1
+                  ? pages.length - 1
+                  : selectedElement + 1,
+              )
+            }
+          >
             Próxima
           </span>{" "}
         </div>
