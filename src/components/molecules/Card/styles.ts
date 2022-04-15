@@ -26,7 +26,7 @@ export const CardTop = styled.div`
     width: 100%;
     max-height: 300px;
     height: 200px;
-    /* object-fit: cover; */
+    object-fit: cover;
     cursor: pointer;
   }
 
@@ -104,7 +104,7 @@ export const ContainerTop = styled.div`
   img {
     width: 100%;
     height: 580px;
-    /* object-fit: cover; */
+    object-fit: cover;
     cursor: pointer;
   }
 
