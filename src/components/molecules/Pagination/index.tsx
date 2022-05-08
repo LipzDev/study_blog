@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from "react";
 import * as S from "./styles";
 
-const Pagination = () => {
-  const [selectedElement, setSelectedElement] = useState<number>(0);
-
-  const pages = [1, 2, 3, 4, 5];
-
+const Pagination = ({ setShowContent, showContent }: any) => {
   return (
     <S.Container>
       <S.Pagination>
+<<<<<<< Updated upstream
         <div className="prev">
           <span onClick={() => setSelectedElement(selectedElement - 1)}>
             Anterior
@@ -29,6 +27,12 @@ const Pagination = () => {
           <span onClick={() => setSelectedElement(selectedElement + 1)}>
             Próxima
           </span>{" "}
+=======
+        <div className="next">
+          <span onClick={() => setShowContent(showContent + 1)}>
+            Carregar mais
+          </span>
+>>>>>>> Stashed changes
         </div>
       </S.Pagination>
     </S.Container>
