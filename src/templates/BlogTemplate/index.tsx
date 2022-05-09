@@ -4,16 +4,12 @@
 import React, { useEffect, useState } from "react";
 import {
   collection,
-  endAt,
-  endBefore,
   getDocs,
   limit,
   orderBy,
-  Query,
   query,
   QueryDocumentSnapshot,
   startAfter,
-  startAt,
 } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { PostTypes } from "../../types/types";
@@ -51,7 +47,7 @@ const BlogTemplate = () => {
 
   useEffect(() => {
     initialRequest();
-  }, [showContent]);
+  }, []);
 
   // MORE POSTS
 
@@ -59,20 +55,19 @@ const BlogTemplate = () => {
     const nextContent = query(
       collection(db, "posts"),
       orderBy("date", "desc"),
-      startAfter(lastVisible),
       limit(8),
+      startAfter(lastVisible),
     );
 
     const getNextContentData = await getDocs(nextContent);
 
     getNextContentData?.forEach((doc: QueryDocumentSnapshot) => {
-      const newData: PostTypes = {
+      const newPosts: PostTypes = {
         ...doc.data(),
       };
 
-      postContent.push(newData);
+      setPosts((prev: any) => [...prev, newPosts]);
 
-      setPosts([...posts, newData]);
       setLastVisible(
         getNextContentData?.docs[getNextContentData?.docs?.length - 1],
       );
