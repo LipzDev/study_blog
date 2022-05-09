@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import { Timestamp } from "firebase/firestore";
 import { PostTypes } from "../../types/types";
 import { useManagePosts } from "../../hooks/useManagePosts";
-import { getPosts } from "../../services/firebase/database/getPosts";
+import { getPosts } from "../../services/firebase/getPosts";
 import { nanoid } from "nanoid";
 import * as S from "./styles";
 

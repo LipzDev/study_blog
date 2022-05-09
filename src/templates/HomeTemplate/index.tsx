@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "../../components/molecules/Card";
 import Layout from "../../components/molecules/Layout";
-import { getRecentPosts } from "../../services/firebase/database/recentsPosts";
+import { getRecentPosts } from "../../services/firebase/recentsPosts";
 import { PostTypes } from "../../types/types";
 import * as S from "./styles";
 

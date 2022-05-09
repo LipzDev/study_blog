@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/molecules/Layout";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
-import { getPosts } from "../../services/firebase/database/getPosts";
+import { getPosts } from "../../services/firebase/getPosts";
 import * as S from "./styles";
 import timestamp from "time-stamp";
 import { PostTypes } from "../../types/types";

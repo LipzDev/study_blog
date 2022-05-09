@@ -7,8 +7,8 @@ import {
   query,
   QueryDocumentSnapshot,
 } from "firebase/firestore";
-import { db } from "../../../config/firebase";
-import { PostTypes } from "../../../types/types";
+import { db } from "../../config/firebase";
+import { PostTypes } from "../../types/types";
 
 export const getPosts = async () => {
   const postContent: PostTypes[] = [];

@@ -7,7 +7,7 @@ import Button from "../../components/atoms/Button";
 import { useManagePosts } from "../../hooks/useManagePosts";
 
 import { PostTypes } from "../../types/types";
-import { getPosts } from "../../services/firebase/database/getPosts";
+import { getPosts } from "../../services/firebase/getPosts";
 import * as S from "./styles";
 
 type EditPostTemplate = {
