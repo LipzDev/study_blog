@@ -11,7 +11,7 @@ type CardProps = {
   image?: string;
   title?: string;
   author?: string;
-  date?: string;
+  date?: number;
   hasDate?: boolean;
   children?: React.ReactNode;
   id?: string;

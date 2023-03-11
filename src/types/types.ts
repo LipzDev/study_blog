@@ -5,7 +5,9 @@ export interface PostTypes {
   slug?: string;
   author?: string;
   title?: string;
-  date?: any;
+  date?: {
+    seconds?: number;
+  };
   imagePath?: string;
   image?: string;
   text?: string;

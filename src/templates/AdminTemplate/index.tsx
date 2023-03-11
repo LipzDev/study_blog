@@ -19,6 +19,7 @@ import { useManagePosts } from "../../hooks/useManagePosts";
 import { getPosts } from "../../services/firebase/getPosts";
 import { nanoid } from "nanoid";
 import * as S from "./styles";
+import Pagination from "../../components/molecules/Pagination";
 
 const AdminTemplate = () => {
   const {
@@ -33,6 +34,8 @@ const AdminTemplate = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
   const [post, setPost] = useState<PostTypes>("" as PostTypes);
+  const [showContent, setShowContent] = useState(1);
+  const [disableBtn, setDisableBtn] = useState<boolean>(false);
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -142,7 +145,11 @@ const AdminTemplate = () => {
               </Card>
             ))}
           </S.PostFlex>
-          {/* <Pagination /> */}
+          {/* <Pagination
+            setShowContent={setShowContent}
+            showContent={showContent}
+            disableBtn={disableBtn}
+          /> */}
         </S.Container>
       </S.Wrapper>
 

@@ -2,15 +2,27 @@
 import React from "react";
 import * as S from "./styles";
 
-const Pagination = ({ setShowContent, showContent }: any) => {
+type PaginationProps = {
+  setShowContent: (num: number) => void;
+  showContent: number;
+  disableBtn: boolean;
+};
+
+const Pagination = ({
+  setShowContent,
+  showContent,
+  disableBtn,
+}: PaginationProps) => {
   return (
     <S.Container>
-      <S.Pagination>
-        <div className="next">
-          <span onClick={() => setShowContent(showContent + 1)}>
-            Carregar mais
-          </span>
-        </div>
+      <S.Pagination disableBtn={disableBtn}>
+        <button
+          disabled={disableBtn}
+          className="next"
+          onClick={() => setShowContent(showContent + 1)}
+        >
+          Carregar mais
+        </button>
       </S.Pagination>
     </S.Container>
   );

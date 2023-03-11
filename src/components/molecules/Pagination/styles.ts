@@ -6,19 +6,24 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
-export const Pagination = styled.div`
+export const Pagination = styled.div<{ disableBtn: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 3rem 0;
 
-  span,
   button {
     cursor: pointer;
-  }
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: none;
+    transition: 0.2s;
 
-  span {
-    font-size: 1.6rem;
-    color: #3e3e3e;
+    ${(props) =>
+      props.disableBtn
+        ? ``
+        : `:hover {
+      background-color: #cccc;
+    }`}
   }
 `;

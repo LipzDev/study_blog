@@ -22,6 +22,7 @@ import * as S from "./styles";
 const BlogTemplate = () => {
   const [posts, setPosts] = useState<any>([]);
   const [showContent, setShowContent] = useState(1);
+  const [disableBtn, setDisableBtn] = useState<boolean>(false);
   const [lastVisible, setLastVisible] = useState<any>(null);
   let postContent: PostTypes[] = [];
 
@@ -29,7 +30,7 @@ const BlogTemplate = () => {
     const firstContent = query(
       collection(db, "posts"),
       orderBy("date", "desc"),
-      limit(8),
+      limit(12),
     );
     const getFistContentData = await getDocs(firstContent);
 
@@ -55,7 +56,7 @@ const BlogTemplate = () => {
     const nextContent = query(
       collection(db, "posts"),
       orderBy("date", "desc"),
-      limit(8),
+      limit(4),
       startAfter(lastVisible),
     );
 
@@ -71,6 +72,8 @@ const BlogTemplate = () => {
       setLastVisible(
         getNextContentData?.docs[getNextContentData?.docs?.length - 1],
       );
+
+      if (getNextContentData?.docs.length < 4) setDisableBtn(true);
     });
   }
 
@@ -100,7 +103,11 @@ const BlogTemplate = () => {
             ))}
           </S.FeaturedPost>
         </S.Container>
-        <Pagination setShowContent={setShowContent} showContent={showContent} />
+        <Pagination
+          setShowContent={setShowContent}
+          showContent={showContent}
+          disableBtn={disableBtn}
+        />
       </S.Wrapper>
     </Layout>
   );

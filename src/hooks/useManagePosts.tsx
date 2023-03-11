@@ -33,7 +33,7 @@ export const PostProvider = ({ children }: PostsContext) => {
       };
 
       addToast({
-        title: "Postagem enviada com sucesso!",
+        title: "Postagem criada com sucesso!",
         type: "success",
         duration: 5000,
       });
@@ -41,7 +41,7 @@ export const PostProvider = ({ children }: PostsContext) => {
       setPosts((prev: PostTypes[]) => [newObject, ...prev]);
     } catch (e) {
       addToast({
-        title: "Erro ao criar postagem",
+        title: "Ocorreu um erro ao criar esta postagem.",
         type: "error",
         duration: 5000,
       });
