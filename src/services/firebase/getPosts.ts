@@ -4,6 +4,7 @@ import {
   getDocs,
   orderBy,
   Query,
+  limit,
   query,
   QueryDocumentSnapshot,
 } from "firebase/firestore";
@@ -30,3 +31,5 @@ export const getPosts = async () => {
 
   return postContent;
 };
+
+//

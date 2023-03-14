@@ -8,19 +8,19 @@ type PaginationProps = {
   disableBtn: boolean;
 };
 
-const Pagination = ({
+const Pagination: React.FC<PaginationProps> = ({
   setShowContent,
   showContent,
   disableBtn,
-}: PaginationProps) => {
+}) => {
+  const handleShowMore = () => {
+    setShowContent(showContent + 1);
+  };
+
   return (
     <S.Container>
       <S.Pagination disableBtn={disableBtn}>
-        <button
-          disabled={disableBtn}
-          className="next"
-          onClick={() => setShowContent(showContent + 1)}
-        >
+        <button disabled={disableBtn} className="next" onClick={handleShowMore}>
           Carregar mais
         </button>
       </S.Pagination>

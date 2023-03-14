@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import {
   collection,
@@ -18,36 +17,19 @@ import Card from "../../components/molecules/Card";
 import Layout from "../../components/molecules/Layout";
 import Pagination from "../../components/molecules/Pagination";
 import * as S from "./styles";
+import { initialRequest } from "../../services/firebase/getPageablePosts";
+
+const LIMIT = 12;
+const LOAD = 4;
 
 const BlogTemplate = () => {
-  const [posts, setPosts] = useState<any>([]);
+  const [posts, setPosts] = useState<PostTypes[]>([]);
   const [showContent, setShowContent] = useState(1);
   const [disableBtn, setDisableBtn] = useState<boolean>(false);
   const [lastVisible, setLastVisible] = useState<any>(null);
-  let postContent: PostTypes[] = [];
-
-  async function initialRequest() {
-    const firstContent = query(
-      collection(db, "posts"),
-      orderBy("date", "desc"),
-      limit(12),
-    );
-    const getFistContentData = await getDocs(firstContent);
-
-    getFistContentData?.forEach((doc: QueryDocumentSnapshot) => {
-      const newData: PostTypes = {
-        ...doc.data(),
-      };
-
-      postContent.push(newData);
-    });
-
-    setPosts(postContent);
-    setLastVisible(getFistContentData.docs[getFistContentData.docs.length - 1]);
-  }
 
   useEffect(() => {
-    initialRequest();
+    initialRequest(LIMIT, setPosts, setLastVisible);
   }, []);
 
   // MORE POSTS
@@ -56,7 +38,7 @@ const BlogTemplate = () => {
     const nextContent = query(
       collection(db, "posts"),
       orderBy("date", "desc"),
-      limit(4),
+      limit(LOAD),
       startAfter(lastVisible),
     );
 
@@ -67,13 +49,15 @@ const BlogTemplate = () => {
         ...doc.data(),
       };
 
-      setPosts((prev: any) => [...prev, newPosts]);
+      setPosts((prev: PostTypes[]) => [...prev, newPosts]);
 
       setLastVisible(
         getNextContentData?.docs[getNextContentData?.docs?.length - 1],
       );
 
-      if (getNextContentData?.docs.length < 4) setDisableBtn(true);
+      console.log(getNextContentData?.docs.length);
+
+      if (getNextContentData?.docs.length <= LOAD) setDisableBtn(true);
     });
   }
 
@@ -88,7 +72,7 @@ const BlogTemplate = () => {
           <ButtonReturn returnTo="/" />
 
           <S.FeaturedPost>
-            {posts?.map((post: any, index: number) => (
+            {posts?.map((post: PostTypes, index: number) => (
               <Card
                 id={post?.id}
                 key={index}
