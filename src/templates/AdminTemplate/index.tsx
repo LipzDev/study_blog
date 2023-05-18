@@ -105,7 +105,7 @@ const AdminTemplate = () => {
       <Head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `if(!document.cookie || !document.cookie.includes('auth-token')){
+            __html: `if(!localStorage.getItem('auth-token')){
         window.location.href="/login"
       }`,
           }}

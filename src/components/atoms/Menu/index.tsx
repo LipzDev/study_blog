@@ -13,7 +13,7 @@ const Menu = ({ expanded, isLoggedIn }: MenuProps) => {
   const route = useRouter();
 
   function exclude() {
-    cookie.remove("auth-token");
+    localStorage.removeItem("auth-token");
     route.push("/login");
   }
 

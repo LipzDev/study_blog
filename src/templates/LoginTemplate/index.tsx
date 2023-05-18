@@ -21,9 +21,7 @@ const LoginTemplate = () => {
     signIn(auth, email, password)
       .then((userCredential: any) => {
         const user = userCredential.user;
-        cookie.set("auth-token", user.accessToken, {
-          expires: 1,
-        });
+        localStorage.setItem("auth-token", user.accessToken);
         route.push("/admin");
         addToast({
           title: "Login efetuado com sucesso!",
@@ -45,7 +43,7 @@ const LoginTemplate = () => {
       <Head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `if(document.cookie.includes('auth-token')){
+            __html: `if(localStorage.getItem('auth-token')){
         window.location.href="/admin"
       }`,
           }}
