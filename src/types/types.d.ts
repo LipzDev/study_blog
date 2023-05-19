@@ -14,24 +14,48 @@ export interface PostTypes {
 
 //
 
-export interface ITokenContent {
-  iss: string;
-  aud: string;
-  auth_time: number;
-  user_id: string;
-  sub: string;
-  iat: number;
-  exp: number;
+export interface TokenTypes {
+  user: User;
+  providerId: null;
+  _tokenResponse: TokenResponse;
+  operationType: string;
+}
+
+export interface TokenResponse {
+  kind: string;
+  localId: string;
   email: string;
-  email_verified: boolean;
-  firebase: IFirebase;
+  displayName: string;
+  idToken: string;
+  registered: boolean;
+  refreshToken: string;
+  expiresIn: string;
 }
 
-export interface IFirebase {
-  identities: IIdentities;
-  sign_in_provider: string;
+export interface User {
+  uid: string;
+  email: string;
+  emailVerified: boolean;
+  isAnonymous: boolean;
+  providerData: ProviderDatum[];
+  stsTokenManager: StsTokenManager;
+  createdAt: string;
+  lastLoginAt: string;
+  apiKey: string;
+  appName: string;
 }
 
-export interface IIdentities {
-  email: string[];
+export interface ProviderDatum {
+  providerId: string;
+  uid: string;
+  displayName: null;
+  email: string;
+  phoneNumber: null;
+  photoURL: null;
+}
+
+export interface StsTokenManager {
+  refreshToken: string;
+  accessToken: string;
+  expirationTime: number;
 }

@@ -1,75 +1,47 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
-import { auth, signIn } from "../../config/firebase";
-import { useRouter } from "next/router";
-import cookie from "js-cookie";
+import React, { useContext, useEffect } from "react";
+import { Router, useRouter } from "next/router";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
-import Head from "next/head";
 import { useToast } from "../../hooks/toast";
 import * as S from "./styles";
+import { UserContext } from "../../context/user";
 
 const LoginTemplate = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { addToast } = useToast();
-  const route = useRouter();
+  const { authLogin, setLogin, login, signed } = useContext(UserContext);
+  const router = useRouter();
 
-  function Login(e: any) {
-    e.preventDefault();
-
-    signIn(auth, email, password)
-      .then((userCredential: any) => {
-        const user = userCredential.user;
-        localStorage.setItem("auth-token", user.accessToken);
-        route.push("/admin");
-        addToast({
-          title: "Login efetuado com sucesso!",
-          type: "success",
-          duration: 5000,
-        });
-      })
-      .catch((error) => {
-        addToast({
-          title: "Login ou senha inválidos!",
-          type: "error",
-          duration: 5000,
-        });
-      });
-  }
+  useEffect(() => {
+    if (signed) {
+      router.push("/");
+    }
+  }, [signed, router]);
 
   return (
-    <>
-      <Head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `if(localStorage.getItem('auth-token')){
-        window.location.href="/admin"
-      }`,
-          }}
-        />
-      </Head>
-      <S.Container>
-        <ButtonReturn returnTo="/" />
-        <S.FlexContent>
-          <S.Form>
-            <input
-              type="text"
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Login"
-            />
-            <input
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Senha"
-            />
-            <button type="submit" onClick={(e) => Login(e)}>
-              Logar
-            </button>
-          </S.Form>
-        </S.FlexContent>
-      </S.Container>
-    </>
+    !signed && (
+      <>
+        <S.Container>
+          <ButtonReturn returnTo="/" />
+          <S.FlexContent>
+            <S.Form>
+              <input
+                type="text"
+                onChange={(e) => setLogin({ ...login, email: e.target.value })}
+                placeholder="Login"
+              />
+              <input
+                type="password"
+                onChange={(e) => setLogin({ ...login, senha: e.target.value })}
+                placeholder="Senha"
+              />
+              <button type="submit" onClick={(e) => authLogin(e)}>
+                Logar
+              </button>
+            </S.Form>
+          </S.FlexContent>
+        </S.Container>
+      </>
+    )
   );
 };
 

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import cookie from "js-cookie";
 import { useRouter } from "next/router";
 import * as S from "./styles";
+import { UserContext } from "../../../context/user";
 
 type MenuProps = {
   isLoggedIn?: boolean;
@@ -11,11 +12,7 @@ type MenuProps = {
 
 const Menu = ({ expanded, isLoggedIn }: MenuProps) => {
   const route = useRouter();
-
-  function exclude() {
-    localStorage.removeItem("auth-token");
-    route.push("/login");
-  }
+  const { signed, logout } = useContext(UserContext);
 
   return (
     <S.Nav className={expanded ? "active" : ""}>
@@ -26,22 +23,23 @@ const Menu = ({ expanded, isLoggedIn }: MenuProps) => {
         <li>
           <Link href="/blog">Blog</Link>
         </li>
+
+        {!signed && (
+          <li>
+            <Link href="/login">Login</Link>
+          </li>
+        )}
+
         <li>
-          {isLoggedIn ? (
-            <a onClick={() => exclude()}>Sair</a>
-          ) : (
-            <Link href="/login">
-              {cookie.get("auth-token") ? (
-                <ol>
-                  <Link href="/admin">Gerenciar</Link>
-                  <li>
-                    <a onClick={() => exclude()}>Sair</a>
-                  </li>
-                </ol>
-              ) : (
-                "Entrar"
-              )}
-            </Link>
+          {signed && (
+            <div>
+              <ol>
+                <a onClick={() => route.push("/admin")}>Gerenciar</a>
+                <li>
+                  <a onClick={() => logout()}>Sair</a>
+                </li>
+              </ol>
+            </div>
           )}
         </li>
       </ul>

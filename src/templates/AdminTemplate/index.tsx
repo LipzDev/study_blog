@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Head from "next/head";
 import ButtonReturn from "../../components/atoms/ButtonReturn";
 import Card from "../../components/molecules/Card";
@@ -20,6 +20,7 @@ import { getPosts } from "../../services/firebase/getPosts";
 import { nanoid } from "nanoid";
 import * as S from "./styles";
 import Pagination from "../../components/molecules/Pagination";
+import { UserContext } from "../../context/user";
 
 const AdminTemplate = () => {
   const {
@@ -42,7 +43,14 @@ const AdminTemplate = () => {
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
 
-  const route = useRouter();
+  const router = useRouter();
+  const { signed } = useContext(UserContext);
+
+  useEffect(() => {
+    // if (!signed) {
+    //   router.push("/login");
+    // }
+  }, []);
 
   // Puxa o conteúdo do firebase.
 
@@ -87,7 +95,7 @@ const AdminTemplate = () => {
 
   function edit(post: PostTypes) {
     setPostToEdit(post);
-    route.push(`/admin/editar-postagem/${post.documentId}`);
+    router.push(`/admin/editar-postagem/${post.documentId}`);
   }
 
   // Fecha o modal
@@ -101,103 +109,96 @@ const AdminTemplate = () => {
   }
 
   return (
-    <Layout isLoggedIn={true}>
-      <Head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `if(!localStorage.getItem('auth-token')){
-        window.location.href="/login"
-      }`,
-          }}
-        />
-      </Head>
-      <S.Wrapper>
-        <S.Container>
-          <ButtonReturn returnTo="/" />
+    signed && (
+      <Layout isLoggedIn={true}>
+        <S.Wrapper>
+          <S.Container>
+            <ButtonReturn returnTo="/" />
 
-          <S.CreateNewPost>
-            <h1>Olá seja bem vindo(a).</h1>
-            <Button onClick={openModal} themeColor="primary">
-              Criar nova postagem
-            </Button>
-          </S.CreateNewPost>
+            <S.CreateNewPost>
+              <h1>Olá seja bem vindo(a).</h1>
+              <Button onClick={openModal} themeColor="primary">
+                Criar nova postagem
+              </Button>
+            </S.CreateNewPost>
 
-          <SearchBar
-            onChange={(e: any) => setValue(e.target.value)}
-            value={value}
-          />
+            <SearchBar
+              onChange={(e: any) => setValue(e.target.value)}
+              value={value}
+            />
 
-          <S.PostFlex>
-            {posts?.map((post: PostTypes, index: number) => (
-              <Card
-                id={post?.id}
-                key={index}
-                hasDate={true}
-                date={post?.date?.seconds}
-                author={post.author}
-                image={post?.image}
-                title={post?.title}
-                isAdmin={true}
-                exclude={() => confirmDeletion(post.documentId as any)}
-                edit={() => edit(post)}
-              >
-                {post.text}
-              </Card>
-            ))}
-          </S.PostFlex>
-          {/* <Pagination
+            <S.PostFlex>
+              {posts?.map((post: PostTypes, index: number) => (
+                <Card
+                  id={post?.id}
+                  key={index}
+                  hasDate={true}
+                  date={post?.date?.seconds}
+                  author={post.author}
+                  image={post?.image}
+                  title={post?.title}
+                  isAdmin={true}
+                  exclude={() => confirmDeletion(post.documentId as any)}
+                  edit={() => edit(post)}
+                >
+                  {post.text}
+                </Card>
+              ))}
+            </S.PostFlex>
+            {/* <Pagination
             setShowContent={setShowContent}
             showContent={showContent}
             disableBtn={disableBtn}
           /> */}
-        </S.Container>
-      </S.Wrapper>
+          </S.Container>
+        </S.Wrapper>
 
-      {/* MODAL FORM */}
+        {/* MODAL FORM */}
 
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-      >
-        <S.Form>
-          <input
-            type="file"
-            onChange={(e: any) => setImage(e.target.files[0])}
-          />
-          <Input placeholder="Título" setValueToForm={setTitle} />
-          <Input placeholder="Author" setValueToForm={setAuthor} />
-          <Textarea placeholder="Mensagem" setValueToForm={setText} />
-          <Button
-            themeColor="primary"
-            onClick={(event: void) => handleClickToUpload(event)}
-          >
-            Postar
-          </Button>
-        </S.Form>
-      </Modal>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={customStyles}
+        >
+          <S.Form>
+            <input
+              type="file"
+              onChange={(e: any) => setImage(e.target.files[0])}
+            />
+            <Input placeholder="Título" setValueToForm={setTitle} />
+            <Input placeholder="Author" setValueToForm={setAuthor} />
+            <Textarea placeholder="Mensagem" setValueToForm={setText} />
+            <Button
+              themeColor="primary"
+              onClick={(event: void) => handleClickToUpload(event)}
+            >
+              Postar
+            </Button>
+          </S.Form>
+        </Modal>
 
-      {/* MODAL DE CONFIRMAÇÃO */}
+        {/* MODAL DE CONFIRMAÇÃO */}
 
-      <Modal
-        isOpen={openConfirmationModal}
-        onRequestClose={() => setOpenConfirmationModal(false)}
-        style={customStylesConfirmationModal}
-      >
-        <S.ConfirmExclude>
-          <h2>Deseja mesmo excluir esta publicação?</h2>
+        <Modal
+          isOpen={openConfirmationModal}
+          onRequestClose={() => setOpenConfirmationModal(false)}
+          style={customStylesConfirmationModal}
+        >
+          <S.ConfirmExclude>
+            <h2>Deseja mesmo excluir esta publicação?</h2>
 
-          <S.Options>
-            <button onClick={() => setOpenConfirmationModal(false)}>
-              CANCELAR
-            </button>
-            <button onClick={() => exclude(post)} className="confirm-button">
-              SIM, EXCLUIR
-            </button>
-          </S.Options>
-        </S.ConfirmExclude>
-      </Modal>
-    </Layout>
+            <S.Options>
+              <button onClick={() => setOpenConfirmationModal(false)}>
+                CANCELAR
+              </button>
+              <button onClick={() => exclude(post)} className="confirm-button">
+                SIM, EXCLUIR
+              </button>
+            </S.Options>
+          </S.ConfirmExclude>
+        </Modal>
+      </Layout>
+    )
   );
 };
 

@@ -55,7 +55,7 @@ const BlogTemplate = () => {
         getNextContentData?.docs[getNextContentData?.docs?.length - 1],
       );
 
-      console.log(getNextContentData?.docs.length);
+      // console.log(getNextContentData?.docs.length);
 
       if (getNextContentData?.docs.length <= LOAD) setDisableBtn(true);
     });

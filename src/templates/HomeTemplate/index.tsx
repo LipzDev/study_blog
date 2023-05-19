@@ -48,7 +48,7 @@ const HomeTemplate = () => {
                     key={index}
                     hasDate={true}
                     date={post?.date?.seconds}
-                    author={post.author}
+                    author={post?.author}
                     image={post?.image}
                     title={post?.title}
                   >

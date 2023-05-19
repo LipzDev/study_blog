@@ -1,8 +1,8 @@
 import React from "react";
 import LoginTemplate from "../templates/LoginTemplate";
 
-const login = () => {
+const Login = () => {
   return <LoginTemplate />;
 };
 
-export default login;
+export default Login;
