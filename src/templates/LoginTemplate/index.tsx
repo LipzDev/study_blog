@@ -17,31 +17,31 @@ const LoginTemplate = () => {
     }
   }, [signed, router]);
 
-  return (
-    !signed && (
-      <>
-        <S.Container>
-          <ButtonReturn returnTo="/" />
-          <S.FlexContent>
-            <S.Form>
-              <input
-                type="text"
-                onChange={(e) => setLogin({ ...login, email: e.target.value })}
-                placeholder="Login"
-              />
-              <input
-                type="password"
-                onChange={(e) => setLogin({ ...login, senha: e.target.value })}
-                placeholder="Senha"
-              />
-              <button type="submit" onClick={(e) => authLogin(e)}>
-                Logar
-              </button>
-            </S.Form>
-          </S.FlexContent>
-        </S.Container>
-      </>
-    )
+  return !signed ? (
+    <>
+      <S.Container>
+        <ButtonReturn returnTo="/" />
+        <S.FlexContent>
+          <S.Form>
+            <input
+              type="text"
+              onChange={(e) => setLogin({ ...login, email: e.target.value })}
+              placeholder="Login"
+            />
+            <input
+              type="password"
+              onChange={(e) => setLogin({ ...login, senha: e.target.value })}
+              placeholder="Senha"
+            />
+            <button type="submit" onClick={(e) => authLogin(e)}>
+              Logar
+            </button>
+          </S.Form>
+        </S.FlexContent>
+      </S.Container>
+    </>
+  ) : (
+    <></>
   );
 };
 

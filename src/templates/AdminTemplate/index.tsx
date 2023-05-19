@@ -47,10 +47,10 @@ const AdminTemplate = () => {
   const { signed } = useContext(UserContext);
 
   useEffect(() => {
-    // if (!signed) {
-    //   router.push("/login");
-    // }
-  }, []);
+    if (!signed) {
+      router.push("/login");
+    }
+  }, [signed]);
 
   // Puxa o conteúdo do firebase.
 
