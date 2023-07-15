@@ -4,6 +4,7 @@ import * as S from "./styles";
 
 export type TextareaProps = {
   isFocused?: boolean;
+  required?: boolean;
   placeholder?: string;
   setValueToForm?: any;
   initialValue?: any;
@@ -12,6 +13,7 @@ export type TextareaProps = {
 const Textarea = ({
   placeholder,
   initialValue,
+  required,
   setValueToForm,
 }: TextareaProps) => {
   const [focus, setFocus] = useState(false);
@@ -28,7 +30,15 @@ const Textarea = ({
         focus || (valueState !== "" && valueState !== undefined) || valueState
       }
     >
-      <label>{placeholder}</label>
+      <label>
+        {required ? (
+          <>
+            {placeholder} <span>*</span>
+          </>
+        ) : (
+          placeholder
+        )}
+      </label>
       <textarea
         value={valueState}
         onFocus={() => setFocus(true)}

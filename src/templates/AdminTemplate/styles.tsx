@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import theme from "../../styles/theme";
 
 export const Wrapper = styled.section`
   h1 {
@@ -52,12 +53,58 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
 
-  input[type="file"] {
-    margin-bottom: 3rem;
-  }
-
   button {
     border-radius: 5px;
+  }
+`;
+
+export const TopContent = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    cursor: pointer;
+    position: relative;
+    left: 3px;
+    top: 0.5px;
+
+    path {
+      fill: ${theme.colors.gray};
+    }
+
+    :hover {
+      path {
+        fill: red;
+      }
+    }
+  }
+
+  img {
+    min-width: 60px;
+    cursor: pointer;
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+    /* width: 30%; */
+
+    p {
+      max-width: 14rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    span {
+      color: red;
+    }
+
+    &:hover {
+      color: ${theme?.colors?.primary};
+    }
   }
 `;
 
@@ -116,8 +163,8 @@ export const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    width: "500px",
-    height: "390px",
+    width: "600px",
+    height: "420px",
   },
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)",

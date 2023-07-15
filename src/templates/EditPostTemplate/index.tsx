@@ -9,6 +9,7 @@ import { useManagePosts } from "../../hooks/useManagePosts";
 import { PostTypes } from "../../types/types";
 import { getPosts } from "../../services/firebase/getPosts";
 import * as S from "./styles";
+import { ReactSVG } from "react-svg";
 
 type EditPostTemplate = {
   url?: string | string[];
@@ -17,6 +18,10 @@ type EditPostTemplate = {
 const EditPostTemplate = ({ url }: EditPostTemplate) => {
   const [allPosts, setAllPosts] = useState<PostTypes[]>([]);
   const { updatePost, setImage, image } = useManagePosts();
+  const inputRef = React.useRef<any>(null);
+  const filePicker = () => {
+    inputRef.current.click();
+  };
 
   // Form content
 
@@ -62,10 +67,35 @@ const EditPostTemplate = ({ url }: EditPostTemplate) => {
         (post: PostTypes, index: number) =>
           post.documentId === url && (
             <S.Form key={index}>
-              <input
+              {/* <input
                 type="file"
                 accept=".jpg, .jpeg, .png"
                 onChange={(e: any) => setImage(e.target.files[0])}
+              /> */}
+
+              <S.TopContent>
+                <label htmlFor="#icon" onClick={() => filePicker()}>
+                  <img src={`/icons/iconImg.png`} />
+                  <p>{image ? image?.name : <>Carregar Imagem</>}</p>
+                </label>
+
+                {image && (
+                  <ReactSVG
+                    src="/icons/close.svg"
+                    wrapper="span"
+                    onClick={() => setImage("")}
+                  />
+                )}
+              </S.TopContent>
+
+              <input
+                type="file"
+                value=""
+                multiple={false}
+                accept="image/*"
+                onChange={(e: any) => setImage(e.target.files[0])}
+                style={{ visibility: "hidden", opacity: 0, width: "1px" }}
+                ref={inputRef}
               />
               <Input
                 placeholder="Título"

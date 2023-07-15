@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { ButtonProps } from "./index";
 import { shade } from "polished";
+import theme from "../../../styles/theme";
 
 export const wrapperModifiers = {
   primary: () => css`
@@ -54,7 +55,7 @@ export const wrapperModifiers = {
 };
 
 export const Button = styled.button<ButtonProps>`
-  ${({ buttonStyle, themeColor }) => css`
+  ${({ buttonStyle, themeColor, disabled }) => css`
     padding: 10px 20px;
     border: 0;
 
@@ -65,5 +66,14 @@ export const Button = styled.button<ButtonProps>`
 
     ${!!buttonStyle && wrapperModifiers[buttonStyle]};
     ${!!themeColor && wrapperModifiers[themeColor]};
+
+    ${disabled &&
+    css`
+      opacity: 0.4;
+      cursor: no-drop;
+
+      :hover {
+      }
+    `}
   `}
 `;

@@ -7,17 +7,21 @@ export type ButtonProps = {
   buttonStyle?: "transparent" | "link";
   themeColor?: "primary" | "secondary";
   className?: string;
+  disabled?: boolean;
 };
 
 const Button = ({
   children,
   onClick,
+  disabled,
   buttonStyle,
   themeColor,
   className,
 }: ButtonProps) => {
   return (
     <S.Button
+      disabled={disabled}
+      title={disabled ? "Desabilitado" : ""}
       className={className}
       onClick={onClick}
       buttonStyle={buttonStyle}

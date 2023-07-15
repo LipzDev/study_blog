@@ -7,9 +7,15 @@ export type InputProps = {
   placeholder?: string;
   setValueToForm?: any;
   initialValue?: any;
+  required?: boolean;
 };
 
-const Input = ({ placeholder, initialValue, setValueToForm }: InputProps) => {
+const Input = ({
+  placeholder,
+  initialValue,
+  setValueToForm,
+  required,
+}: InputProps) => {
   const [focus, setFocus] = useState(false);
   const [valueState, setValueState] = useState(initialValue);
   const [newValue, setNewValue]: any = useState("");
@@ -24,7 +30,15 @@ const Input = ({ placeholder, initialValue, setValueToForm }: InputProps) => {
         focus || (valueState !== "" && valueState !== undefined) || valueState
       }
     >
-      <label>{placeholder}</label>
+      <label>
+        {required ? (
+          <>
+            {placeholder} <span>*</span>
+          </>
+        ) : (
+          placeholder
+        )}
+      </label>
       <input
         value={valueState}
         type="text"

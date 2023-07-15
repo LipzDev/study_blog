@@ -55,9 +55,11 @@ const BlogTemplate = () => {
         getNextContentData?.docs[getNextContentData?.docs?.length - 1],
       );
 
-      // console.log(getNextContentData?.docs.length);
+      console.log(posts.length);
 
-      if (getNextContentData?.docs.length <= LOAD) setDisableBtn(true);
+      if (lastVisible === posts.length - 1) {
+        setDisableBtn(true);
+      }
     });
   }
 

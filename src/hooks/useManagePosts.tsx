@@ -17,6 +17,7 @@ export const PostProvider = ({ children }: PostsContext) => {
   const [posts, setPosts] = useState<PostTypes[]>([]);
   const [image, setImage] = useState<any>("");
   const [postToEdit, setPostToEdit] = useState<PostTypes>({});
+  const [refreshPage, setRefreshPage] = useState<boolean>(false);
   const { addToast } = useToast();
 
   async function addPost(post: PostTypes[]) {
@@ -39,6 +40,12 @@ export const PostProvider = ({ children }: PostsContext) => {
       });
 
       setPosts((prev: PostTypes[]) => [newObject, ...prev]);
+
+      setTimeout(() => {
+        setRefreshPage(!refreshPage);
+      }, 1000);
+
+      //
     } catch (e) {
       addToast({
         title: "Ocorreu um erro ao criar esta postagem.",
@@ -58,9 +65,11 @@ export const PostProvider = ({ children }: PostsContext) => {
         duration: 5000,
       });
 
-      setPosts((prev: PostTypes[]) =>
-        prev.filter((posts: PostTypes) => posts.documentId !== id),
-      );
+      setTimeout(() => {
+        setRefreshPage(!refreshPage);
+      }, 1000);
+
+      //
     } catch (e) {
       addToast({
         title: "Erro ao excluir publicação",
@@ -85,8 +94,13 @@ export const PostProvider = ({ children }: PostsContext) => {
         duration: 5000,
       });
 
-      setPosts((prev: PostTypes[]) => [...prev, newPostToUpload]);
       router.push("/admin");
+
+      setTimeout(() => {
+        setRefreshPage(!refreshPage);
+      }, 1000);
+
+      //
     } catch (e) {
       addToast({
         title: "Erro ao criar postagem",
@@ -101,6 +115,8 @@ export const PostProvider = ({ children }: PostsContext) => {
       value={{
         setPosts,
         posts,
+        setRefreshPage,
+        refreshPage,
         addPost,
         removePost,
         updatePost,

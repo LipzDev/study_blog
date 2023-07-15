@@ -18,6 +18,10 @@ export const Wrapper = styled.form<TextareaProps>`
       transition: 0.2s;
       color: #3e3e3e;
       z-index: ${isFocused ? "1" : "-1"};
+
+      span {
+        color: red;
+      }
     }
 
     textarea {

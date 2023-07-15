@@ -21,6 +21,7 @@ import { nanoid } from "nanoid";
 import * as S from "./styles";
 import Pagination from "../../components/molecules/Pagination";
 import { UserContext } from "../../context/user";
+import { ReactSVG } from "react-svg";
 
 const AdminTemplate = () => {
   const {
@@ -30,13 +31,13 @@ const AdminTemplate = () => {
     removePost,
     setImage,
     image,
+    refreshPage,
     setPostToEdit,
   } = useManagePosts();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
   const [post, setPost] = useState<PostTypes>("" as PostTypes);
-  const [showContent, setShowContent] = useState(1);
-  const [disableBtn, setDisableBtn] = useState<boolean>(false);
+  const inputRef = React.useRef<any>(null);
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -45,6 +46,10 @@ const AdminTemplate = () => {
 
   const router = useRouter();
   const { signed } = useContext(UserContext);
+
+  const filePicker = () => {
+    inputRef.current.click();
+  };
 
   useEffect(() => {
     if (!signed) {
@@ -55,8 +60,8 @@ const AdminTemplate = () => {
   // Puxa o conteúdo do firebase.
 
   useEffect(() => {
-    getPosts().then((response: PostTypes[]) => setPosts(response));
-  }, []);
+    getPosts()?.then((response: PostTypes[]) => setPosts(response));
+  }, [refreshPage]);
 
   // Informações a serem enviadas
 
@@ -106,6 +111,18 @@ const AdminTemplate = () => {
 
   function openModal() {
     setModalIsOpen(true);
+  }
+
+  // Verifica se esta vazio
+
+  function checkEmpty(...content: any[]) {
+    for (let i = 0; i < content?.length; i++) {
+      const valor = content[i];
+      if (valor === "" || valor === null || valor === undefined) {
+        return true; // Encontrou um valor vazio, nulo ou indefinido, retorna true
+      }
+    }
+    return false; // Não encontrou nenhum valor vazio, nulo ou indefinido, retorna false
   }
 
   return (
@@ -161,16 +178,49 @@ const AdminTemplate = () => {
           style={customStyles}
         >
           <S.Form>
+            <S.TopContent>
+              <label htmlFor="#icon" onClick={() => filePicker()}>
+                <img src={`/icons/iconImg.png`} />
+                <p>
+                  {image ? (
+                    image?.name
+                  ) : (
+                    <>
+                      Carregar Imagem <span>*</span>
+                    </>
+                  )}
+                </p>
+              </label>
+
+              {image && (
+                <ReactSVG
+                  src="/icons/close.svg"
+                  wrapper="span"
+                  onClick={() => setImage("")}
+                />
+              )}
+            </S.TopContent>
+
             <input
               type="file"
+              value=""
+              multiple={false}
+              accept="image/*"
               onChange={(e: any) => setImage(e.target.files[0])}
+              style={{ visibility: "hidden", opacity: 0, width: "1px" }}
+              ref={inputRef}
             />
-            <Input placeholder="Título" setValueToForm={setTitle} />
-            <Input placeholder="Author" setValueToForm={setAuthor} />
-            <Textarea placeholder="Mensagem" setValueToForm={setText} />
+            <Input placeholder="Título" setValueToForm={setTitle} required />
+            <Input placeholder="Author" setValueToForm={setAuthor} required />
+            <Textarea
+              placeholder="Mensagem"
+              setValueToForm={setText}
+              required
+            />
             <Button
               themeColor="primary"
               onClick={(event: void) => handleClickToUpload(event)}
+              disabled={checkEmpty(image, title, author, text)}
             >
               Postar
             </Button>
